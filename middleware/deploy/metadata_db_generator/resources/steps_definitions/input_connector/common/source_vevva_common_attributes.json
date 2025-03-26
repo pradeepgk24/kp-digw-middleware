@@ -1,0 +1,229 @@
+[
+  {
+    "attributeName": "connection",
+    "displayName": "Connection",
+    "required": true,
+    "description": "Connection info",
+    "type": {
+      "objectType": "object",
+      "attributes": [
+        {
+          "attributeName": "vault_domain",
+          "displayName": "Vault domain",
+          "required": true,
+          "description": "The domain name of your vault. You can find this by logging into your vault via the UI. Once you log in, you’ll see a URL. Like this: https://promo-vee.veevavault.com/ui/. The domain name for this vault should be 'promo-vee.veevavault.com'",
+          "type": {
+            "objectType": "string"
+          },
+          "isOverwriteable": false,
+          "isBasicAttribute": true,
+          "value": ""
+        },
+        {
+          "attributeName": "username",
+          "displayName": "Username",
+          "required": true,
+          "description": "Username, it is the same username as for the login via UI",
+          "type": {
+            "objectType": "string"
+          },
+          "isOverwriteable": false,
+          "isBasicAttribute": true,
+          "value": ""
+        },
+        {
+          "attributeName": "password",
+          "displayName": "Password",
+          "required": true,
+          "description": " Password to veeva API",
+          "type": {
+            "objectType": "secret"
+          },
+          "isOverwriteable": false,
+          "isBasicAttribute": true,
+          "value": {}
+        },
+        {
+          "attributeName": "timeout",
+          "displayName": "Timeout",
+          "required": false,
+          "description": "Read/connect timeout (in seconds) for the Veeva API calls",
+          "type": {
+            "objectType": "number",
+            "scale": 0,
+            "precision": 3
+          },
+          "isOverwriteable": true,
+          "isBasicAttribute": false,
+          "value": 301
+        },
+        {
+          "attributeName": "retries",
+          "displayName": "Retries",
+          "required": false,
+          "description": "The number of retries in case of an unsuccessful API call",
+          "type": {
+            "objectType": "number",
+            "scale": 0,
+            "precision": 2
+          },
+          "isOverwriteable": true,
+          "isBasicAttribute": false,
+          "value": 0
+        },
+        {
+          "attributeName": "initial_retry_delay",
+          "displayName": "Initial retry delay",
+          "required": false,
+          "description": "The number of seconds to wait before proceeding with the first retry in order to apply an exponential backoff",
+          "type": {
+            "objectType": "number",
+            "scale": 0,
+            "precision": 2
+          },
+          "isOverwriteable": true,
+          "isBasicAttribute": false,
+          "value": 1
+        },
+        {
+          "attributeName": "proxies",
+          "displayName": "Proxies",
+          "required": false,
+          "description": "The proxy/-ies to use for requests",
+          "type": {
+            "objectType": "dictionary"
+          },
+          "isOverwriteable": true,
+          "isBasicAttribute": false,
+          "value": {}
+        },
+        {
+          "attributeName": "verify",
+          "displayName": "Verify",
+          "required": false,
+          "description": "whether or not to enable the SSL certificate verification",
+          "type": {
+            "objectType": "boolean"
+          },
+          "isOverwriteable": true,
+          "isBasicAttribute": false,
+          "value": true
+        },
+        {
+          "attributeName": "keep_session_alive",
+          "displayName": "Keep session alive",
+          "required": false,
+          "description": "If True a keep session alive request is posted during the processor initialization. Supported only for API version 21.3 and above.",
+          "type": {
+            "objectType": "boolean"
+          },
+          "isOverwriteable": true,
+          "isBasicAttribute": false,
+          "value": false
+        },
+        {
+          "attributeName": "recover_invalid_session",
+          "displayName": "Recover invalid session",
+          "required": false,
+          "description": "If the REST API session expires, and the Vault return exception `INVALID_SESSION_ID` the job can recover and re-new the session so the acquisition can continue.",
+          "type": {
+            "objectType": "boolean"
+          },
+          "isBasicAttribute": false,
+          "isOverwriteable": true,
+          "value": false
+        }
+      ]
+    },
+    "isOverwriteable": true,
+    "isBasicAttribute": true
+  },
+  {
+    "attributeName": "fail_if_no_data",
+    "displayName": "Fail if no data",
+    "required": true,
+    "description": "If true, the step fails when the query doesn't match any data",
+    "type": {
+      "objectType": "boolean"
+    },
+    "isBasicAttribute": false,
+    "value": true,
+    "isOverwriteable": true
+  },
+  {
+    "attributeName": "api_version",
+    "displayName": "Api version",
+    "required": false,
+    "description": "Veeva API version to be used, use 'v20.3' or newer. If not give will be defaulted as v24.1",
+    "type": {
+      "objectType": "string"
+    },
+    "isOverwriteable": true,
+    "isBasicAttribute": false,
+    "value": "v24.1"
+  },
+  {
+    "attributeName": "page_size",
+    "displayName": "Page size",
+    "required": false,
+    "description": "If your vault contains huge amount of records, you can lower the amount of API calls if you set this to a higher number. Please note, the response can limit the returned amount of data (even below the default value), if the query result has too many fields. Even in this case, all data will be retrieved but more API calls will be used",
+    "type": {
+      "objectType": "number",
+      "scale": 0,
+      "precision": 7
+    },
+    "isBasicAttribute": false,
+    "isOverwriteable": true,
+    "value": 1000
+  },
+  {
+    "attributeName": "parallelized",
+    "displayName": "In parallel mode",
+    "required": false,
+    "description": "If true, the given query will be processed in parallel.",
+    "type": {
+      "objectType": "boolean"
+    },
+    "isBasicAttribute": false,
+    "isOverwriteable": true,
+    "value": false
+  },
+  {
+    "attributeName": "parallelism_factor",
+    "displayName": "Parallelism factor",
+    "required": false,
+    "description": "Number of threads to spawn in parallel mode",
+    "type": {
+      "objectType": "number",
+      "scale": 0,
+      "precision": 2
+    },
+    "isBasicAttribute": false,
+    "isOverwriteable": true,
+    "value": 5
+  },
+  {
+    "attributeName": "pagination_mode",
+    "displayName": "Pagination mode",
+    "required": false,
+    "description": "Type of pagination approach",
+    "type": {
+      "objectType": "string"
+    },
+    "isBasicAttribute": false,
+    "isOverwriteable": true,
+    "value": "next_page"
+  },
+  {
+    "attributeName": "filter_condition",
+    "displayName": "Filter condition",
+    "required": false,
+    "description": "VQL WHERE clause, which can limit the query to be performed. Filter condition will not applied if a `query` contains a `WHERE` keyword.",
+    "type": {
+      "objectType": "string"
+    },
+    "isBasicAttribute": false,
+    "isOverwriteable": true,
+    "value": ""
+  }
+]

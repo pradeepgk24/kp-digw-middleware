@@ -1,0 +1,152 @@
+[
+  {
+    "actionType": "readPipeline",
+    "actionDefinition": {
+      "pipelineName": "<pipelineName>"
+    },
+    "description": "The permission check if you can read pipeline"
+  },
+  {
+    "actionType": "deletePipeline",
+    "actionDefinition": {
+      "pipelineName": "<pipelineName>"
+    },
+    "description": "The permission check if you can delete pipeline"
+  },
+  {
+    "actionType": "updatePipeline",
+    "actionDefinition": {
+      "pipelineName": "<pipelineName>"
+    },
+    "description": "The permission check if you can update pipeline"
+  },
+  {
+    "actionType": "createPipeline",
+    "actionDefinition": {},
+    "description": "The permission check if you create pipeline"
+  },
+  {
+    "actionType": "executePipeline",
+    "actionDefinition": {
+      "pipelineName": "<pipelineName>"
+    },
+    "description": "The permission check if you can execute the pipeline"
+  },
+  {
+    "actionType": "readPipelineTemplate",
+    "actionDefinition": {
+      "pipelineTemplateName": "<pipelineTemplateName>"
+    },
+    "description": "The permission check if you can read pipeline template"
+  },
+  {
+    "actionType": "deletePipelineTemplate",
+    "actionDefinition": {
+      "pipelineTemplateName": "<pipelineTemplateName>"
+    },
+    "description": "The permission check if you can delete pipeline template"
+  },
+  {
+    "actionType": "updatePipelineTemplate",
+    "actionDefinition": {
+      "pipelineTemplateName": "<pipelineTemplateName>"
+    },
+    "description": "The permission check if you can update pipeline template"
+  },
+  {
+    "actionType": "createPipelineTemplate",
+    "actionDefinition": {},
+    "description": "The permission check if you create pipeline template"
+  },
+  {
+    "actionType": "readComponentTemplate",
+    "actionDefinition": {
+      "componentTemplateName": "<componentTemplateName>"
+    },
+    "description": "The permission check if you can read component template"
+  },
+  {
+    "actionType": "deleteComponentTemplate",
+    "actionDefinition": {
+      "componentTemplateName": "<componentTemplateName>"
+    },
+    "description": "The permission check if you can delete component template"
+  },
+  {
+    "actionType": "updateComponentTemplate",
+    "actionDefinition": {
+      "componentTemplateName": "<componentTemplateName>"
+    },
+    "description": "The permission check if you can update component template"
+  },
+  {
+    "actionType": "createComponentTemplate",
+    "actionDefinition": {},
+    "description": "The permission check if you create component template"
+  },
+  {
+    "actionType": "readWorkflow",
+    "actionDefinition": {
+      "workflowName": "<workflowName>"
+    },
+    "description": "The permission check if you can read workflow"
+  },
+  {
+    "actionType": "deleteWorkflow",
+    "actionDefinition": {
+      "workflowName": "<workflowName>"
+    },
+    "description": "The permission check if you can delete workflow"
+  },
+  {
+    "actionType": "updateWorkflow",
+    "actionDefinition": {
+      "workflowName": "<workflowName>"
+    },
+    "description": "The permission check if you can update workflow"
+  },
+  {
+    "actionType": "createWorkflow",
+    "actionDefinition": {},
+    "description": "The permission check if you create workflow"
+  },
+  {
+    "actionType": "executeWorkflow",
+    "actionDefinition": {
+      "workflowName": "<workflowName>"
+    },
+    "description": "The permission check if you can execute the workflow"
+  },
+  {
+    "actionType": "useComponent",
+    "actionDefinition": {
+      "componentCategory": {
+        "defaultValue": ".*",
+        "enum": [
+          "input_connector",
+          "output_connector",
+          "data_type",
+          "transformer",
+          "processor"
+        ]
+      },
+      "componentTypeName": "<componentTypeName>"
+    },
+    "description": "The permission check if you can use component"
+  },
+  {
+    "actionType": "showCreatePipelineBlankOption",
+    "actionDefinition": {},
+    "description": "The permission check if you can see the create pipeline blank option"
+  },
+  {
+    "actionType": "showCreatePipelineFromTemplateOption",
+    "actionDefinition": {},
+    "description": "The permission check if you can see the create pipeline from template option"
+  },
+  {
+    "actionType": "showCreatePipelineFromYamlOption",
+    "actionDefinition": {},
+    "description": "The permission check if you can see the create pipeline from yaml option"
+  }
+]

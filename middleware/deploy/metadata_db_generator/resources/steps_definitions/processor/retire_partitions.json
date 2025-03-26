@@ -1,0 +1,52 @@
+{
+  "title": "Retire partitions parameters",
+  "componentCategory": "processor",
+  "componentType": "retire_partitions",
+  "difwStepCategory": "process",
+  "difwStepType": "retire_partitions",
+  "displayName": "Retire partitions",
+  "documentationLink": "https://github.com/merck-gen/mf-difw-core/blob/{branch}/documentation/configuration/steps/common/processors/retire_partitions.md",
+  "flowValidations": "#extendByFile:common/process_flow_validations_processors.json",
+  "platforms": {
+    "glue": {
+      "supportedJobTypes": [
+        "python",
+        "spark"
+      ]
+    },
+    "databricks": {
+      "supportedJobTypes": [
+        "python_databricks",
+        "spark_databricks"
+      ]
+    }
+  },
+  "attributes": [
+    {
+      "attributeName": "database_name",
+      "displayName": "Database name",
+      "description": "Name of the database",
+      "type": {
+        "objectType": "string"
+      },
+      "required": true,
+      "isBasicAttribute": true,
+      "isOverwriteable": true,
+      "value": ""
+    },
+    {
+      "attributeName": "retention_period",
+      "displayName": "Retention period",
+      "description": "Number of days to keep. All partitions older the given period and data stored in them will be removed",
+      "type": {
+        "objectType": "number",
+        "scale": 0,
+        "precision": 5
+      },
+      "isOverwriteable": true,
+      "required": true,
+      "isBasicAttribute": true,
+      "value": 30
+    }
+  ]
+}

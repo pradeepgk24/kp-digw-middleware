@@ -1,0 +1,156 @@
+{
+  "title": "CSV to S3 parameters",
+  "componentCategory": "output_connector",
+  "componentType": "s3_csv",
+  "difwStepCategory": "output",
+  "difwStepType": "csv",
+  "displayName": "CSV to S3",
+  "documentationLink": "https://github.com/merck-gen/mf-difw-core/blob/{branch}/documentation/configuration/steps/spark/writers/csv.md",
+  "flowValidations": "#extendByFile:common/process_flow_validations_writers_out_connectors.json",
+  "attributes": [
+    {
+      "attributeName": "mode",
+      "displayName": "Mode",
+      "description": "Write mode: append, overwrite, error (alias errorifexists) or ignore",
+      "type": {
+        "objectType": "options",
+        "values": [
+          {
+            "value": "append",
+            "displayValue": "Append"
+          },
+          {
+            "value": "overwrite",
+            "displayValue": "Overwrite"
+          },
+          {
+            "value": "error",
+            "displayValue": "Error"
+          },
+          {
+            "value": "ignore",
+            "displayValue": "Ignore"
+          }
+        ]
+      },
+      "isOverwriteable": true,
+      "value": "overwrite",
+      "required": true,
+      "isBasicAttribute": false
+    },
+    {
+      "attributeName": "spark_write_csv_options",
+      "displayName": "Spark write csv options",
+      "description": "Other options for Spark CSV writer. For complete list of Spark CSV writer options see https://spark.apache.org/docs/3.1.1/api/python/reference/api/pyspark.sql.DataFrameWriter.csv.html",
+      "type": {
+        "objectType": "dictionary"
+      },
+      "isOverwriteable": true,
+      "value": {},
+      "required": false,
+      "isBasicAttribute": false
+    },
+    {
+      "attributeName": "s3_bucket",
+      "displayName": "Target S3 bucket",
+      "description": "Target S3 bucket where data will be stored",
+      "type": {
+        "objectType": "string",
+        "s3Browsing": {
+          "subType": "bucket",
+          "relatedS3BrowserAttrName": "s3_layer_path"
+        }
+      },
+      "required": true,
+      "isBasicAttribute": true,
+      "isOverwriteable": true,
+      "value": ""
+    },
+    {
+      "attributeName": "s3_layer_path",
+      "displayName": "Target s3 path",
+      "description": "Target S3 path in S3 source bucket where data will be stored",
+      "type": {
+        "objectType": "string",
+        "s3Browsing": {
+          "subType": "key",
+          "relatedS3BrowserAttrName": "s3_bucket"
+        }
+      },
+      "required": true,
+      "isRuntime": true,
+      "isBasicAttribute": true,
+      "isOverwriteable": true,
+      "value": ""
+    },
+    {
+      "attributeName": "static_file_location",
+      "displayName": "Static file location",
+      "description": "Set this value to true (to eliminate static partitions from the target path)",
+      "type": {
+        "objectType": "boolean"
+      },
+      "required": true,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": false
+    },
+    {
+      "attributeName": "num_partitions",
+      "displayName": "Number of partitions",
+      "description": "Tells Spark to repartition data to the given number. Set this value to 1 if you want to produce a single output file",
+      "type": {
+        "objectType": "number",
+        "scale": 0,
+        "precision": 10
+      },
+      "required": false,
+      "isOverwriteable": true,
+      "value": null,
+      "isBasicAttribute": false
+    },
+    {
+      "attributeName": "dynamic_partitions",
+      "displayName": "Dynamic partitions",
+      "description": "Overrides dynamic_partitions configured at Table config",
+      "type": {
+        "objectType": "list",
+        "elementsType": {
+          "objectType": "string"
+        }
+      },
+      "isOverwriteable": true,
+      "value": [],
+      "required": false,
+      "isBasicAttribute": false
+    },
+    {
+      "attributeName": "delay_after_write",
+      "displayName": "Delay after write",
+      "description": "Seconds to sleep after write. Obsolete parameter",
+      "type": {
+        "objectType": "number",
+        "scale": 0,
+        "precision": 10
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": 0
+    },
+    {
+      "attributeName": "custom_format_options",
+      "displayName": "Custom format options",
+      "description": "Custom writer format specific options",
+      "type": {
+        "objectType": "dictionary"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": {}
+    }
+  ]
+}
+
+

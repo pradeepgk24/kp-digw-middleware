@@ -1,0 +1,100 @@
+{
+  "title": "Source veeva parameters",
+  "componentCategory": "input_connector",
+  "componentType": "veeva_table",
+  "difwStepCategory": "process",
+  "documentationLink": "https://github.com/merck-gen/mf-difw-core/blob/{branch}/documentation/configuration/steps/common/processors/acq_from_veeva.md",
+  "difwStepType": "acq_from_veeva_table",
+  "displayName": "Veeva table",
+  "componentProperties": {
+    "supportExternalAwsStorage": true,
+    "conditionType": "veeva_table",
+    "isTestable": true,
+    "loadTableListFromSource": "veeva_table"
+  },
+  "platforms": {
+    "glue": {
+      "supportedJobTypes": [
+        "python",
+        "spark"
+      ]
+    },
+    "databricks": {
+      "supportedJobTypes": [
+        "python_databricks",
+        "spark_databricks"
+      ]
+    }
+  },
+  "flowValidations": "#extendByFile:common/process_flow_validations_json_based_in_connectors.json",
+  "attributes": [
+    {
+      "attributeName": "query",
+      "displayName": "Query",
+      "required": false,
+      "description": "Not needed for veeva_table. A SQL query. For incremental ingest you can use '{lower_bound}' and '{upper_bound}' placeholders. Do not use PAGESIZE and PAGEOFFSET keywords.",
+      "type": {
+        "objectType": "string"
+      },
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": ""
+    },
+    {
+      "attributeName": "from_query_target_option",
+      "displayName": "From query target option",
+      "required": false,
+      "description": "Can be one of `allversions`, `favorites`, `recent`. Applicable only if original_table_name or table_name is `documents`. Query target options on documents allow you to search all document versions and retrieve favorite and recent documents.",
+      "type": {
+        "objectType": "string"
+      },
+      "isOverwriteable": false,
+      "isBasicAttribute": false,
+      "value": ""
+    },
+    {
+      "attributeName": "include_fields",
+      "displayName": "Include fields",
+      "description": "List of columns which must be taken from a Veeva object. It is mutually exclusive with Exclude fields parameter.",
+            "type": {
+        "objectType": "list",
+        "elementsType": {
+          "objectType": "string"
+        }
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": []
+    },
+    {
+      "attributeName": "exclude_fields",
+      "displayName": "Exclude fields",
+      "description": "List of columns which must be excluded from a Veeva object. It is mutually exclusive with include_fields parameter.",
+      "type": {
+        "objectType": "list",
+        "elementsType": {
+          "objectType": "string"
+        }
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": []
+    },
+     {
+      "attributeName": "no_data_no_file",
+      "displayName": "No data no file",
+      "description": "Enables a behaviour of the processor that no data file is produced if the source has no available data. With this behavior enabled, it is possible to combine with no_acquired_files data quality rule.",
+      "type": {
+        "objectType": "boolean"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": false
+    },
+    "#extendByFile:common/source_veeva_common_attributes.json",
+    "#extendByFile:common/source_connection_common_attributes.json"
+  ]
+}

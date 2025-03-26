@@ -1,0 +1,24 @@
+{
+  "title": "Query parameters",
+  "componentCategory": "transformer",
+  "componentType": "query",
+  "difwStepCategory": "transformation",
+  "documentationLink": "https://github.com/merck-gen/mf-difw-core/blob/{branch}/documentation/configuration/steps/spark/transformers/query.md",
+  "difwStepType": "query",
+  "displayName": "Query",
+  "flowValidations": "#extendByFile:common/process_flow_validations_transformers.json",
+  "attributes": [
+    {
+      "attributeName": "query",
+      "displayName": "Query",
+      "description": "SQL query to perform transformation using PySpark SQLTransformer",
+      "type": {
+        "objectType": "string"
+      },
+      "required": true,
+      "isBasicAttribute": true,
+      "isOverwriteable": true,
+      "value": ""
+    }
+  ]
+}

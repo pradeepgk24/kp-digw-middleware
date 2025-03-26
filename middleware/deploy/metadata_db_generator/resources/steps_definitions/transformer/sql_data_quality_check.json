@@ -1,0 +1,125 @@
+{
+  "title": "SQL data test parameters",
+  "componentCategory": "transformer",
+  "componentType": "sql_data_quality_check",
+  "difwStepCategory": "transformation",
+  "documentationLink": "https://github.com/merck-gen/mf-difw-core/blob/{branch}/documentation/configuration/steps/spark/transformers/sql_data_quality_check.md",
+  "difwStepType": "sql_data_quality_check",
+  "displayName": "SQL Data Test",
+  "flowValidations": "#extendByFile:common/process_flow_validations_transformers.json",
+  "attributes": [
+    {
+      "attributeName": "dataframe_view_name",
+      "displayName": "Dataframe view name",
+      "description": "Name of the temporary dataframe view",
+      "required": true,
+      "type": {
+        "objectType": "string"
+      },
+      "isOverwriteable": true,
+      "value": ""
+    },
+    {
+      "attributeName": "database",
+      "displayName": "Database name",
+      "description": "Name of the database to be used (if not included in the query)",
+      "type": {
+        "objectType": "string"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": ""
+    },
+    {
+      "attributeName": "storage_level",
+      "displayName": "Storage level",
+      "description": "Storage level for the input dataframe. If you are confident that caching is not necessary, set this to NONE",
+      "type": {
+        "objectType": "string"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": ""
+    },
+    {
+      "attributeName": "log_limit",
+      "displayName": "Log limit",
+      "description": "If the test fails, this variable controls how many rows are displayed from the dataframe",
+      "type": {
+        "objectType": "number",
+        "scale": 0,
+        "precision": 5
+      },
+      "required": true,
+      "isBasicAttribute": false,
+      "value": 100,
+      "isOverwriteable": true
+    },
+    {
+      "attributeName": "named_queries",
+      "displayName": "Named queries",
+      "description": "Named queries are sorted by their names and run in that order",
+      "type": {
+        "objectType": "object",
+        "attributes": [
+          {
+            "attributeName": "query_name",
+            "displayName": "Query name",
+            "type": {
+              "objectType": "object",
+              "attributes": [],
+              "dynamicPattern": {
+                "attributes": [
+                  {
+                    "attributeName": "query",
+                    "displayName": "Query",
+                    "type": {
+                      "objectType": "string"
+                    },
+                    "isOverwriteable": true,
+                    "value": ""
+                  },
+                  {
+                    "attributeName": "on_fail",
+                    "displayName": "On fail",
+                    "required": false,
+                    "type": {
+                      "objectType": "object",
+                      "attributes": [
+                        {
+                          "attributeName": "query",
+                          "displayName": "Query",
+                          "type": {
+                            "objectType": "string"
+                          },
+                          "isOverwriteable": true,
+                          "value": ""
+                        },
+                        {
+                          "attributeName": "dataframe_view_name",
+                          "displayName": "Dataframe view name",
+                          "description": "Temporary view name for the result of the failed tests. If not specified, the view is not created.",
+                          "required": false,
+                          "type": {
+                            "objectType": "string"
+                          },
+                          "isOverwriteable": true,
+                          "value": ""
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "required": false,
+      "isBasicAttribute": true,
+      "isOverwriteable": true
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+[
+  {
+    "actionType": "assumeSubject",
+    "actionDefinition": {
+      "subjectType": {
+        "defaultValue": ".*",
+        "enum": [
+          "user",
+          "group",
+          "project"
+        ]
+      },
+      "subjectId": "<subjectId>"
+    },
+    "description": "The permission check if you can do work on behalf of the subject. For example admin user can assign new users into Project, add group into project, validate different users,..."
+  },
+  {
+    "actionType": "readSubject",
+    "actionDefinition": {
+      "subjectType": {
+        "defaultValue": ".*",
+        "enum": [
+          "user",
+          "group",
+          "project"
+        ]
+      },
+      "subjectId": "<subjectId>"
+    },
+    "description": "The permission check if you can read subject"
+  },
+  {
+    "actionType": "updateSubject",
+    "actionDefinition": {
+      "subjectType": {
+        "defaultValue": ".*",
+        "enum": [
+          "user",
+          "group",
+          "project"
+        ]
+      },
+      "subjectId": "<subjectId>"
+    },
+    "description": "The permission check if you can update subject"
+  },
+  {
+    "actionType": "deleteSubject",
+    "actionDefinition": {
+      "subjectType": {
+        "defaultValue": ".*",
+        "enum": [
+          "user",
+          "group",
+          "project"
+        ]
+      },
+      "subjectId": "<subjectId>"
+    },
+    "description": "The permission check if you can delete subject"
+  },
+  {
+    "actionType": "createSubject",
+    "actionDefinition": {
+      "subjectType": {
+        "defaultValue": ".*",
+        "enum": [
+          "user",
+          "group",
+          "project"
+        ]
+      }
+    },
+    "description": "The permission check if you can create subject"
+  }
+]

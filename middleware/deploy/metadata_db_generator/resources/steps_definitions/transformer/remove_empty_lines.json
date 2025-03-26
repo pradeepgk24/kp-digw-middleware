@@ -1,0 +1,51 @@
+{
+  "title": "Remove empty lines parameters",
+  "componentCategory": "transformer",
+  "componentType": "remove_empty_lines",
+  "difwStepCategory": "transformation",
+  "difwStepType": "remove_empty_lines",
+  "documentationLink": "https://github.com/merck-gen/mf-difw-core/blob/{branch}/documentation/configuration/steps/spark/transformers/remove_empty_lines.md",
+  "displayName": "Remove empty lines",
+  "flowValidations": "#extendByFile:common/process_flow_validations_transformers.json",
+  "attributes": [
+    {
+      "attributeName": "remove_blank_values",
+      "displayName": "Remove blank values",
+      "description": "If true then take into count columns which are blank (but not null)",
+      "type": {
+        "objectType": "boolean"
+      },
+      "isBasicAttribute": true,
+      "required": true,
+      "value": true,
+      "isOverwriteable": true
+    },
+    {
+      "attributeName": "remove_null_values",
+      "displayName": "Remove null values",
+      "description": "If true then take into count columns which are null",
+      "type": {
+        "objectType": "boolean"
+      },
+      "isBasicAttribute": false,
+      "required": true,
+      "isOverwriteable": true,
+      "value": true
+    },
+    {
+      "attributeName": "ignored_columns",
+      "displayName": "Ignored columns",
+      "description": "If filled in, values in those columns are not considered",
+      "type": {
+        "objectType": "list",
+        "elementsType": {
+          "objectType": "string"
+        }
+      },
+      "required": false,
+      "isOverwriteable": true,
+      "value": [],
+      "isBasicAttribute": false
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+[
+  {
+    "attributeName": "repartition",
+    "displayName": "Repartition",
+    "description": "Option to increase or decrease the RDD/DataFrame partitions by number of partitions or by single column name or multiple column names",
+    "type": {
+      "objectType": "object",
+      "attributes": [
+        {
+          "attributeName": "num_partitions",
+          "displayName": "Number of partitions",
+          "description": "Num_partitions",
+          "type": {
+            "objectType": "number",
+            "scale": 0,
+            "precision": 3
+          },
+          "isOverwriteable": true,
+          "value": null,
+          "required": false
+        },
+        {
+          "attributeName": "columns",
+          "displayName": "Columns",
+          "description": "List of the columns to repartition",
+          "type": {
+            "objectType": "list",
+            "elementsType": {
+              "objectType": "string"
+            }
+          },
+          "isOverwriteable": true,
+          "value": [],
+          "required": false
+        }
+      ]
+    }
+  },
+  {
+    "attributeName": "coalesce",
+    "displayName": "Coalesce",
+    "description": "Option is used only to reduce the number of partitions",
+    "type": {
+      "objectType": "number",
+      "scale": 0,
+      "precision": 3
+    },
+    "isOverwriteable": true,
+    "value": null,
+    "required": false
+  }
+]

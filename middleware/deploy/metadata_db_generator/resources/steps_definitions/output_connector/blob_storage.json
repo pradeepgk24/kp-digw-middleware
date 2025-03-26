@@ -1,0 +1,77 @@
+{
+  "title": "Azure Blob storage parameters",
+  "componentCategory": "output_connector",
+  "componentType": "blob_storage",
+  "difwStepCategory": "process",
+  "documentationLink": "https://github.com/merck-gen/mf-difw-core/blob/{branch}/documentation/configuration/steps/common/processors/exp_to_blob_storage.md",
+  "flowValidations": "#extendByFile:common/process_flow_validations_exports_out_connectors.json",
+  "difwStepType": "exp_to_blob_storage",
+  "displayName": "Blob storage",
+  "componentProperties": {
+    "supportExternalAwsStorage": true
+  },
+  "platforms": {
+    "glue": {
+      "supportedJobTypes": [
+        "python",
+        "spark"
+      ]
+    },
+    "databricks": {
+      "supportedJobTypes": [
+        "python_databricks",
+        "spark_databricks"
+      ]
+    }
+  },
+  "attributes": [
+    {
+      "attributeName": "target_path",
+      "displayName": "Target path",
+      "description": "Target prefix path to blob",
+      "type": {
+        "objectType": "string"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true
+    },
+    {
+      "attributeName": "chunk_size",
+      "displayName": "Chunk size",
+      "description": "Possibility to specify chunk_size for reading of bigger file, in which case file will be read in parts not fill up the memory of worker. chunk_size unit is byte. Default value 4 MiB",
+      "type": {
+        "objectType": "number"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": 536870912
+    },
+        {
+      "attributeName": "parallelized",
+      "displayName": "Parallelized",
+      "description": "If set to `true`, the s3 object will be processed in parallel.",
+      "type": {
+        "objectType": "boolean"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": false
+    },
+        {
+      "attributeName": "parallelism_factor",
+      "displayName": "Parallelism factor",
+      "description": "Number of threads to spawn for \"parallel\" process.",
+      "type": {
+        "objectType": "number"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true
+    },
+    "#extendByFile:common/export_processor_common_attributes.json",
+    "#extendByFile:../common/common_blob_storage_connection.json"
+  ]
+}

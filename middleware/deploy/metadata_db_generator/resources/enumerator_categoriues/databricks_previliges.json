@@ -1,0 +1,36 @@
+[
+  {
+    "enumeratorValue": "USE_SCHEMA",
+    "displayName": "use schema"
+  },
+  {
+    "enumeratorValue": "CREATE_TABLE",
+    "displayName": "create table"
+  },
+  {
+    "enumeratorValue": "CREATE_VIEW",
+    "displayName": "create view"
+  },
+  {
+    "enumeratorValue": "CREATE_FUNCTION",
+    "displayName": "create function"
+  },
+  {
+    "enumeratorValue": "MODIFY",
+    "displayName": "modify"
+  },
+  {
+    "enumeratorValue": "SELECT",
+    "displayName": "select"
+  },
+  {
+    "enumeratorValue": "ALL_PRIVILEGES",
+    "displayName": "all privileges"
+  },
+  {
+    "enumeratorValue": "EXECUTE",
+    "displayName": "execute"
+  }
+]
+
+

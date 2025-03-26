@@ -1,0 +1,265 @@
+{
+  "permissionName": "admin",
+  "effect": "allow",
+  "description": "Admin right to perform whatever action within project",
+  "permissionActions": [
+    {
+      "actionType": "readNotification",
+      "actionDetail": {
+        "notificationType": ".*"
+      }
+    },
+    {
+      "actionType": "deleteNotification",
+      "actionDetail": {
+        "notificationType": ".*"
+      }
+    },
+    {
+      "actionType": "updateNotification",
+      "actionDetail": {
+        "notificationType": ".*"
+      }
+    },
+    {
+      "actionType": "createNotification",
+      "actionDetail": {
+        "notificationType": ".*"
+      }
+    },
+    {
+      "actionType": "readPipeline",
+      "actionDetail": {
+        "pipelineName": ".*"
+      }
+    },
+    {
+      "actionType": "deletePipeline",
+      "actionDetail": {
+        "pipelineName": ".*"
+      }
+    },
+    {
+      "actionType": "updatePipeline",
+      "actionDetail": {
+        "pipelineName": ".*"
+      }
+    },
+    {
+      "actionType": "createPipeline",
+      "actionDetail": {}
+    },
+    {
+      "actionType": "showCreatePipelineBlankOption",
+      "actionDetail": {}
+    },
+    {
+      "actionType": "showCreatePipelineFromTemplateOption",
+      "actionDetail": {}
+    },
+    {
+      "actionType": "showCreatePipelineFromYamlOption",
+      "actionDetail": {}
+    },
+    {
+      "actionType": "executePipeline",
+      "actionDetail": {
+        "pipelineName": ".*"
+      }
+    },
+    {
+      "actionType": "readPipelineTemplate",
+      "actionDetail": {
+        "pipelineTemplateName": ".*"
+      }
+    },
+    {
+      "actionType": "deletePipelineTemplate",
+      "actionDetail": {
+        "pipelineTemplateName": ".*"
+      }
+    },
+    {
+      "actionType": "updatePipelineTemplate",
+      "actionDetail": {
+        "pipelineTemplateName": ".*"
+      }
+    },
+    {
+      "actionType": "createPipelineTemplate",
+      "actionDetail": {}
+    },
+    {
+      "actionType": "readComponentTemplate",
+      "actionDetail": {
+        "componentTemplateName": ".*"
+      }
+    },
+    {
+      "actionType": "deleteComponentTemplate",
+      "actionDetail": {
+        "componentTemplateName": ".*"
+      }
+    },
+    {
+      "actionType": "updateComponentTemplate",
+      "actionDetail": {
+        "componentTemplateName": ".*"
+      }
+    },
+    {
+      "actionType": "createComponentTemplate",
+      "actionDetail": {
+        "componentTemplateName": ".*"
+      }
+    },
+    {
+      "actionType": "writePermission",
+      "actionDetail": {}
+    },
+    {
+      "actionType": "deletePermission",
+      "actionDetail": {}
+    },
+    {
+      "actionType": "readPermission",
+      "actionDetail": {}
+    },
+    {
+      "actionType": "manageGlobalPermission",
+      "actionDetail": {}
+    },
+    {
+      "actionType": "accessIam",
+      "actionDetail": {}
+    },
+    {
+      "actionType": "accessProjectSettings",
+      "actionDetail": {}
+    },
+    {
+      "actionType": "accessNotificationSettings",
+      "actionDetail": {}
+    },
+    {
+      "actionType": "updateProjectSettings",
+      "actionDetail": {
+        "settingsType": ".*"
+      }
+    },
+    {
+      "actionType": "readSecret",
+      "actionDetail": {
+        "secretName": ".*"
+      }
+    },
+    {
+      "actionType": "deleteSecret",
+      "actionDetail": {
+        "secretName": ".*"
+      }
+    },
+    {
+      "actionType": "updateSecret",
+      "actionDetail": {
+        "secretName": ".*"
+      }
+    },
+    {
+      "actionType": "createSecret",
+      "actionDetail": {}
+    },
+    {
+      "actionType": "assumeSubject",
+      "actionDetail": {
+        "subjectType": ".*",
+        "subjectId": ".*"
+      }
+    },
+    {
+      "actionType": "readSubject",
+      "actionDetail": {
+        "subjectType": ".*",
+        "subjectId": ".*"
+      }
+    },
+    {
+      "actionType": "updateSubject",
+      "actionDetail": {
+        "subjectType": ".*",
+        "subjectId": ".*"
+      }
+    },
+    {
+      "actionType": "deleteSubject",
+      "actionDetail": {
+        "subjectType": ".*",
+        "subjectId": ".*"
+      }
+    },
+    {
+      "actionType": "createSubject",
+      "actionDetail": {
+        "subjectType": ".*"
+      }
+    },
+    {
+      "actionType": "readProjectSettings",
+      "actionDetail": {
+        "settingsType": ".*"
+      }
+    },
+    {
+      "actionType": "readWorkflow",
+      "actionDetail": {
+        "workflowName": ".*"
+      }
+    },
+    {
+      "actionType": "deleteWorkflow",
+      "actionDetail": {
+        "workflowName": ".*"
+      }
+    },
+    {
+      "actionType": "updateWorkflow",
+      "actionDetail": {
+        "workflowName": ".*"
+      }
+    },
+    {
+      "actionType": "createWorkflow",
+      "actionDetail": {}
+    },
+    {
+      "actionType": "executeWorkflow",
+      "actionDetail": {
+        "workflowName": ".*"
+      }
+    },
+    {
+      "actionType": "writeS3Objects",
+      "actionDetail": {
+        "s3Bucket": ".*",
+        "s3ObjectKey": ".*"
+      }
+    },
+    {
+      "actionType": "removeS3Objects",
+      "actionDetail": {}
+    },
+    {
+      "actionType": "useComponent",
+      "actionDetail": {
+        "componentCategory": ".*",
+        "componentTypeName": ".*"
+      }
+    },
+    {
+      "actionType": "createEvent",
+      "actionDetail": {}
+    }
+  ]
+}
+
+

@@ -1,0 +1,114 @@
+{
+  "title": "Big query source parameters",
+  "displayName": "Big query",
+  "componentCategory": "input_connector",
+  "componentType": "big_query",
+  "documentationLink": "https://github.com/merck-gen/mf-difw-core/blob/{branch}/documentation/configuration/steps/spark/loaders/big_query.md",
+  "difwStepCategory": "input",
+  "difwStepType": "big_query",
+  "componentProperties": {
+    "conditionType": "big_query"
+  },
+  "flowValidations": "#extendByFile:common/process_flow_validations_loaders_in_connectors.json",
+  "platforms": {
+    "glue": {
+      "supportedJobTypes": [
+        "spark"
+      ]
+    },
+    "databricks": {
+      "supportedJobTypes": [
+        "spark_databricks"
+      ]
+    }
+  },
+  "additionalJarDependencies": [
+    {
+      "groupId": "com.google.cloud.spark",
+      "artifactId": "spark-bigquery-with-dependencies_2.12",
+      "version": "0.23.2"
+    }
+  ],
+  "attributes": [
+    {
+      "attributeName": "auth_method",
+      "displayName": "Authentication method",
+      "description": "Section where you can define authentication methods. Only one of the method can be defined",
+      "isOverwriteable": false,
+      "type": {
+        "objectType": "object",
+        "attributes": [
+          {
+            "attributeName": "json_base_64",
+            "displayName": "JSON base 64",
+            "description": "Encoded authentication google cloud credential json file. The file is encoded to base64. It is mutually exclusive with gcp_access_token",
+            "type": {
+              "objectType": "secret"
+            },
+            "value": {}
+          },
+          {
+            "attributeName": "gcp_access_token",
+            "displayName": "GCP access token",
+            "description": "Gcp authentication access token. For retrieving you can login into google cloud CLI and pass command `gcloud auth application-default print-access-token`. It is mutually exclusive with json_base_64",
+            "type": {
+              "objectType": "secret"
+            },
+            "value": {}
+          }
+        ]
+      },
+      "required": true,
+      "isBasicAttribute": true
+    },
+    {
+      "attributeName": "project_id",
+      "displayName": "Project ID",
+      "description": "Project Id in google cloud where the dataset is stored",
+      "type": {
+        "objectType": "string"
+      },
+      "required": true,
+      "isBasicAttribute": true,
+      "isOverwriteable": true,
+      "value": ""
+    },
+    {
+      "attributeName": "dataset_name",
+      "displayName": "Dataset name",
+      "description": "The name of big query dataset",
+      "type": {
+        "objectType": "string"
+      },
+      "required": true,
+      "isBasicAttribute": true,
+      "isOverwriteable": true,
+      "value": ""
+    },
+    {
+      "attributeName": "query",
+      "displayName": "Query",
+      "description": "A SQL expression defining a table or sub-query used for retrieving data",
+      "type": {
+        "objectType": "string"
+      },
+      "isBasicAttribute": false,
+      "required": false,
+      "isOverwriteable": true,
+      "value": "us-east-1"
+    },
+    {
+      "attributeName": "spark_big_query_loader_options",
+      "displayName": "Spark big query loader options",
+      "description": "Options of Spark big-query reader in key-value format. For complete list of Spark big query reader options see https://github.com/GoogleCloudDataproc/spark-bigquery-connector#properties",
+      "type": {
+        "objectType": "dictionary"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": {}
+    },
+    "#extendByFile:../common/common_filter_condition_attribute.json"
+  ]
+}

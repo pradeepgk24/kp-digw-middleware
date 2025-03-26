@@ -1,0 +1,24 @@
+{
+  "title": "Add constant columns parameters",
+  "componentCategory": "transformer",
+  "componentType": "add_constant_columns",
+  "difwStepCategory": "transformation",
+  "documentationLink": "https://github.com/merck-gen/mf-difw-core/blob/{branch}/documentation/configuration/steps/spark/transformers/add_constant_columns.md",
+  "difwStepType": "add_constant_columns",
+  "displayName": "Add constant columns",
+  "flowValidations": "#extendByFile:common/process_flow_validations_transformers.json",
+  "attributes": [
+    {
+      "attributeName": "columns",
+      "displayName": "Columns",
+      "description": "Dict of columns/values you want to add",
+      "required": true,
+      "type": {
+        "objectType": "dictionary"
+      },
+      "isBasicAttribute": true,
+      "isOverwriteable": true,
+      "value": {}
+    }
+  ]
+}

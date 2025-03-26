@@ -1,0 +1,60 @@
+{
+  "title": "Source from local",
+  "componentCategory": "input_connector",
+  "componentType": "local_file",
+  "difwStepCategory": "process",
+  "difwStepType": "acq_from_s3",
+  "displayName": "Local file",
+  "documentationLink": "https://share.merck.com/display/ADI/DIFW+-+user+interface+V1+-+local+files",
+  "flowValidations": "#extendByFile:common/process_flow_validations_file_based_in_connectors.json",
+  "componentProperties": {
+    "supportExternalAwsStorage": true
+  },
+  "platforms": {
+    "glue": {
+      "supportedJobTypes": [
+        "python",
+        "spark"
+      ]
+    },
+    "databricks": {
+      "supportedJobTypes": [
+        "python_databricks",
+        "spark_databricks"
+      ]
+    }
+  },
+  "attributes": [
+    {
+      "attributeName": "local_file",
+      "displayName": "Local file",
+      "description": "Put your local file here",
+      "type": {
+        "objectType": "file",
+        "bucketType": "data_bucket",
+        "s3Location": "files-from-ui/{{unique-hash-id}}/source_data/local_files",
+        "fileName": "",
+        "fileType": "",
+        "s3Browsing": {
+            "subType": "key",
+            "relatedS3BrowserAttrValue": "Calculated"
+        }
+      },
+      "isRuntime": true,
+      "isBasicAttribute": true,
+      "isOverwriteable": true
+    },
+    {
+      "attributeName": "source_delete",
+      "displayName": "Delete the uploaded source file",
+      "description": "Flag indicates if you want to delete the uploaded file from S3 after successful load or not",
+      "type": {
+        "objectType": "boolean"
+      },
+      "isRuntime": true,
+      "isBasicAttribute": true,
+      "isOverwriteable": true,
+      "value": true
+    }
+  ]
+}

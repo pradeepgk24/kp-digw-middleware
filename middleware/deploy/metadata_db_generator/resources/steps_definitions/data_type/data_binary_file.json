@@ -1,0 +1,44 @@
+{
+  "title": "Source data type Binary File parameters",
+  "componentCategory": "data_type",
+  "componentType": "binary_file",
+  "documentationLink": "https://github.com/merck-gen/mf-difw-core/blob/{branch}/documentation/configuration/steps/spark/loaders/binary_file.md",
+  "difwStepCategory": "input",
+  "difwStepType": "binary_file",
+  "displayName": "BinaryFile",
+  "flowValidations": "#extendByFile:common/process_flow_validations_data_type.json",
+  "componentProperties": {
+    "conditionType": "spark_sql"
+  },
+  "platforms": {
+    "glue": {
+      "supportedJobTypes": [
+        "spark"
+      ]
+    },
+    "databricks": {
+      "supportedJobTypes": [
+        "python_databricks"
+      ]
+    }
+  },
+  "attributes": [
+    {
+      "attributeName": "spark_read_binary_file_options",
+      "displayName": "Spark read Binary File options",
+      "description": "Options of Spark binaryFile reader in key-value format. For complete list of the options see https://spark.apache.org/docs/latest/sql-data-sources-binaryFile.html",
+      "type": {
+        "objectType": "dictionary"
+      },
+      "isOverwriteable": true,
+      "value": {},
+      "required": false,
+      "isBasicAttribute": true
+    },
+    "#extendByFile:common/source_data_types_common_attributes.json",
+    "#extendByFile:common/source_data_types_repartition_attributes.json",
+    "#extendByFile:common/common_blob_storage_connection_data_types.json"
+  ]
+}
+
+

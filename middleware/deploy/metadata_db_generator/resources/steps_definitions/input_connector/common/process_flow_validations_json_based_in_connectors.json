@@ -1,0 +1,36 @@
+{
+  "forbiddenDownstreamType": {
+    "transformer": [],
+    "output_connector": [
+      "delta",
+      "dynamo_db",
+      "s3_excel",
+      "jdbc",
+      "redshift",
+      "s3_csv",
+      "s3_parquet",
+      "s3_streaming_parquet",
+      "s3_streaming_csv"
+    ],
+    "data_type": [
+      "binary",
+      "csv",
+      "dicom_file",
+      "csv_pandas",
+      "excel",
+      "parquet",
+      "text",
+      "xml"
+    ]
+  },
+  "forbiddenUpstreamType": {
+    "data_type": [],
+    "transformer": [],
+    "input_connector": [
+      "jdbc",
+      "big_query",
+      "delta",
+      "spark_table"
+    ]
+  }
+}

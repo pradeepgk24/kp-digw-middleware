@@ -1,0 +1,24 @@
+{
+  "title": "Concat array type",
+  "componentCategory": "transformer",
+  "componentType": "concat_array_type",
+  "difwStepCategory": "transformation",
+  "documentationLink": "https://github.com/merck-gen/mf-difw-core/blob/{branch}/documentation/configuration/steps/spark/transformers/concat_array_type.md",
+  "difwStepType": "concat_array_type",
+  "displayName": "Concat array type",
+  "flowValidations": "#extendByFile:common/process_flow_validations_transformers.json",
+  "attributes": [
+    {
+      "attributeName": "separator",
+      "displayName": "Separator",
+      "description": "Separator sign which is going to be used in concat_ws function",
+      "required": false,
+      "type": {
+        "objectType": "string"
+      },
+      "isBasicAttribute": true,
+      "isOverwriteable": true,
+      "value": ","
+    }
+  ]
+}

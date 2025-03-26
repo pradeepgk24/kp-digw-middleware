@@ -1,0 +1,192 @@
+{
+  "permissionName": "developer",
+  "effect": "allow",
+  "description": "Developer right to perform action related with development of pipelines",
+  "permissionActions": [
+    {
+      "actionType": "readPipeline",
+      "actionDetail": {
+        "pipelineName": ".*"
+      }
+    },
+    {
+      "actionType": "deletePipeline",
+      "actionDetail": {
+        "pipelineName": ".*"
+      }
+    },
+    {
+      "actionType": "updatePipeline",
+      "actionDetail": {
+        "pipelineName": ".*"
+      }
+    },
+    {
+      "actionType": "createPipeline",
+      "actionDetail": {}
+    },
+    {
+      "actionType": "showCreatePipelineBlankOption",
+      "actionDetail": {}
+    },
+    {
+      "actionType": "showCreatePipelineFromTemplateOption",
+      "actionDetail": {}
+    },
+    {
+      "actionType": "showCreatePipelineFromYamlOption",
+      "actionDetail": {}
+    },
+    {
+      "actionType": "executePipeline",
+      "actionDetail": {
+        "pipelineName": ".*"
+      }
+    },
+    {
+      "actionType": "readPipelineTemplate",
+      "actionDetail": {
+        "pipelineTemplateName": ".*"
+      }
+    },
+    {
+      "actionType": "deletePipelineTemplate",
+      "actionDetail": {
+        "pipelineTemplateName": ".*"
+      }
+    },
+    {
+      "actionType": "updatePipelineTemplate",
+      "actionDetail": {
+        "pipelineTemplateName": ".*"
+      }
+    },
+    {
+      "actionType": "createPipelineTemplate",
+      "actionDetail": {}
+    },
+    {
+      "actionType": "readComponentTemplate",
+      "actionDetail": {
+        "componentTemplateName": ".*"
+      }
+    },
+    {
+      "actionType": "deleteComponentTemplate",
+      "actionDetail": {
+        "componentTemplateName": ".*"
+      }
+    },
+    {
+      "actionType": "updateComponentTemplate",
+      "actionDetail": {
+        "componentTemplateName": ".*"
+      }
+    },
+    {
+      "actionType": "createComponentTemplate",
+      "actionDetail": {
+        "componentTemplateName": ".*"
+      }
+    },
+    {
+      "actionType": "readPermission",
+      "actionDetail": {}
+    },
+    {
+      "actionType": "accessIam",
+      "actionDetail": {}
+    },
+    {
+      "actionType": "accessProjectSettings",
+      "actionDetail": {}
+    },
+    {
+      "actionType": "readSecret",
+      "actionDetail": {
+        "secretName": ".*"
+      }
+    },
+    {
+      "actionType": "deleteSecret",
+      "actionDetail": {
+        "secretName": ".*"
+      }
+    },
+    {
+      "actionType": "updateSecret",
+      "actionDetail": {
+        "secretName": ".*"
+      }
+    },
+    {
+      "actionType": "createSecret",
+      "actionDetail": {}
+    },
+    {
+      "actionType": "readSubject",
+      "actionDetail": {
+        "subjectType": ".*",
+        "subjectId": ".*"
+      }
+    },
+    {
+      "actionType": "readProjectSettings",
+      "actionDetail": {
+        "settingsType": ".*"
+      }
+    },
+    {
+      "actionType": "readWorkflow",
+      "actionDetail": {
+        "workflowName": ".*"
+      }
+    },
+    {
+      "actionType": "deleteWorkflow",
+      "actionDetail": {
+        "workflowName": ".*"
+      }
+    },
+    {
+      "actionType": "updateWorkflow",
+      "actionDetail": {
+        "workflowName": ".*"
+      }
+    },
+    {
+      "actionType": "createWorkflow",
+      "actionDetail": {}
+    },
+    {
+      "actionType": "executeWorkflow",
+      "actionDetail": {
+        "workflowName": ".*"
+      }
+    },
+    {
+      "actionType": "writeS3Objects",
+      "actionDetail": {
+        "s3Bucket": ".*",
+        "s3ObjectKey": ".*"
+      }
+    },
+    {
+      "actionType": "removeS3Objects",
+      "actionDetail": {}
+    },
+    {
+      "actionType": "useComponent",
+      "actionDetail": {
+        "componentCategory": ".*",
+        "componentTypeName": ".*"
+      }
+    },
+    {
+      "actionType": "createEvent",
+      "actionDetail": {}
+    }
+  ]
+}
+
+

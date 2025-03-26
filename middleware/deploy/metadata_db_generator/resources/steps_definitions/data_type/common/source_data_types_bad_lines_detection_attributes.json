@@ -1,0 +1,56 @@
+{
+  "attributeName": "bad_lines_detection",
+  "displayName": "Bad lines detection options",
+  "description": "Options for the custom detection of bad lines",
+  "required": false,
+  "type": {
+    "objectType": "object",
+    "attributes": [
+      {
+        "attributeName": "action",
+        "displayName": "Action",
+        "description": "log - enables logging and email notification of bad lines fail - enables logging, email notification and raising an error if bad lines are detected",
+        "type": {
+          "objectType": "options",
+          "values": [
+            {
+              "value": "log",
+              "displayValue": "Log"
+            },
+            {
+              "value": "fail",
+              "displayValue": "Fail"
+            }
+          ]
+        },
+        "value": "",
+        "isOverwriteable": true,
+        "required": false
+      },
+      {
+        "attributeName": "keep_bad_lines",
+        "displayName": "Keep bad lines",
+        "description": "If True, keeps bad lines column `columnNameOfCorruptRecord` in the dataframe with the corrupted records",
+        "type": {
+          "objectType": "boolean"
+        },
+        "required": false,
+        "isOverwriteable": true,
+        "value": false
+      },
+      {
+        "attributeName": "limit_bad_lines",
+        "displayName": "Limit of bad lines",
+        "description": "Number of rows being recorded into a log",
+        "type": {
+          "objectType": "number",
+          "scale": 0,
+          "precision": 7
+        },
+        "required": false,
+        "isOverwriteable": true,
+        "value": 1000
+      }
+    ]
+  }
+}

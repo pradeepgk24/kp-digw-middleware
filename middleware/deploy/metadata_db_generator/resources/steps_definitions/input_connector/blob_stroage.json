@@ -1,0 +1,70 @@
+{
+  "title": "Azure blob storage parameters",
+  "componentCategory": "input_connector",
+  "componentType": "blob_storage",
+  "difwStepCategory": "process",
+  "documentationLink": "https://github.com/merck-gen/mf-difw-core/blob/{branch}/documentation/configuration/steps/common/processors/acq_from_blob_storage.md",
+  "difwStepType": "acq_from_blob_storage",
+  "displayName": "Blob storage",
+  "flowValidations": "#extendByFile:common/process_flow_validations_file_based_in_connectors.json",
+  "componentProperties": {
+    "supportExternalAwsStorage": true
+  },
+  "platforms": {
+    "glue": {
+      "supportedJobTypes": [
+        "python",
+        "spark"
+      ]
+    },
+    "databricks": {
+      "supportedJobTypes": [
+        "python_databricks",
+        "spark_databricks"
+      ]
+    }
+  },
+  "attributes": [
+    {
+      "attributeName": "source_path",
+      "displayName": "Source path",
+      "description": "Source prefix path to blob",
+      "type": {
+        "objectType": "string"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true
+    },
+    {
+      "attributeName": "chunk_size",
+      "displayName": "Chunk size",
+      "description": "Possibility to specify chunk_size for reading of bigger file, in which case file will be read in parts not fill up the memory of worker. chunk_size unit is byte. Default is None, if value is not specified, file will be read whole at once - in one chunk.",
+      "type": {
+        "objectType": "number"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": 1024
+    },
+    {
+      "attributeName": "target_delete",
+      "displayName": "Target delete",
+      "description": "If set to true, the files are deleted from the target folder before the acquisition starts.",
+      "type": {
+        "objectType": "boolean"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": true
+    },
+    "#extendByFile:../common/common_blob_storage_connection.json",
+    "#extendByFile:common/source_connection_common_attributes.json"
+  ]
+}
+
+
+
+

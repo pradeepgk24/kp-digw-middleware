@@ -1,0 +1,61 @@
+{
+  "mandatoryDownstreamType": {
+    "output_connector": [
+      "delta",
+      "dynamo_db",
+      "s3_excel",
+      "jdbc",
+      "redshift",
+      "s3_csv",
+      "s3_parquet",
+      "s3_streaming_parquet",
+      "s3_streaming_csv"
+    ],
+    "transformer": []
+  },
+  "forbiddenDownstreamType": {
+    "processor": [],
+    "airflow_component": [],
+    "data_transformation_tool": [],
+    "output_connector": [
+      "sftp",
+      "sharepoint_folder",
+      "sharepoint_list",
+      "smb"
+    ],
+    "input_connector": []
+  },
+  "mandatoryUpstreamType": {
+    "input_connector": [
+      "jdbc",
+      "big_query",
+      "delta",
+      "spark_table"
+    ],
+    "data_type": [],
+    "transformer": []
+  },
+  "forbiddenUpstreamType": {
+    "input_connector": [
+      "dynamo_db",
+      "hdfs",
+      "jira",
+      "ldap",
+      "local_file",
+      "s3",
+      "salesforce",
+      "salesforce_documents",
+      "sftp",
+      "sharepoint_folder",
+      "sharepoint_list",
+      "smb",
+      "url",
+      "veeva_document",
+      "veeva_table"
+    ],
+    "processor": [],
+    "airflow_component": [],
+    "data_transformation_tool": [],
+    "output_connector": []
+  }
+}

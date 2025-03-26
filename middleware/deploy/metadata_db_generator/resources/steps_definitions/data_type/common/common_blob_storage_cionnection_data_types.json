@@ -1,0 +1,68 @@
+[
+  {
+    "attributeName": "blob_storage",
+    "displayName": "Blob storage connection details",
+    "description": "The section defines the source storage as azure blob storage. For more details about Blob storage see main readme section Spark loader storage.",
+    "type": {
+      "objectType": "object",
+      "attributes": [
+        {
+          "attributeName": "account_name",
+          "displayName": "Account name",
+          "description": "The name of storage account",
+          "required": true,
+          "type": {
+            "objectType": "string"
+          },
+          "isOverwriteable": true
+        },
+        {
+          "attributeName": "container_name",
+          "displayName": "Container name",
+          "description": "Name of the storage container",
+          "type": {
+            "objectType": "string"
+          },
+          "required": true,
+          "isBasicAttribute": false,
+          "isOverwriteable": true
+        },
+        {
+          "attributeName": "account_key",
+          "displayName": "Account Key",
+          "description": "Shared account key which provides the access to a Blob storage. Not needed if sas_token is defined.",
+          "required": false,
+          "type": {
+            "objectType": "secret"
+          },
+          "isOverwriteable": true
+        },
+        {
+          "attributeName": "sas_token",
+          "displayName": "Shared access signature token",
+          "description": "Shared access signature token which provides the access to a Blob storage. Not needed if account_key is defined.",
+          "required": false,
+          "type": {
+            "objectType": "secret"
+          },
+          "isOverwriteable": true
+        },
+        {
+          "attributeName": "source_path",
+          "displayName": "Source path",
+          "description": "Source prefix path to blob",
+          "type": {
+            "objectType": "string"
+          },
+          "required": false,
+          "isBasicAttribute": false,
+          "isOverwriteable": true
+        }
+      ]
+    },
+    "required": false,
+    "isBasicAttribute": false,
+    "isOverwriteable": true
+  }
+]
+

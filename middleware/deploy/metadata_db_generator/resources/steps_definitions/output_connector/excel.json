@@ -1,0 +1,145 @@
+{
+  "title": "Excel writer parameters",
+  "componentCategory": "output_connector",
+  "componentType": "s3_excel",
+  "difwStepCategory": "output",
+  "difwStepType": "excel",
+  "displayName": "S3 excel",
+  "documentationLink": "https://github.com/merck-gen/mf-difw-core/blob/{branch}/documentation/configuration/steps/spark/writers/excel.md",
+  "flowValidations": "#extendByFile:common/process_flow_validations_writers_out_connectors.json",
+  "attributes": [
+    {
+      "attributeName": "dynamic_partitions",
+      "displayName": "Dynamic Partitions",
+      "description": "Overrides dynamic_partitions configured at Table config.\nSet this value to [ ] if you want to produce a single output file.",
+      "type": {
+        "objectType": "list",
+        "elementsType": {
+          "objectType": "string"
+        }
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": []
+    },
+    {
+      "attributeName": "file_name",
+      "displayName": "File  Name",
+      "description": "Name of the output xlsx-file.",
+      "type": {
+        "objectType": "string"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": "output"
+    },
+    {
+      "attributeName": "date_format",
+      "displayName": "Date Format",
+      "description": "Format string for dates written into Excel files (e.g. ‘YYYY-MM-DD’).",
+      "type": {
+        "objectType": "string"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": "YYYY-MM-DD"
+    },
+    {
+      "attributeName": "datetime_format",
+      "displayName": "Datetime Format",
+      "description": "Format string for datetime objects written into Excel files. (e.g. ‘YYYY-MM-DD HH:MM:SS’).",
+      "type": {
+        "objectType": "string"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": "YYYY-MM-DD HH:MM:SS"
+    },
+    {
+      "attributeName": "delay_after_write",
+      "displayName": "Delay after write",
+      "description": "Seconds to sleep after write. Obsolete parameter.",
+      "type": {
+        "objectType": "number"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": 0
+    },
+    {
+      "attributeName": "write_excel_options",
+      "displayName": "Writer excel options",
+      "description": "Other options for pandas to_excel method.\nFor complete list of options see Pandas documentation.",
+      "type": {
+        "objectType": "dictionary"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": {}
+    },
+    {
+      "attributeName": "json_string_options",
+      "displayName": "JSON string options",
+      "description": "Options to control converting to JSON string. Accepts the same options as the JSON datasource.\nFor complete list of options see JSON documentation.",
+      "type": {
+        "objectType": "dictionary"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": {}
+    },
+    {
+      "attributeName": "s3_bucket",
+      "displayName": "Target S3 bucket",
+      "description": "Target S3 bucket where data will be stored",
+      "type": {
+        "objectType": "string",
+        "s3Browsing": {
+          "subType": "bucket",
+          "relatedS3BrowserAttrName": "s3_layer_path"
+        }
+      },
+      "required": true,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": ""
+    },
+    {
+      "attributeName": "s3_layer_path",
+      "displayName": "Target s3 path",
+      "description": "Target S3 path in S3 source bucket where data will be stored",
+      "type": {
+        "objectType": "string",
+        "s3Browsing": {
+          "subType": "key",
+          "relatedS3BrowserAttrName": "s3_bucket"
+        }
+      },
+      "required": true,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": ""
+    },
+    {
+      "attributeName": "static_file_location",
+      "displayName": "Static file location",
+      "description": "Set this value to true (to eliminate static partitions from the target path)",
+      "type": {
+        "objectType": "boolean"
+      },
+      "required": true,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": false
+    }
+  ]
+}
+
+

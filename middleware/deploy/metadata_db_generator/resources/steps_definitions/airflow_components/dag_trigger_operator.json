@@ -1,0 +1,132 @@
+{
+  "title": "Dag trigger operator",
+  "componentCategory": "airflow_component",
+  "componentType": "dag_trigger",
+  "documentationLink": "https://github.com/merck-gen/mf-difw-core/blob/{branch}/documentation/configuration/README.md#airflow-components-trigger",
+  "difwStepCategory": "",
+  "difwStepType": "",
+  "difwJobCategory": "operator",
+  "difwTaskType": "airflow_component",
+  "displayName": "Airflow DAG trigger operator",
+  "flowValidations": "#extendByFile:common/process_flow_validations_airflow_component.json",
+  "componentProperties": {
+    "operatorClass": "difw_operators.dag_trigger_operator.DagTriggerOperator"
+  },
+  "platforms": {
+    "glue": {
+      "supportedJobTypes": []
+    },
+    "databricks": {
+      "supportedJobTypes": []
+    },
+    "airflow": {
+      "supportedJobTypes": []
+    }
+  },
+  "attributes": [
+    {
+      "attributeName": "triggers",
+      "displayName": "Triggers",
+      "description": "List of triggers that will be triggered in the order they are defined",
+      "type": {
+        "objectType": "list",
+        "elementsType": {
+          "objectType": "object",
+          "attributes": [
+            {
+              "attributeName": "dag_id",
+              "displayName": "DAG id",
+              "description": "ID of the external DAG that will be triggered",
+              "isBasicAttribute": true,
+              "type": {
+                "objectType": "string"
+              },
+              "isOverwriteable": false,
+              "value": "",
+              "required": true
+            },
+            {
+              "attributeName": "connection_id",
+              "displayName": "Airflow connection id",
+              "description": "HTTP connection ID defined in Airflow connections. For more options, see description below.",
+              "isBasicAttribute": true,
+              "type": {
+                "objectType": "string"
+              },
+              "isOverwriteable": false,
+              "value": "",
+              "required": true
+            },
+            {
+              "attributeName": "logical_date",
+              "displayName": "Logical date",
+              "description": "Datetime in ISO format. The DAG will be triggered with this logical (=execution) date.",
+              "isBasicAttribute": false,
+              "type": {
+                "objectType": "timestamp"
+              },
+              "isOverwriteable": false,
+              "value": "",
+              "required": false
+            },
+            {
+              "attributeName": "conflict_resolution",
+              "displayName": "Conflict resolution",
+              "description": "It might happen that the external DAG have already ran or be running with the defined logical date. This controls the trigger reaction to that event.",
+              "isBasicAttribute": false,
+              "type": {
+                "objectType": "options",
+                "values": [
+                  {
+                    "value": "success",
+                    "displayValue": "Success"
+                  },
+                  {
+                    "value": "fail",
+                    "displayValue": "Fail"
+                  },
+                  {
+                    "value": "skip",
+                    "displayValue": "Skip"
+                  }
+                ]
+              },
+              "isOverwriteable": false,
+              "value": "success",
+              "required": false
+            },
+            {
+              "attributeName": "wait_for_dag",
+              "displayName": "Wait for DAG",
+              "description": "Controls whether to spawn a sensor that will be waiting for this DAG",
+              "isBasicAttribute": false,
+              "type": {
+                "objectType": "boolean"
+              },
+              "value": false,
+              "isOverwriteable": false,
+              "required": false
+            }
+          ]
+        }
+      },
+      "required": true,
+      "isOverwriteable": false,
+      "isBasicAttribute": true,
+      "value": []
+    },
+    {
+      "attributeName": "dynamic_runtime_attributes",
+      "displayName": "Runtime attributes",
+      "description": "Runtime attributes, user can rewrite before ",
+      "type": {
+        "objectType": "object",
+        "dynamicInputStructure": true,
+        "attributes": []
+      },
+      "required": true,
+      "isOverwriteable": false,
+      "isBasicAttribute": true
+    }
+  ]
+}

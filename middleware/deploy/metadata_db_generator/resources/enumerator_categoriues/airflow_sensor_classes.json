@@ -1,0 +1,30 @@
+[
+  {
+    "enumeratorValue": "airflow.providers.sftp.sensors.sftp.SFTPSensor",
+    "displayName": "airflow.providers.sftp.sensors.sftp.SFTPSensor"
+  },
+  {
+    "enumeratorValue": "airflow.providers.amazon.aws.sensors.s3.S3KeySensor",
+    "displayName": "airflow.providers.amazon.aws.sensors.s3.S3KeySensor"
+  },
+  {
+    "enumeratorValue": "airflow.sensors.date_time.DateTimeSensor",
+    "displayName": "airflow.sensors.date_time.DateTimeSensor"
+  },
+  {
+    "enumeratorValue": "airflow.sensors.time_delta.TimeDeltaSensor",
+    "displayName": "airflow.sensors.time_delta.TimeDeltaSensor"
+  },
+  {
+    "enumeratorValue": "airflow.providers.http.sensors.http.HttpSensor",
+    "displayName": "airflow.providers.http.sensors.http.HttpSensor"
+  },
+  {
+    "enumeratorValue": "airflow.sensors.sql.SqlSensor",
+    "displayName": "airflow.sensors.sql.SqlSensor"
+  },
+  {
+    "enumeratorValue": "airflow.sensors.external_task.ExternalTaskSensorLink",
+    "displayName": "airflow.sensors.external_task.ExternalTaskSensorLink"
+  }
+]

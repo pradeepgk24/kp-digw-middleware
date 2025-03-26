@@ -1,0 +1,39 @@
+{
+  "mandatoryDownstreamType": {
+    "output_connector": [
+      "delta",
+      "dynamo_db",
+      "s3_excel",
+      "jdbc",
+      "redshift",
+      "s3_csv",
+      "s3_parquet",
+      "s3_streaming_parquet",
+      "s3_streaming_csv"
+    ],
+    "transformer": []
+  },
+  "forbiddenDownstreamType": {
+    "processor": [],
+    "airflow_component": [],
+    "data_transformation_tool": [],
+    "output_connector": [
+      "sftp",
+      "sharepoint_folder",
+      "sharepoint_list",
+      "smb"
+    ],
+    "data_type": []
+  },
+  "forbiddenUpstreamType": {
+    "input_connector": [
+      "jdbc",
+      "big_query",
+      "delta",
+      "spark_table"
+    ],
+    "transformer": [],
+    "data_type": []
+  }
+}
+

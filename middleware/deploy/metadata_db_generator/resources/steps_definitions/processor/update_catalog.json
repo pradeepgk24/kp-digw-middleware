@@ -1,0 +1,116 @@
+{
+  "title": "Update catalog parameters",
+  "componentCategory": "processor",
+  "componentType": "update_catalog",
+  "difwStepCategory": "process",
+  "difwStepType": "update_catalog",
+  "displayName": "Update catalog",
+  "documentationLink": "https://github.com/merck-gen/mf-difw-core/blob/{branch}/documentation/configuration/steps/spark/processors/update_catalog.md",
+  "flowValidations": "#extendByFile:common/process_flow_validations_processors.json",
+  "platforms": {
+    "glue": {
+      "supportedJobTypes": [
+        "spark"
+      ]
+    },
+    "databricks": {
+      "supportedJobTypes": [
+        "spark_databricks"
+      ]
+    }
+  },
+  "attributes": [
+    {
+      "attributeName": "database_name",
+      "displayName": "Database name",
+      "description": "Name of the database in Glue catalog to be updated",
+      "type": {
+        "objectType": "string"
+      },
+      "required": true,
+      "isBasicAttribute": true,
+      "isOverwriteable": true,
+      "value": "{{glue_databases.c_db.database_name}}"
+    },
+    {
+      "attributeName": "schema_change_detection",
+      "displayName": "Schema change detection",
+      "description": "Enables or disables schema change detection",
+      "type": {
+        "objectType": "boolean"
+      },
+      "required": true,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": true
+    },
+    {
+      "attributeName": "custom_table_properties",
+      "displayName": "Custom table properties",
+      "description": "User-defined key-value pairs to be set in TBLPROPERTIES. If the value is null, the property is unset",
+      "type": {
+        "objectType": "dictionary"
+      },
+      "required": false,
+      "isOverwriteable": true,
+      "value": {},
+      "isBasicAttribute": false
+    },
+    {
+      "attributeName": "update_glue_description",
+      "displayName": "Update glue description",
+      "description": "Updates glue table description parameter in glue catalog. Available only for glue catalog",
+      "type": {
+        "objectType": "boolean"
+      },
+      "required": true,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": false
+    },
+    {
+      "attributeName": "s3_bucket",
+      "displayName": "S3 bucket",
+      "description": "Table s3 bucket",
+      "type": {
+        "objectType": "string",
+        "s3Browsing": {
+          "subType": "bucket",
+          "relatedS3BrowserAttrName": "s3_layer_path"
+        }
+      },
+      "required": true,
+      "isBasicAttribute": true,
+      "isOverwriteable": true,
+      "value": "{{data_bucket}}"
+    },
+    {
+      "attributeName": "s3_layer_path",
+      "displayName": "S3 layer path",
+      "description": "Table s3 path",
+      "type": {
+        "objectType": "string",
+        "s3Browsing": {
+          "subType": "key",
+          "relatedS3BrowserAttrName": "s3_bucket"
+        }
+      },
+      "required": true,
+      "isBasicAttribute": true,
+      "isOverwriteable": true,
+      "value": "{{s3_paths.c_path}}"
+    },
+    {
+      "attributeName": "static_file_location",
+      "displayName": "Static file location",
+      "description": "If value is true, static partitions are eliminated from the target path",
+      "type": {
+        "objectType": "boolean"
+      },
+      "required": true,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": false
+    }
+  ]
+}

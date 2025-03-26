@@ -1,0 +1,120 @@
+{
+  "title": "Custom spark writer",
+  "componentCategory": "output_connector",
+  "componentType": "custom_spark_writer",
+  "difwStepCategory": "output",
+  "difwStepType": "custom_spark_writer",
+  "displayName": "Custom spark writer",
+  "documentationLink": "https://github.com/merck-gen/mf-difw-core/blob/{branch}/documentation/configuration/steps/spark/writers/custom_spark_writer.md",
+  "flowValidations": "#extendByFile:common/process_flow_validations_writers_out_connectors.json",
+  "platforms": {
+    "glue": {
+      "supportedJobTypes": [
+        "spark"
+      ]
+    },
+    "databricks": {
+      "supportedJobTypes": [
+        "spark_databricks"
+      ]
+    }
+  },
+  "attributes": [
+    {
+      "attributeName": "custom_spark_code",
+      "displayName": "Custom spark code",
+      "description": "Write your custom python spark writer here",
+      "type": {
+        "objectType": "file",
+        "bucketType": "resource_bucket",
+        "s3Location": "files-from-ui/{{unique-hash-id}}/custom_code/custom_spark_writer",
+        "fileName": "custom_spark_writer.py",
+        "fileType": "python",
+        "fromLocal": false,
+        "fromText": true
+      },
+      "isBasicAttribute": true,
+      "isOverwriteable": false,
+      "value": "IyB5b3UgY2FuIGltcG9ydCBzdGFuZGFyZCBsaWJyYXJpZXMgYXZhaWxhYmxlIGluIERJRlcgcGFja2FnZQ0KIyA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PQ0KIyBQVVQgWU9VUiBTVEFOREFSRCBGVyBMSUJSQVJJRVMgSU1QT1JUUyBIRVJFDQojID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09DQpmcm9tIHB5c3Bhcmsuc3FsIGltcG9ydCBEYXRhRnJhbWUNCg0KIyBjdXN0b20gcGFja2FnZXMgdGhhdCBhcmUgaW5zdGFsbGVkIGF0IHJ1bnRpbWUgY2FuIGJlIGltcG9ydGVkIGRpcmVjdGx5DQojID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09DQojIFBVVCBZT1VSIENVU1RPTSBMSUJSQVJJRVMgSU1QT1JUUyBIRVJFDQojID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09DQoNCg0KIyB0aGlzIGlzIHRoZSBvbmx5IG1hbmRhdG9yeSBmdW5jdGlvbiB5b3UgaGF2ZSB0byBoYXZlIGluIHlvdXIgY3VzdG9tIGNvZGUNCiMgdGhlIGZ1bGwgaW50ZXJmYWNlIGlzOg0KIyBkZWYgbWFpbihqb2JfY29uZmlndXJhdGlvbiwgdGFibGVfY29uZmlndXJhdGlvbiwNCiMgICAgICAgICAgY3VzdG9tX3BhcmFtZXRlcnMsIGNvbXBvbmVudF9pbnN0YW5jZSwgbG9nZ2VyLCBkYXRhZnJhbWUpOg0KIyBhbGwgcGFyYW1ldGVycyBhcmUgcGFzc2VkIGFzIG5hbWVkIGFyZ3VtZW50cywgc28gaWYgeW91ciBjdXN0b20gY29tcG9uZW50IGRvZXMgbm90IG5lZWQgYWxsDQojIHRoZSBhcmd1bWVudHMsIGp1c3QgcmVtb3ZlIHRoZW0gYW5kIHVzZSAqKmt3YXJncyBhdCB0aGUgZW5kDQpkZWYgbWFpbihqb2JfY29uZmlndXJhdGlvbiwgdGFibGVfY29uZmlndXJhdGlvbixjdXN0b21fcGFyYW1ldGVycywgY29tcG9uZW50X2luc3RhbmNlLCBsb2dnZXIsIGRhdGFmcmFtZSwgKiprd2FyZ3MpOg0KICAgIGxvZ2dlci5pbmZvKCdTdGFydCBjdXN0b20gc3Bhcmsgd3JpdGVyJykNCiAgICBhc3NlcnQgaXNpbnN0YW5jZShkYXRhZnJhbWUsIERhdGFGcmFtZSkNCiAgICBsb2dnZXIuaW5mbyhyZXByKGpvYl9jb25maWd1cmF0aW9uKSkNCiAgICBsb2dnZXIuaW5mbyhyZXByKHRhYmxlX2NvbmZpZ3VyYXRpb24pKQ0KICAgIGxvZ2dlci5pbmZvKHJlcHIoY3VzdG9tX3BhcmFtZXRlcnMpKQ0KICAgICMgPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0NCiAgICAjIFBBU1MgWU9VUiBDVVNUT00gQ09ERSBIRVJFDQogICAgIyA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PQ0K"
+    },
+    {
+      "attributeName": "custom_parameters",
+      "displayName": "Custom parameters",
+      "description": "User specific options for custom code",
+      "isBasicAttribute": true,
+      "type": {
+        "objectType": "object",
+        "dynamicInputStructure": true,
+        "attributes": []
+      }
+    },
+    {
+      "attributeName": "additional_spark_packages",
+      "displayName": "Additional spark packages",
+      "description": "These packages will be deployed with the dataset the same way as core DIFW dependencies.\n    This is the only way, how to deploy libraries to Spark executors. This approach will not work for c-based libraries,\n    the runtime packages option (listed above) should be used for that purpose.",
+      "type": {
+        "objectType": "list",
+        "elementsType": {
+          "objectType": "object",
+          "attributes": [
+            {
+              "type": {
+                "objectType": "string"
+              },
+              "attributeName": "library_name",
+              "displayName": "Library name",
+              "value": "",
+              "isOverwriteable": false
+            },
+            {
+              "type": {
+                "objectType": "string"
+              },
+              "attributeName": "library_version",
+              "displayName": "Library version",
+              "value": "",
+              "isOverwriteable": false
+            }
+          ]
+        }
+      },
+      "isBasicAttribute": false,
+      "isOverwriteable": false,
+      "value": []
+    },
+    {
+      "attributeName": "runtime_python_packages",
+      "displayName": "Runtime python packages",
+      "description": "These packages will be downloaded from index and installed during every job run.\n    This is the only way, how to install c-based libraries to Spark driver, Spark executors will not see those libraries.",
+      "type": {
+        "objectType": "list",
+        "elementsType": {
+          "objectType": "object",
+          "attributes": [
+            {
+              "type": {
+                "objectType": "string"
+              },
+              "attributeName": "library_name",
+              "displayName": "Library name",
+              "value": "",
+              "isOverwriteable": false
+            },
+            {
+              "type": {
+                "objectType": "string"
+              },
+              "attributeName": "library_version",
+              "displayName": "Library version",
+              "value": "",
+              "isOverwriteable": false
+            }
+          ]
+        }
+      },
+      "isBasicAttribute": false,
+      "isOverwriteable": false,
+      "value": []
+    }
+  ]
+}

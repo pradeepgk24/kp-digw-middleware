@@ -1,0 +1,141 @@
+{
+  "title": "Unzip parameters",
+  "componentCategory": "processor",
+  "componentType": "unzip",
+  "difwStepCategory": "process",
+  "documentationLink": "https://github.com/merck-gen/mf-difw-core/blob/{branch}/documentation/configuration/steps/python/processors/unzip.md",
+  "difwStepType": "unzip",
+  "displayName": "Unzip",
+  "flowValidations": "#extendByFile:common/process_flow_validations_processors.json",
+  "platforms": {
+    "glue": {
+      "supportedJobTypes": [
+        "python"
+      ]
+    },
+    "databricks": {
+      "supportedJobTypes": [
+        "python_databricks",
+        "spark_databricks"
+      ]
+    }
+  },
+  "attributes": [
+    {
+      "attributeName": "table_to_member_regex_map",
+      "displayName": "Table to member regex map",
+      "description": "Mapping of table names to regular expressions matching zip content paths. Pair table: regular expression. E.g. my_test_table: 'file [0-9]+[.]zip/dir1/[^/]+[.]csv'",
+      "type": {
+        "objectType": "dictionary"
+      },
+      "required": true,
+      "isBasicAttribute": true,
+      "isOverwriteable": true,
+      "value": {}
+    },
+    {
+      "attributeName": "file_regex",
+      "displayName": "File regex",
+      "description": "Regular expression to match zip files",
+      "type": {
+        "objectType": "string"
+      },
+      "required": true,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": ".*\\[.\\]\\[Zz\\]\\[Ii\\]\\[Pp\\]$"
+    },
+    {
+      "attributeName": "path_sep_replacement",
+      "displayName": "Path separator replacement",
+      "description": "Replacement of '/' in zip content paths to produce flat file names (e.g. abc.zip/dir1/dir2/x.csv becomes abc.zip.dir1.dir2.x.csv)",
+      "type": {
+        "objectType": "string"
+      },
+      "required": true,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": "."
+    },
+    {
+      "attributeName": "s3_bucket",
+      "displayName": "Target S3 bucket",
+      "description": "Source S3 bucket where data will be stored",
+      "type": {
+        "objectType": "string",
+        "s3Browsing": {
+          "subType": "bucket",
+          "relatedS3BrowserAttrName": "s3_layer_path"
+        }
+      },
+      "required": true,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": "{{data_bucket}}"
+    },
+    {
+      "attributeName": "s3_layer_path",
+      "displayName": "Target s3 path",
+      "description": "Source S3 path in S3 source bucket where data will be stored",
+      "type": {
+        "objectType": "string",
+        "s3Browsing": {
+          "subType": "key",
+          "relatedS3BrowserAttrName": "s3_bucket"
+        }
+      },
+      "required": true,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": "{{s3_paths.b_path}}"
+    },
+    {
+      "attributeName": "static_file_location",
+      "displayName": "Static file location",
+      "description": "If value is true, static partitions are eliminated from the target path",
+      "type": {
+        "objectType": "boolean"
+      },
+      "required": true,
+      "isOverwriteable": true,
+      "isBasicAttribute": false,
+      "value": false
+    },
+    {
+      "attributeName": "compression",
+      "displayName": "Compression",
+      "description": "Compresses files before upload to S3. All files will have a `.gz` suffix.",
+      "required": false,
+      "type": {
+        "objectType": "object",
+        "attributes": [
+          {
+            "attributeName": "type",
+            "displayName": "Type",
+            "value": "gzip",
+            "required": true,
+            "type": {
+              "objectType": "string",
+              "maxLength": "256"
+            },
+            "isOverwriteable": true
+          },
+          {
+            "attributeName": "level",
+            "displayName": "Level",
+            "required": true,
+            "type": {
+              "objectType": "number",
+              "scale": 0,
+              "precision": 2
+            },
+            "isOverwriteable": true,
+            "value": 9
+          }
+        ]
+      },
+      "isBasicAttribute": false,
+      "isOverwriteable": true
+    }
+  ]
+}

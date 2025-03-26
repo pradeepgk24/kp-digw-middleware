@@ -1,0 +1,36 @@
+{
+  "title": "Replace column characters  parameters",
+  "componentCategory": "transformer",
+  "componentType": "replace_col_chars",
+  "difwStepCategory": "transformation",
+  "documentationLink": "https://github.com/merck-gen/mf-difw-core/blob/{branch}/documentation/configuration/steps/spark/transformers/replace_col_chars.md",
+  "difwStepType": "replace_col_chars",
+  "displayName": "Replace column characters",
+  "flowValidations": "#extendByFile:common/process_flow_validations_transformers.json",
+  "attributes": [
+    {
+      "attributeName": "special_characters",
+      "displayName": "Special characters",
+      "description": "A regular expression to find characters which must be replaced",
+      "type": {
+        "objectType": "string"
+      },
+      "isBasicAttribute": true,
+      "required": true,
+      "isOverwriteable": true,
+      "value": "[^a-zA-Z0-9_]"
+    },
+    {
+      "attributeName": "replacement_character",
+      "displayName": "Replacement character",
+      "description": "A character to replace matching ones with. If value empty string, the chars are effectively cut off",
+      "type": {
+        "objectType": "string"
+      },
+      "required": false,
+      "isBasicAttribute": true,
+      "isOverwriteable": true,
+      "value": ""
+    }
+  ]
+}

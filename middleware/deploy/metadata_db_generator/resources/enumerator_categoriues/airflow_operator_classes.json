@@ -1,0 +1,44 @@
+[
+  {
+    "enumeratorValue": "airflow.operators.bash.BashOperator",
+    "displayName": "airflow.operators.bash.BashOperator"
+  },
+  {
+    "enumeratorValue": "airflow.operators.python.PythonOperator",
+    "displayName": "airflow.operators.python.PythonOperator"
+  },
+  {
+    "enumeratorValue": "airflow.providers.mysql.operators.mysql.MySqlOperator",
+    "displayName": "airflow.providers.mysql.operators.mysql.MySqlOperator"
+  },
+  {
+    "enumeratorValue": "airflow.providers.http.operators.http.HttpOperator",
+    "displayName": "airflow.providers.http.operators.http.HttpOperator"
+  },
+  {
+    "enumeratorValue": "airflow.operators.email.EmailOperator",
+    "displayName": "airflow.operators.email.EmailOperator"
+  },
+  {
+    "enumeratorValue": "airflow.providers.oracle.operators.oracle.OracleOperator",
+    "displayName": "airflow.providers.oracle.operators.oracle.OracleOperator"
+  },
+  {
+    "enumeratorValue": "airflow.providers.jdbc.operators.jdbc.JdbcOperator",
+    "displayName": "airflow.providers.jdbc.operators.jdbc.JdbcOperator"
+  },
+  {
+    "enumeratorValue": "airflow.providers.docker.operators.docker.DockerOperator",
+    "displayName": "airflow.providers.docker.operators.docker.DockerOperator"
+  },
+  {
+    "enumeratorValue": "airflow.providers.amazon.aws.operators.s3.S3FileTransformOperator",
+    "displayName": "airflow.providers.amazon.aws.operators.s3.S3FileTransformOperator"
+  },
+  {
+    "enumeratorValue": "airflow.operators.empty.EmptyOperator",
+    "displayName": "airflow.operators.empty.EmptyOperator"
+  }
+]
+
+

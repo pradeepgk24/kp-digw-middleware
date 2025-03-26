@@ -1,0 +1,415 @@
+{
+  "title": "Source Mysql JDBC 8 parameters",
+  "displayName": "Mysql JDBC 8",
+  "componentCategory": "input_connector",
+  "componentType": "mysql_jdbc_8",
+  "documentationLink": "https://github.com/merck-gen/mf-difw-core/blob/{branch}/documentation/configuration/steps/spark/loaders/jdbc.md",
+  "difwStepCategory": "input",
+  "difwStepType": "mysql_jdbc_8",
+  "componentProperties": {
+    "conditionType": "jdbc",
+    "isTestable": true,
+    "loadTableListFromSource": "jdbc"
+  },
+  "flowValidations": "#extendByFile:common/process_flow_validations_loaders_in_connectors.json",
+  "platforms": {
+    "glue": {
+      "supportedJobTypes": [
+        "spark"
+      ]
+    },
+    "databricks": {
+      "supportedJobTypes": [
+        "python_databricks"
+      ]
+    }
+  },
+  "attributes": [
+    {
+      "attributeName": "jdbc_user",
+      "displayName": "JDBC user",
+      "description": "JDBC username",
+      "type": {
+        "objectType": "secret"
+      },
+      "isOverwriteable": false,
+      "required": true,
+      "isBasicAttribute": true,
+      "value": {}
+    },
+    {
+      "attributeName": "jdbc_password",
+      "displayName": "JDBC password",
+      "description": "JDBC password",
+      "type": {
+        "objectType": "secret"
+      },
+      "isOverwriteable": false,
+      "required": true,
+      "isBasicAttribute": true,
+      "value": {}
+    },
+    {
+      "attributeName": "jdbc_url",
+      "displayName": "JDBC url",
+      "description": "Template on a connection string. Template is: 'jdbc:mysql://{jdbc_host}:{jdbc_port}/{jdbc_database}', manually replace the following values: {jdbc_host}, {jdbc_port} and {jdbc_database}. Databricks jobs do support having ':' between port and database - '{jdbc_port}:{jdbc_database}', this is not supported for Glue jobs.",
+      "type": {
+        "objectType": "string"
+      },
+      "isOverwriteable": false,
+      "required": true,
+      "isBasicAttribute": true,
+      "value": "jdbc:mysql://{jdbc_host}:{jdbc_port}/{jdbc_database}"
+    },
+    {
+      "attributeName": "jdbc_driver",
+      "displayName": "JDBC driver",
+      "description": "A driver class name to use. For instance: com.mysql.cj.jdbc.Driver. Not needed for drivers based on JDBC 4.0 and above (auto load feature).",
+      "type": {
+        "objectType": "string"
+      },
+      "isOverwriteable": false,
+      "required": false,
+      "isBasicAttribute": true,
+      "value": "com.mysql.cj.jdbc.Driver"
+    },
+    {
+      "attributeName": "jdbc_options",
+      "displayName": "JDBC options",
+      "description": "Optional map of default options passed to JDBC data-frame reader",
+      "type": {
+        "objectType": "dictionary"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": {}
+    },
+    {
+      "attributeName": "jdbc_custom_format",
+      "displayName": "JDBC custom format",
+      "description": "A custom format can be configured in order to properly handle various data types",
+      "type": {
+        "objectType": "string"
+      },
+      "isOverwriteable": false,
+      "required": false,
+      "isBasicAttribute": false,
+      "value": ""
+    },
+    {
+      "attributeName": "jdbc_custom_dialect",
+      "displayName": "JDBC custom dialect",
+      "description": "A custom dialect can be configured in order to properly handle various data types",
+      "type": {
+        "objectType": "string"
+      },
+      "isOverwriteable": false,
+      "required": false,
+      "isBasicAttribute": false,
+      "value": ""
+    },
+    {
+      "attributeName": "jdbc_driver_s3_path",
+      "displayName": "JDBC driver s3 path",
+      "description": "S3 Path to JDBC driver. Use only if there is a conflict with default driver provided by Glue,  see https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-connect.html#aws-glue-programming-etl-connect-jdbc. It sets driverS3Path option. This option is not supported by default JDBC Spark read format,  you need use custom one which supports it e.g. custom_oracle_jdbc => set also jdbc_custom_format parameter. Use in combination with jdbc_driver parameter, otherwise it takes class name from default Glue driver",
+      "type": {
+        "objectType": "string"
+      },
+      "isOverwriteable": false,
+      "required": false,
+      "isBasicAttribute": false,
+      "value": ""
+    },
+    {
+      "attributeName": "query",
+      "displayName": "Query",
+      "description": "A SQL expression defining a table or sub-query used for retrieving data, spark creates SQL query in the form  select * from `query`. A `{source_table}` template is used if no query is provided;  it is replaced with `original_table_name` or `name` of the table which is being loaded. Example: <schema>.'{source_table}'",
+      "type": {
+        "objectType": "string"
+      },
+      "isBasicAttribute": false,
+      "required": false,
+      "value": "{source_table}",
+      "isOverwriteable": true
+    },
+    "#extendByFile:../common/common_filter_condition_attribute.json",
+    {
+      "attributeName": "jdbc_fetchsize",
+      "displayName": "JDBC fetchsize",
+      "description": "Number of rows to fetch in a single chunk. `query` must be configured",
+      "type": {
+        "objectType": "number",
+        "scale": 0,
+        "precision": 7
+      },
+      "isBasicAttribute": false,
+      "required": false,
+      "value": 1000,
+      "isOverwriteable": true
+    },
+    {
+      "attributeName": "jdbc_hash_expression",
+      "displayName": "JDBC hash expression",
+      "description": "A SQL expression to enable parallel loading of data and define which partition a row goes to. `query` must be configured",
+      "type": {
+        "objectType": "string"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": ""
+    },
+    {
+      "attributeName": "jdbc_hash_partitions",
+      "displayName": "JDBC hash partitions",
+      "description": "Number of partitions to split rows to. `query` must be configured",
+      "type": {
+        "objectType": "number",
+        "scale": 0,
+        "precision": 7
+      },
+      "isBasicAttribute": false,
+      "required": false,
+      "value": 7,
+      "isOverwriteable": true
+    },
+    {
+      "attributeName": "jdbc_hash_modulo_expression",
+      "displayName": "JDBC hash modulo expression",
+      "description": " Query to calculate hash partitioning has to be passed explicitly as a configuration, as the mod calculations differ from one database to the other for oracle systems the expression would be `mod(<jdbc_hash_expression>,<jdbc_hash_partitions>)`, for ms-sql the expression would be : ({jdbc_hash_expression} % {jdbc_hash_partitions})  `query` must be configured",
+      "type": {
+        "objectType": "string"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": "mod({jdbc_hash_expression},{jdbc_hash_partitions})"
+    },
+    {
+      "attributeName": "jdbc_catalog_name",
+      "displayName": "JDBC catalog name",
+      "description": "Catalog name (not used for Oracle DBs). For more details see #configuration-note",
+      "type": {
+        "objectType": "string"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": ""
+    },
+    {
+      "attributeName": "jdbc_schema_name_in_catalog",
+      "displayName": "JDBC schema name in catalog",
+      "description": "Schema name as specified in the catalog (uppercase for some DBs). For more details see #configuration-note",
+      "type": {
+        "objectType": "string"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": ""
+    },
+    {
+      "attributeName": "jdbc_table_name_in_catalog",
+      "displayName": "JDBC table name in catalog",
+      "description": "Table name as specified in the catalog (uppercase for some DBs). For more details see #configuration-note",
+      "type": {
+        "objectType": "string"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": ""
+    },
+    {
+      "attributeName": "hard_delete_options",
+      "displayName": "Hard delete options",
+      "description": "Enables an option to detect deleted records. There are two modes either `primary_keys` or `deleted_records`.",
+      "type": {
+        "objectType": "object",
+        "attributes": [
+          {
+            "attributeName": "source",
+            "displayName": "Source",
+            "required": false,
+            "isBasicAttribute": false,
+            "description": "Source options for the table with deleted records",
+            "type": {
+              "objectType": "object",
+              "attributes": [
+                {
+                  "attributeName": "query",
+                  "displayName": "Query",
+                  "description": "Query which defines the table with delete_records or with primary keys. The behavior of this parameter is the same as the `query` for data.",
+                  "type": {
+                    "objectType": "string"
+                  },
+                  "isBasicAttribute": false,
+                  "required": false,
+                  "isOverwriteable": true
+                },
+                {
+                  "attributeName": "jdbc_options",
+                  "displayName": "JDBC options",
+                  "description": "Optional map of default options passed to JDBC data-frame reader",
+                  "type": {
+                    "objectType": "dictionary"
+                  },
+                  "required": false,
+                  "isBasicAttribute": false,
+                  "isOverwriteable": true,
+                  "value": {}
+                }
+              ]
+            }
+          },
+          {
+            "attributeName": "writer_config",
+            "displayName": "Writer config",
+            "required": false,
+            "isBasicAttribute": false,
+            "description": "Writer config section, defines target location for data retrieved for hard_delete",
+            "type": {
+              "objectType": "object",
+              "attributes": [
+                {
+                  "attributeName": "s3_bucket",
+                  "displayName": "S3 bucket",
+                  "description": "Target bucket name which will be used to store the deleted records data",
+                  "type": {
+                    "objectType": "string",
+                    "s3Browsing": {
+                      "subType": "bucket",
+                      "relatedS3BrowserAttrName": "s3_layer_path"
+                    }
+                  },
+                  "required": false,
+                  "isBasicAttribute": false,
+                  "isOverwriteable": true,
+                  "value": "{{data_bucket}}"
+                },
+                {
+                  "attributeName": "s3_layer_path",
+                  "displayName": "S3 layer path",
+                  "description": "Target s3 path for delete records",
+                  "type": {
+                    "objectType": "string",
+                    "s3Browsing": {
+                      "subType": "key",
+                      "relatedS3BrowserAttrName": "s3_bucket"
+                    }
+                  },
+                  "required": false,
+                  "isBasicAttribute": false,
+                  "isOverwriteable": true
+                },
+                {
+                  "attributeName": "static_file_location",
+                  "displayName": "Static file location",
+                  "description": "If value is true, static partitions are eliminated from the target path",
+                  "type": {
+                    "objectType": "boolean"
+                  },
+                  "required": false,
+                  "isBasicAttribute": false,
+                  "isOverwriteable": true,
+                  "value": false
+                },
+                {
+                  "attributeName": "output_table_name",
+                  "displayName": "Output table name",
+                  "description": "Target table name, which can affects the final s3 path. If delete_mode is `primary_keys` the value is \"<source_table>_primary_keys\". If mode is `deleted_records` the value \"<source_table>_deleted_records.\"",
+                  "type": {
+                    "objectType": "string"
+                  },
+                  "required": false,
+                  "isBasicAttribute": false,
+                  "isOverwriteable": true
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true
+    },
+    "#extendByFile:../common/common_no_data_policy.json",
+    {
+      "attributeName": "additional_jar_dependencies",
+      "displayName": "Additional Jar Dependencies",
+      "description": "Jar Dependencies for the Pipeline Execution.",
+      "type": {
+        "objectType": "list",
+        "elementsType": {
+          "objectType": "object",
+          "attributes": [
+            {
+              "attributeName": "group_id",
+              "displayName": "Group ID",
+              "description": "Maven Group ID",
+              "type": {
+                "objectType": "string"
+              },
+              "value": ""
+            },
+            {
+              "attributeName": "artifact_id",
+              "displayName": "Artifact ID",
+              "description": "Maven Artifact ID",
+              "type": {
+                "objectType": "string"
+              },
+              "value": ""
+            },
+            {
+              "attributeName": "version",
+              "displayName": "Version",
+              "description": "Maven version",
+              "type": {
+                "objectType": "string"
+              },
+              "value": ""
+            }
+          ]
+        }
+      },
+      "value": [
+        {
+          "attributes": [
+            {
+              "attributeName": "group_id",
+              "displayName": "Group ID",
+              "description": "Maven Group ID",
+              "type": {
+                "objectType": "string"
+              },
+              "value": "com.mysql"
+            },
+            {
+              "attributeName": "artifact_id",
+              "displayName": "Artifact ID",
+              "description": "Maven Artifact ID",
+              "type": {
+                "objectType": "string"
+              },
+              "value": "mysql-connector-j"
+            },
+            {
+              "attributeName": "version",
+              "displayName": "Version",
+              "description": "Maven version",
+              "type": {
+                "objectType": "string"
+              },
+              "value": "8.4.0"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+

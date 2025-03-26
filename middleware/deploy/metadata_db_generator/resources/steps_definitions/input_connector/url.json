@@ -1,0 +1,466 @@
+{
+  "title": "Source API/URL parameters",
+  "componentCategory": "input_connector",
+  "componentType": "api",
+  "difwStepCategory": "process",
+  "difwStepType": "acq_from_url",
+  "displayName": "URL",
+  "documentationLink": "https://github.com/merck-gen/mf-difw-core/blob/{branch}/documentation/configuration/steps/common/processors/acq_from_url.md",
+  "flowValidations": "#extendByFile:common/process_flow_validations_file_based_in_connectors.json",
+  "platforms": {
+    "glue": {
+      "supportedJobTypes": [
+        "python",
+        "spark"
+      ]
+    },
+    "databricks": {
+      "supportedJobTypes": [
+        "python_databricks",
+        "spark_databricks"
+      ]
+    }
+  },
+  "attributes": [
+    {
+      "attributeName": "url",
+      "displayName": "URL",
+      "description": "Source server URL for get request",
+      "type": {
+        "objectType": "string"
+      },
+      "required": false,
+      "isOverwriteable": false,
+      "isBasicAttribute": true,
+      "value": ""
+    },
+      {
+      "attributeName": "initial_retry_delay",
+      "displayName": "Initial retry delay",
+      "description": "The initial delay between retries of the API call. Every retry multiply it by 2",
+      "type": {
+        "objectType": "number"
+      },
+      "required": false,
+      "isOverwriteable": true,
+      "isBasicAttribute": false,
+      "value": 1
+    },
+    {
+      "attributeName": "retries",
+      "displayName": "Retries",
+      "description": "Number of retries to retry an api call if the previous one was unsuccessful. Same for all API calls in the pipeline.",
+      "type": {
+        "objectType": "number"
+      },
+      "required": false,
+      "isOverwriteable": true,
+      "isBasicAttribute": false,
+      "value": 0
+    },
+    {
+      "attributeName": "s3_file_name",
+      "displayName": "S3 file name",
+      "description": "Name of the file created on s3. By default name of the file is the name of the table",
+      "type": {
+        "objectType": "string"
+      },
+      "required": true,
+      "isBasicAttribute": true,
+      "value": "{{table_name}}",
+      "isOverwriteable": true
+    },
+    {
+      "attributeName": "request_options",
+      "displayName": "Request options",
+      "required": false,
+      "description": "Additional parameters for get request such as url params, headers, proxies or timeout.",
+      "type": {
+        "objectType": "object",
+        "attributes": [
+          {
+            "attributeName": "method",
+            "displayName": "Method",
+            "description": "Type of the HTTP request",
+            "required": false,
+            "type": {
+              "objectType": "string"
+            },
+            "isOverwriteable": false,
+            "value": ""
+          },
+          {
+            "attributeName": "params",
+            "displayName": "Parameters",
+            "required": false,
+            "description": "Passes parameters key/value pairs in the url after a question mark. http://bin.org/get?key=val ,  https://requests.readthedocs.io/en/latest/user/quickstart/?highlight=passing-parameters-in-urls#passing-parameters-in-urls.",
+            "type": {
+              "objectType": "dictionary"
+            },
+            "isOverwriteable": false,
+            "value": {}
+          },
+          {
+            "attributeName": "headers",
+            "displayName": "Headers",
+            "required": false,
+            "description": "Defines a http header to a request, https://requests.readthedocs.io/en/latest/user/quickstart/?highlight=custom-headers#custom-headers",
+            "type": {
+              "objectType": "dictionary"
+            },
+            "isOverwriteable": false,
+            "value": {}
+          },
+          {
+            "attributeName": "proxies",
+            "displayName": "Proxies",
+            "required": false,
+            "description": "Defines a https://requests.readthedocs.io/en/latest/user/advanced/?highlight=proxies#proxies",
+            "type": {
+              "objectType": "dictionary"
+            },
+            "isOverwriteable": false,
+            "value": {}
+          },
+          {
+            "attributeName": "data",
+            "displayName": "Data",
+            "required": false,
+            "description": "Body of the request, which is used in case of POST request. Data in the payload are sent with \"Content-Type\": \"application/x-www-form-urlencoded header\".",
+            "type": {
+              "objectType": "dictionary"
+            },
+            "isOverwriteable": true,
+            "value": {}
+          },
+          {
+            "attributeName": "json",
+            "displayName": "Json",
+            "required": false,
+            "description": "Body of the request, which is used in case of POST request. Data from the dictionary are converted to JSON string and are sent with \"Content-Type\": \"application/json\" header.",
+            "type": {
+              "objectType": "dictionary"
+            },
+            "isOverwriteable": true,
+            "value": {}
+          },
+          {
+            "attributeName": "timeout",
+            "displayName": "Timeout",
+            "required": false,
+            "description": "Defines a request timeout",
+            "type": {
+              "objectType": "number"
+            },
+            "isOverwriteable": true,
+            "value": null
+          },
+          {
+            "attributeName": "verify",
+            "displayName": "Verify",
+            "required": false,
+            "description": "SSL verification",
+            "type": {
+              "objectType": "boolean"
+            },
+            "value": false,
+            "isOverwriteable": true
+          }
+        ]
+      },
+      "isBasicAttribute": false,
+      "isOverwriteable": true
+    },
+    {
+      "attributeName": "authentication",
+      "displayName": "Authentication",
+      "description": "Defines type, credentials for a get request authentication",
+      "required": false,
+      "type": {
+        "objectType": "object",
+        "attributes": [
+          {
+            "attributeName": "type",
+            "displayName": "Type",
+            "required": true,
+            "description": "Defines what type of authentication will be used. Allowed values [basic, oauth2]",
+            "type": {
+              "objectType": "options",
+              "values": [
+                {
+                  "value": "basic",
+                  "displayValue": "Basic"
+                },
+                {
+                  "value": "oauth2",
+                  "displayValue": "Oauth 2"
+                }
+              ]
+            },
+            "value": "basic",
+            "isOverwriteable": false
+          },
+          {
+            "attributeName": "user_name",
+            "displayName": "Username",
+            "required": false,
+            "description": "Only for **basic** authentication type. User name for a request authentication",
+            "type": {
+              "objectType": "string"
+            },
+            "isOverwriteable": false,
+            "value": ""
+          },
+          {
+            "attributeName": "password",
+            "displayName": "Password",
+            "required": false,
+            "description": "Only for **basic** authentication type. Password for a request authentication",
+            "type": {
+              "objectType": "secret"
+            },
+            "isOverwriteable": false,
+            "value": {}
+          },
+          {
+            "attributeName": "request_options",
+            "required": false,
+            "displayName": "Oauth2 request options",
+            "description": "Only for **oauth2** authentication type. Options for post request to retrieve access_token and token_type. Options are params, url, headers, data, proxies or timeout",
+            "type": {
+              "objectType": "object",
+              "attributes": [
+                {
+                  "attributeName": "url",
+                  "displayName": "Authorization server URL",
+                  "required": true,
+                  "description": "Only for **oauth2** authentication type. Authorization server URL",
+                  "type": {
+                    "objectType": "string"
+                  },
+                  "isBasicAttribute": true,
+                  "isOverwriteable": false,
+                  "value": ""
+                },
+                {
+                  "attributeName": "headers",
+                  "displayName": "Headers",
+                  "required": false,
+                  "description": "Only for **oauth2** authentication type. Extra header included in the post request",
+                  "type": {
+                    "objectType": "dictionary"
+                  },
+                  "isOverwriteable": false,
+                  "value": {}
+                },
+                {
+                  "attributeName": "data",
+                  "displayName": "Data",
+                  "required": false,
+                  "description": "Only for **oauth2** authentication type. Data in the payload are sent with \"Content-Type\": \"application/x-www-form-urlencoded header\". .",
+                  "type": {
+                    "objectType": "dictionary"
+                  },
+                  "isOverwriteable": false,
+                  "value": {}
+                },
+                {
+                  "attributeName": "json",
+                  "displayName": "Json",
+                  "required": false,
+                  "description": "Only for **oauth2** authentication type. Data from the dictionary are converted to JSON string and are sent with \"Content-Type\": \"application/json\" header.",
+                  "type": {
+                    "objectType": "dictionary"
+                  },
+                  "isOverwriteable": false,
+                  "value": {}
+                },
+                {
+                  "attributeName": "access_token_parameter_name",
+                  "displayName": "Access token parameter name",
+                  "required": false,
+                  "description": "Defines name of key which contains access_key in authentication response.",
+                  "type": {
+                    "objectType": "string"
+                  },
+                  "isOverwriteable": false,
+                  "value": ""
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "isOverwriteable": false,
+      "isBasicAttribute": true
+    },
+    {
+      "attributeName": "paginate",
+      "displayName": "Paginate",
+      "description": "Section for pagination",
+      "required": false,
+      "type": {
+        "objectType": "object",
+        "attributes": [
+          {
+            "attributeName": "request_strategy",
+            "displayName": "Request strategy",
+            "required": true,
+            "isOverwriteable": true,
+            "description": "Strategy for pagination",
+            "type": {
+              "objectType": "options",
+              "values": [
+                {
+                  "value": "limit_offset",
+                  "displayValue": "Limit and offset"
+                },
+                {
+                  "value": "integer_range",
+                  "displayValue": "Integer range"
+                },
+                {
+                  "value": "next_token",
+                  "displayValue": "Next token"
+                },
+                {
+                  "value": "constant",
+                  "displayValue": "Constant"
+                }
+              ]
+            },
+            "value": "limit_offset"
+          },
+          {
+            "attributeName": "requests",
+            "displayName": "List of requests",
+            "required": false,
+            "isOverwriteable": true,
+            "value": [],
+            "description": "List of API requests that will be called and the results will be saved to S3",
+            "type": "#extendByFile:common/api_request.json"
+          },
+          {
+            "attributeName": "last_page_contains_data",
+            "displayName": "Last page contains data",
+            "required": false,
+            "description": "If stop condition is reached, should the last page be saved to s3 or not.",
+            "type": {
+              "objectType": "boolean"
+            },
+            "isOverwriteable": true,
+            "value": ""
+          },
+          {
+            "attributeName": "initial_request",
+            "displayName": "Initial request",
+            "required": false,
+            "description": "Initial request for next_token strategy, that can contain the same request options as above: url (defaults to root config url), method, params, json, data, headers",
+            "type": "#extendByFile:common/api_request.json",
+            "isOverwriteable": true,
+            "value": {}
+          },
+          {
+            "attributeName": "request",
+            "displayName": "Request",
+            "required": false,
+            "description": "Request options that can contain the following options that are similar to those defined above, these can also contain strategy-specific placeholders. Url (defaults to root config url), method, params, json, data, headers",
+            "type": "#extendByFile:common/api_request.json",
+            "isOverwriteable": true,
+            "value": {}
+          },
+          {
+            "attributeName": "path_to_next_token",
+            "displayName": "Path to next token",
+            "required": false,
+            "description": "String with /-delimited path where in JSON find the next_token, e.g. metadata/__next",
+            "type": {
+              "objectType": "string"
+            },
+            "isOverwriteable": true,
+            "value": ""
+          },
+          {
+            "attributeName": "increment",
+            "displayName": "Increment",
+            "required": false,
+            "description": "Incremental change in the pagination",
+            "type": {
+              "objectType": "number"
+            },
+            "isOverwriteable": true,
+            "value": null
+          },{
+            "attributeName": "is_inclusive",
+            "displayName": "Is inclusive",
+            "required": false,
+            "description": "If true, +1 is added to the start placeholder with each iteration",
+            "type": {
+              "objectType": "boolean"
+            },
+            "isOverwriteable": true,
+            "value": ""
+          },
+          {
+            "attributeName": "stop_condition",
+            "required": false,
+            "displayName": "Stop condition",
+            "description": "Instructions when to stop the iteration. If badly defined, the API calls will continue in an infinite loop or until the server responses with an error code.",
+            "type": {
+              "objectType": "object",
+              "attributes": [
+                {
+                  "attributeName": "path_to_value",
+                  "displayName": "Path to value",
+                  "required": true,
+                  "description": "String with /-delimited path where in JSON find the value to be checked",
+                  "type": {
+                    "objectType": "string"
+                  },
+                  "isBasicAttribute": true
+                },
+                {
+                  "attributeName": "value",
+                  "displayName": "Value",
+                  "required": false,
+                  "description": "Value that exactly matches the JSON element extracted from response using the path defined above.",
+                  "type": {
+                    "objectType": "string"
+                  }
+                },
+                {
+                  "attributeName": "value_state",
+                  "displayName": "Value state",
+                  "required": false,
+                  "isOverwriteable": true,
+                  "description": "State of the value extracted from JSON using the path above. It can be undefined (missing from JSON entirely), or it can none, which is JSON null, or it can evaluate to false (which can be for example: also null, an empty collection, boolean false, or zero)",
+                  "type": {
+                    "objectType": "options",
+                    "values": [
+                      {
+                        "value": "undefined",
+                        "displayValue": "Is missing (undefined)"
+                      },
+                      {
+                        "value": "none",
+                        "displayValue": "Has null json value (none)"
+                      },
+                      {
+                        "value": "false",
+                        "displayValue": "Evaluates to False (false)"
+                      }
+                    ]
+                  },
+                  "value": "undefined"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "isOverwriteable": false,
+      "isBasicAttribute": true
+    },
+    "#extendByFile:common/source_connection_common_attributes.json"
+  ]
+}

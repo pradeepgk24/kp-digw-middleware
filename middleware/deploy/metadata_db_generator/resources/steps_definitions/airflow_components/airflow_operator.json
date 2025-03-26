@@ -1,0 +1,271 @@
+{
+  "title": "Airflow operator",
+  "componentCategory": "airflow_component",
+  "componentType": "airflow_operator",
+  "documentationLink": "https://github.com/merck-gen/mf-difw-core/blob/{branch}/documentation/configuration/README.md#job-config",
+  "difwStepCategory": "",
+  "difwStepType": "",
+  "difwTaskType": "airflow_component",
+  "difwJobCategory": "operator",
+  "displayName": "Airflow operator",
+  "flowValidations": "#extendByFile:common/process_flow_validations_airflow_component.json",
+  "componentProperties": {},
+  "platforms": {
+    "glue": {
+      "supportedJobTypes": []
+    },
+    "databricks": {
+      "supportedJobTypes": []
+    },
+    "airflow": {
+      "supportedJobTypes": []
+    }
+  },
+  "attributes": [
+    {
+      "attributeName": "operator_class",
+      "displayName": "Operator class",
+      "description": "An Operator is conceptually a template for a predefined Task. More info: https://airflow.apache.org/docs/apache-airflow/2.4.0/concepts/operators.html",
+      "isBasicAttribute": true,
+      "type": {
+        "objectType": "options",
+        "valuesEnumCategory": "airflow_operator_classes",
+        "values": []
+      },
+      "isOverwriteable": false,
+      "value": "",
+      "required": true
+    },
+    {
+      "attributeName": "operator_kwargs",
+      "displayName": "Operator specific parameters",
+      "description": "Parameters specific to particular class",
+      "isBasicAttribute": true,
+      "type": {
+        "objectType": "object",
+        "dynamicInputStructure": true,
+        "attributes": []
+      },
+      "isOverwriteable": true,
+      "value": {},
+      "required": false
+    },
+    {
+      "attributeName": "airflow_task_parameters",
+      "displayName": "Airflow task parameters",
+      "description": "Airflow base operator parameters",
+      "isBasicAttribute": false,
+      "type": {
+        "objectType": "object",
+        "attributes": [
+          {
+            "attributeName": "retries",
+            "displayName": "Retries",
+            "description": "The number of retries that should be performed before failing the task",
+            "isBasicAttribute": true,
+            "type": {
+              "objectType": "number",
+              "scale": 0,
+              "precision": 10
+            },
+            "isOverwriteable": false,
+            "value": null,
+            "required": false
+          },
+          {
+            "attributeName": "retry_delay",
+            "displayName": "Retries",
+            "description": "Delay between retries, can be set as timedelta or float seconds, which will be converted into timedelta, the default is timedelta(seconds=300)",
+            "isBasicAttribute": true,
+            "type": {
+              "objectType": "number",
+              "scale": 0,
+              "precision": 10
+            },
+            "isOverwriteable": false,
+            "value": 300,
+            "required": false
+          },
+          {
+            "attributeName": "retry_exponential_backoff",
+            "displayName": "Retry exponential backoff",
+            "description": "Allow progressively longer waits between retries by using exponential backoff algorithm on retry delay (delay will be converted into seconds)",
+            "isBasicAttribute": true,
+            "type": {
+              "objectType": "boolean"
+            },
+            "isOverwriteable": false,
+            "default": false,
+            "required": false
+          },
+          {
+            "attributeName": "max_retry_delay",
+            "displayName": "Max retry delay",
+            "description": "Maximum delay interval between retries, can be set as timedelta or float seconds, which will be converted into timedelta",
+            "isBasicAttribute": true,
+            "type": {
+              "objectType": "number",
+              "scale": 0,
+              "precision": 10
+            },
+            "isOverwriteable": false,
+            "value": null,
+            "required": false
+          },
+          {
+            "attributeName": "start_date",
+            "displayName": "Start date",
+            "description": "The start_date for the task, determines the execution_date for the first task instance. The best practice is to have the start_date rounded to your DAG’s schedule_interval. Daily jobs have their start_date some day at 00:00:00, hourly jobs have their start_date at 00:00 of a specific hour. Note that Airflow simply looks at the latest execution_date and adds the schedule_interval to determine the next execution_date. It is also very important to note that different tasks’ dependencies need to line up in time. If task A depends on task B and their start_date are offset in a way that their execution_date don’t line up, A’s dependencies will never be met. If you are looking to delay a task, for example running a daily task at 2AM, look into the TimeSensor and TimeDeltaSensor. We advise against using dynamic start_date and recommend using fixed ones. Read the FAQ entry about start_date for more information.",
+            "isBasicAttribute": true,
+            "type": {
+              "objectType": "timestamp"
+            },
+            "isOverwriteable": false,
+            "value": null,
+            "required": false
+          },
+          {
+            "attributeName": "end_date",
+            "displayName": "Start date",
+            "description": "If specified, the scheduler won’t go beyond this date",
+            "isBasicAttribute": true,
+            "type": {
+              "objectType": "timestamp"
+            },
+            "isOverwriteable": false,
+            "value": null,
+            "required": false
+          },
+          {
+            "attributeName": "depends_on_past",
+            "displayName": "Depends on past",
+            "description": "When set to true, task instances will run sequentially and only if the previous instance has succeeded or has been skipped. The task instance for the start_date is allowed to run.",
+            "isBasicAttribute": true,
+            "type": {
+              "objectType": "boolean"
+            },
+            "isOverwriteable": false,
+            "default": false,
+            "required": false,
+            "value": null
+          },
+          {
+            "attributeName": "wait_for_downstream",
+            "displayName": "Wait for downstream",
+            "description": "When set to true, an instance of task X will wait for tasks immediately downstream of the previous instance of task X to finish successfully or be skipped before it runs. This is useful if the different instances of a task X alter the same asset, and this asset is used by tasks downstream of task X. Note that depends_on_past is forced to True wherever wait_for_downstream is used. Also note that only tasks immediately downstream of the previous task instance are waited for; the statuses of any tasks further downstream are ignored.",
+            "isBasicAttribute": true,
+            "type": {
+              "objectType": "boolean"
+            },
+            "isOverwriteable": false,
+            "default": false,
+            "required": false,
+            "value": null
+          },
+          {
+            "attributeName": "priority_weight",
+            "displayName": "Priority weight",
+            "description": "Priority weight of this task against other task. This allows the executor to trigger higher priority tasks before others when things get backed up. Set priority_weight as a higher number for more important tasks.",
+            "isBasicAttribute": true,
+            "type": {
+              "objectType": "number",
+              "scale": 0,
+              "precision": 10
+            },
+            "isOverwriteable": false,
+            "value": null,
+            "required": false
+          },
+          {
+            "attributeName": "weight_rule",
+            "displayName": "Weight rule",
+            "description": "weighting method used for the effective total priority weight of the task. Options are: { downstream | upstream | absolute } default is downstream When set to downstream the effective weight of the task is the aggregate sum of all downstream descendants. As a result, upstream tasks will have higher weight and will be scheduled more aggressively when using positive weight values. This is useful when you have multiple dag run instances and desire to have all upstream tasks to complete for all runs before each dag can continue processing downstream tasks. When set to upstream the effective weight is the aggregate sum of all upstream ancestors. This is the opposite where downstream tasks have higher weight and will be scheduled more aggressively when using positive weight values. This is useful when you have multiple dag run instances and prefer to have each dag complete before starting upstream tasks of other dags. When set to absolute, the effective weight is the exact priority_weight specified without additional weighting. You may want to do this when you know exactly what priority weight each task should have. Additionally, when set to absolute, there is bonus effect of significantly speeding up the task creation process as for very large DAGs. Options can be set as string or using the constants defined in the static class airflow.utils.WeightRule",
+            "type": {
+              "objectType": "options",
+              "values": [
+                {
+                  "value": null,
+                  "displayValue": "Not specified"
+                },
+                {
+                  "value": "downstream",
+                  "displayValue": "Downstream"
+                },
+                {
+                  "value": "upstream",
+                  "displayValue": "Upstream"
+                },
+                {
+                  "value": "absolute",
+                  "displayValue": "Absolute"
+                }
+              ]
+            },
+            "value": null,
+            "isBasicAttribute": true
+          },
+          {
+            "attributeName": "queue",
+            "displayName": "Queue",
+            "description": "Which queue to target when running this job. Not all executors implement queue management, the CeleryExecutor does support targeting specific queues",
+            "isBasicAttribute": true,
+            "type": {
+              "objectType": "string"
+            },
+            "isOverwriteable": false,
+            "value": "",
+            "required": false
+          },
+          {
+            "attributeName": "trigger_rule",
+            "displayName": "Trigger rule",
+            "description": "Defines the rule by which dependencies are applied for the task to get triggered. Options are: { all_success | all_failed | all_done | all_skipped | one_success | one_failed | none_failed | none_failed_min_one_success | none_skipped | always} default is all_success. Options can be set as string or using the constants defined in the static class airflow.utils.TriggerRule",
+            "type": {
+              "objectType": "options",
+              "values": [
+                {
+                  "value": "all_success",
+                  "displayValue": "all_success"
+                },
+                {
+                  "value": "all_failed",
+                  "displayValue": "all_failed"
+                },
+                {
+                  "value": "all_done",
+                  "displayValue": "all_done"
+                },
+                {
+                  "value": "all_skipped",
+                  "displayValue": "all_skipped"
+                },
+                {
+                  "value": "one_success",
+                  "displayValue": "one_success"
+                },
+                {
+                  "value": "one_failed",
+                  "displayValue": "one_failed"
+                },
+                {
+                  "value": "none_failed",
+                  "displayValue": "none_failed"
+                },
+                {
+                  "value": "none_skipped",
+                  "displayValue": "none_skipped"
+                },
+                {
+                  "value": "always",
+                  "displayValue": "always"
+                }
+              ]
+            },
+            "value": "all_success",
+            "isBasicAttribute": true
+          }
+        ]
+      }
+    }
+  ]
+}

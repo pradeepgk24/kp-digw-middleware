@@ -1,0 +1,112 @@
+{
+  "title": "Source LDAP parameters",
+  "componentCategory": "input_connector",
+  "componentType": "ldap",
+  "difwStepCategory": "process",
+  "documentationLink": "https://github.com/merck-gen/mf-difw-core/blob/{branch}/documentation/configuration/steps/python/processors/acq_from_ldap.md",
+  "difwStepType": "acq_from_ldap",
+  "displayName": "LDAP",
+  "flowValidations": "#extendByFile:common/process_flow_validations_json_based_in_connectors.json",
+  "componentProperties": {
+    "supportExternalAwsStorage": true
+  },
+  "platforms": {
+    "glue": {
+      "supportedJobTypes": [
+        "python",
+        "spark"
+      ]
+    },
+    "databricks": {
+      "supportedJobTypes": [
+        "python_databricks",
+        "spark_databricks"
+      ]
+    }
+  },
+  "attributes": [
+    {
+      "attributeName": "ldap_url",
+      "displayName": "LDAP url",
+      "description": "LDAP server address including port, e.g. ldaps://adaccess.merck.com:636",
+      "type": {
+        "objectType": "string"
+      },
+      "required": true,
+      "isBasicAttribute": true,
+      "isOverwriteable": true,
+      "value": ""
+    },
+    {
+      "attributeName": "username",
+      "displayName": "Username",
+      "description": "LDAP Username",
+      "type": {
+        "objectType": "string"
+      },
+      "required": true,
+      "isBasicAttribute": true,
+      "isOverwriteable": true,
+      "value": ""
+    },
+    {
+      "attributeName": "password",
+      "displayName": "Password",
+      "description": "Password",
+      "type": {
+        "objectType": "secret"
+      },
+      "required": true,
+      "isBasicAttribute": true,
+      "isOverwriteable": true,
+      "value": {}
+    },
+    {
+      "attributeName": "base",
+      "displayName": "Base",
+      "description": "The DN of the entry at which to start the search",
+      "type": {
+        "objectType": "string"
+      },
+      "required": false,
+      "isBasicAttribute": false
+    },
+    {
+      "attributeName": "search_filter",
+      "displayName": "Search filter",
+      "description": "A string representation of the filter to apply in the search (see RFC 4515)",
+      "type": {
+        "objectType": "string"
+      },
+      "required": false,
+      "isBasicAttribute": false
+    },
+    {
+      "attributeName": "attributes",
+      "displayName": "Attributes",
+      "description": "List of attributes to fetch",
+      "type": {
+        "objectType": "list",
+        "elementsType": {
+          "objectType": "string"
+        }
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "value": []
+    },
+    {
+      "attributeName": "page_size",
+      "displayName": "Page size",
+      "description": "How many entries to request with each iteration - if the number is too high, SIZELIMITEXCEEDED error will occur. We recommend using the default value.",
+      "type": {
+        "objectType": "number"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "value": null
+    },
+    "#extendByFile:common/source_connection_common_attributes.json"
+  ]
+}
+

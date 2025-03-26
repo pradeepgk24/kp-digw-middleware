@@ -1,0 +1,72 @@
+{
+  "title": "Source spark table parameters",
+  "componentCategory": "input_connector",
+  "componentType": "spark_table",
+  "documentationLink": "https://github.com/merck-gen/mf-difw-core/blob/{branch}/documentation/configuration/steps/spark/loaders/spark_table.md",
+  "difwStepCategory": "input",
+  "difwStepType": "spark_table",
+  "displayName": "Spark table",
+  "flowValidations": "#extendByFile:common/process_flow_validations_loaders_in_connectors.json",
+  "platforms": {
+    "glue": {
+      "supportedJobTypes": [
+        "spark"
+      ]
+    },
+    "databricks": {
+      "supportedJobTypes": [
+        "spark_databricks"
+      ]
+    }
+  },
+  "attributes": [
+    {
+      "attributeName": "database_name",
+      "displayName": "Database name",
+      "description": "Glue database name",
+      "type": {
+        "objectType": "string"
+      },
+      "required": true,
+      "isOverwriteable": false,
+      "isBasicAttribute": true,
+      "value": "{{glue_databases.latest_db.database_name}}"
+    },
+    {
+      "attributeName": "table_name",
+      "displayName": "Table name",
+      "description": "Override of the table name from table section",
+      "type": {
+        "objectType": "string"
+      },
+      "required": true,
+      "isBasicAttribute": false,
+      "value": "{{table_name}}",
+      "isOverwriteable": true
+    },
+    {
+      "attributeName": "query",
+      "displayName": "Query",
+      "description": "Spark sql query to be passed into the loader. If a sql query is defined, loader will use it instead of table name to load the data",
+      "type": {
+        "objectType": "string"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": ""
+    },
+    {
+      "attributeName": "catalog_name",
+      "displayName": "Catalog name",
+      "required": false,
+      "isBasicAttribute": false,
+      "description": "Defines name of a catalog. This property can be used only with databricks platform.",
+      "type": {
+        "objectType": "string"
+      }
+    },
+    "#extendByFile:../common/common_filter_condition_attribute.json",
+    "#extendByFile:../common/common_additional_jars_dependencies.json"
+  ]
+}

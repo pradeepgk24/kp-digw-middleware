@@ -1,0 +1,165 @@
+{
+  "title": "Source SFTP parameters",
+  "componentCategory": "input_connector",
+  "componentType": "sftp",
+  "documentationLink": "https://github.com/merck-gen/mf-difw-core/blob/{branch}/documentation/configuration/steps/python/processors/acq_from_sftp.md",
+  "difwStepCategory": "process",
+  "difwStepType": "acq_from_sftp",
+  "displayName": "SFTP",
+  "flowValidations": "#extendByFile:common/process_flow_validations_file_based_in_connectors.json",
+  "componentProperties": {
+    "isTestable": true,
+    "supportExternalAwsStorage": true
+  },
+  "platforms": {
+    "glue": {
+      "supportedJobTypes": [
+        "python",
+        "spark"
+      ]
+    },
+    "databricks": {
+      "supportedJobTypes": [
+        "python_databricks",
+        "spark_databricks"
+      ]
+    }
+  },
+  "attributes": [
+    {
+      "attributeName": "source_path",
+      "displayName": "Source path",
+      "description": "Directory in source SFTP where data are stored",
+      "type": {
+        "objectType": "string"
+      },
+      "required": true,
+      "isBasicAttribute": true,
+      "isOverwriteable": true,
+      "value": ""
+    },
+    {
+      "attributeName": "file_regex",
+      "displayName": "Source file regex",
+      "description": "File pattern - regular expression use for filtering of input files",
+      "type": {
+        "objectType": "string"
+      },
+      "required": true,
+      "isBasicAttribute": true,
+      "isOverwriteable": true,
+      "value": ""
+    },
+    {
+      "attributeName": "sftp_host",
+      "displayName": "SFTP host",
+      "description": "SFTP host",
+      "type": {
+        "objectType": "string"
+      },
+      "required": true,
+      "isOverwriteable": false,
+      "isBasicAttribute": true
+    },
+    {
+      "attributeName": "sftp_port",
+      "displayName": "SFTP port",
+      "description": "SFTP port",
+      "type": {
+        "objectType": "number",
+        "scale": 0,
+        "precision": 6
+      },
+      "required": true,
+      "isOverwriteable": false,
+      "isBasicAttribute": true,
+      "value": 22
+    },
+    {
+      "attributeName": "sftp_user",
+      "displayName": "SFTP user",
+      "description": "SFTP user",
+      "type": {
+        "objectType": "string"
+      },
+      "required": true,
+      "isOverwriteable": false,
+      "isBasicAttribute": true,
+      "value": ""
+    },
+    {
+      "attributeName": "sftp_password",
+      "displayName": "SFTP password",
+      "description": "SFTP password",
+      "type": {
+        "objectType": "secret"
+      },
+      "required": false,
+      "isOverwriteable": false,
+      "isBasicAttribute": true,
+      "value": {}
+    },
+    {
+      "attributeName": "key",
+      "displayName": "Private key",
+      "description": "Section for the private key details",
+      "type": {
+        "objectType": "object",
+        "attributes": [
+          {
+            "attributeName": "key_type",
+            "displayName": "Key type",
+            "description": "Key type",
+            "required": true,
+            "type": {
+              "objectType": "string",
+              "secretName": "",
+              "secretManagerName": "",
+              "secretKey": ""
+            },
+            "isOverwriteable": false
+          },
+          {
+            "attributeName": "key_content",
+            "displayName": "Key content",
+            "description": "Key content",
+            "required": true,
+            "type": {
+              "objectType": "secret"
+            },
+            "isOverwriteable": false,
+            "value": {}
+          }
+        ]
+      },
+      "required": false,
+      "isOverwriteable": false,
+      "isBasicAttribute": true
+    },
+    {
+      "attributeName": "source_backup_folder",
+      "displayName": "Source backup folder",
+      "description": "Backup folder for deleted files. If it is defined all deleted files will be moved into this folder instead of hard delete",
+      "type": {
+        "objectType": "string"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": ""
+    },
+    {
+      "attributeName": "source_delete",
+      "displayName": "Source delete",
+      "description": "If true, the files are deleted from the source SFTP after download",
+      "type": {
+        "objectType": "boolean"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": false
+    },
+    "#extendByFile:common/source_connection_common_attributes.json"
+  ]
+}

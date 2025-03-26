@@ -1,0 +1,390 @@
+{
+  "title": "Human health history parameters",
+  "componentCategory": "processor",
+  "componentType": "human_health_history",
+  "difwStepCategory": "process",
+  "difwStepType": "human_health_history",
+  "displayName": "Human health history",
+  "documentationLink": "https://github.com/merck-gen/mf-difw-core/blob/{branch}/documentation/configuration/steps/common/processors/human_health_history.md",
+  "flowValidations": "#extendByFile:common/process_flow_validations_processors.json",
+  "platforms": {
+    "glue": {
+      "supportedJobTypes": [
+        "python"
+      ]
+    },
+    "databricks": {
+      "supportedJobTypes": [
+        "python_databricks"
+      ]
+    }
+  },
+  "attributes": [
+    {
+      "attributeName": "history_dataset_name",
+      "displayName": "History dataset name",
+      "description": "History dataset name. Affects history table name or AK(Alternate Key) and SK(Surrogate Key) name.",
+      "type": {
+        "objectType": "string"
+      },
+      "required": true,
+      "isOverwriteable": true,
+      "value": "",
+      "isBasicAttribute": true
+    },
+    {
+      "attributeName": "mode",
+      "displayName": "Mode",
+      "description": "Defines mode of the historization. Either area or region.",
+      "type": {
+        "objectType": "options",
+        "values": [
+          {
+            "value": "area",
+            "displayValue": "area"
+          },
+          {
+            "value": "region",
+            "displayValue": "region"
+          }
+        ]
+      },
+      "required": true,
+      "isOverwriteable": true,
+      "value": "",
+      "isBasicAttribute": true
+    },
+    {
+      "attributeName": "region_code",
+      "displayName": "Region code",
+      "description": "Region code. Define only if `region` mode is selected.",
+      "type": {
+        "objectType": "string"
+      },
+      "required": false,
+      "isOverwriteable": true,
+      "value": "",
+      "isBasicAttribute": false
+    },
+    {
+      "attributeName": "redshift_connection",
+      "displayName": "Redshift connection",
+      "description": "redshift connection details",
+      "type": {
+        "objectType": "object",
+        "attributes": [
+          {
+            "attributeName": "redshift_host",
+            "displayName": "Redshift host",
+            "description": "redshift host",
+            "required": true,
+            "type": {
+              "objectType": "string"
+            },
+            "isOverwriteable": true
+          },
+          {
+            "attributeName": "redshift_port",
+            "displayName": "Redshift port",
+            "description": "redshift port",
+            "required": true,
+            "type": {
+              "objectType": "number"
+            },
+            "isOverwriteable": true
+          },
+          {
+            "attributeName": "redshift_user",
+            "displayName": "Redshift user",
+            "description": "redshift user",
+            "required": true,
+            "type": {
+              "objectType": "secret"
+            },
+            "isOverwriteable": true
+          },
+          {
+            "attributeName": "redshift_password",
+            "displayName": "Redshift password",
+            "description": "redshift password",
+            "required": true,
+            "type": {
+              "objectType": "secret"
+            },
+            "isOverwriteable": true
+          },
+          {
+            "attributeName": "redshift_database",
+            "displayName": "Redshift database",
+            "description": "redshift database",
+            "required": true,
+            "type": {
+              "objectType": "string"
+            },
+            "isOverwriteable": true
+          }
+        ]
+      },
+      "required": true,
+      "isOverwriteable": true,
+      "value": "",
+      "isBasicAttribute": true
+    },
+    {
+      "attributeName": "source_table",
+      "displayName": "Source table",
+      "description": "Source table definition",
+      "type": {
+        "objectType": "object",
+        "attributes": [
+          {
+            "attributeName": "table_name",
+            "displayName": "Table name",
+            "description": "Source table name",
+            "required": false,
+            "type": {
+              "objectType": "string"
+            },
+            "isOverwriteable": true
+          },
+          {
+            "attributeName": "schema_name",
+            "displayName": "Schema name",
+            "description": "Name of source schema",
+            "required": true,
+            "type": {
+              "objectType": "string"
+            },
+            "isOverwriteable": true
+          },
+          {
+            "attributeName": "is_external_schema",
+            "displayName": "Is external schema",
+            "description": "Defines whether source table is located in external schema or internal",
+            "required": false,
+            "type": {
+              "objectType": "boolean"
+            },
+            "value": true,
+            "isOverwriteable": true
+          },
+          {
+            "attributeName": "data_deduplication",
+            "displayName": "Data deduplication",
+            "description": "Defines whether deduplication should be applied on source table",
+            "required": false,
+            "type": {
+              "objectType": "boolean"
+            },
+            "value": false,
+            "isOverwriteable": true
+          },
+          {
+            "attributeName": "column_type_mapping",
+            "displayName": "Column type mapping",
+            "description": "Defines mapping between spark data type and redshift data type",
+            "required": false,
+            "type": {
+              "objectType": "dictionary"
+            },
+            "value": {
+              "string": "varchar(255)",
+              "double": "double precision"
+            },
+            "isOverwriteable": true
+          }
+        ]
+      },
+      "required": true,
+      "isOverwriteable": true,
+      "value": "",
+      "isBasicAttribute": true
+    },
+    {
+      "attributeName": "xref_table",
+      "displayName": "Xref table",
+      "description": "Cross reference table detail",
+      "type": {
+        "objectType": "object",
+        "attributes": [
+          {
+            "attributeName": "schema_name",
+            "displayName": "Schema name",
+            "description": "Schema name of cross reference table",
+            "required": true,
+            "type": {
+              "objectType": "string"
+            },
+            "isOverwriteable": true
+          },
+          {
+            "attributeName": "table_name",
+            "displayName": "Table name",
+            "description": "Name of cross reference table",
+            "required": true,
+            "type": {
+              "objectType": "string"
+            },
+            "isOverwriteable": true
+          }
+        ]
+      },
+      "required": true,
+      "isOverwriteable": true,
+      "isBasicAttribute": true
+    },
+    {
+      "attributeName": "history_table",
+      "displayName": "History table",
+      "description": "History table details",
+      "type": {
+        "objectType": "object",
+        "attributes": [
+          {
+            "attributeName": "table_name",
+            "displayName": "Table name",
+            "description": "History table name, if not given will be generated on BE as `h<History dataset name>_<Source table name>`",
+            "required": false,
+            "type": {
+              "objectType": "string"
+            },
+            "isOverwriteable": true
+          },
+          {
+            "attributeName": "schema_name",
+            "displayName": "Schema name",
+            "description": "Schema name of history table",
+            "required": true,
+            "type": {
+              "objectType": "string"
+            },
+            "isOverwriteable": true
+          },
+          {
+            "attributeName": "skip_creation",
+            "displayName": "Skip creation",
+            "description": "Flag indicates whether to skip table creation",
+            "required": false,
+            "type": {
+              "objectType": "boolean"
+            },
+            "value": false,
+            "isOverwriteable": true
+          },
+          {
+            "attributeName": "privileges",
+            "displayName": "Privileges",
+            "description": "Table privileges definition",
+            "required": false,
+            "type": {
+              "objectType": "object",
+              "attributes": [
+                {
+                  "attributeName": "owner",
+                  "displayName": "Owner",
+                  "description": "Defines owner of the table",
+                  "type": {
+                    "objectType": "string"
+                  }
+                },
+                {
+                  "attributeName": "grants",
+                  "displayName": "grants",
+                  "description": "Defines what privileges to be granted on table",
+                  "type": {
+                    "objectType": "list",
+                    "elementsType": {
+                      "objectType": "object",
+                      "attributes": [
+                        {
+                          "attributeName": "privilege_type",
+                          "displayName": "Privilege type",
+                          "description": "Privilege type",
+                          "type": {
+                            "objectType": "string"
+                          }
+                        },
+                        {
+                          "attributeName": "users",
+                          "displayName": "Users",
+                          "description": "List of users",
+                          "type": {
+                            "objectType": "list",
+                            "elementsType": {
+                              "objectType": "string"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
+            "value": false,
+            "isOverwriteable": true
+          }
+        ]
+      },
+      "required": true,
+      "isOverwriteable": true,
+      "isBasicAttribute": true
+    },
+    {
+      "attributeName": "columns",
+      "displayName": "Columns",
+      "description": "Custom columns definition. Can be used to define values for columns such as da_area_code etc on insert, update or delete operation.",
+      "type": {
+        "objectType": "list",
+        "elementsType": {
+          "objectType": "object",
+          "attributes": [
+            {
+              "attributeName": "name",
+              "displayName": "Name",
+              "description": "Name of a column",
+              "type": {
+                "objectType": "string"
+              }
+            },
+            {
+              "attributeName": "type",
+              "displayName": "Type",
+              "description": "Type of a column",
+              "type": {
+                "objectType": "string"
+              }
+            },
+            {
+              "attributeName": "insert_value",
+              "displayName": "Insert value",
+              "description": "Value on insert of a new record. In case string is defined it must be surrounded with single quotes such as \"'Y'\".",
+              "type": {
+                "objectType": "string"
+              }
+            },
+            {
+              "attributeName": "update_value",
+              "displayName": "Update value",
+              "description": "Value on update of a record. In case string is defined it must be surrounded with single quotes such as \"'Y'\".",
+              "type": {
+                "objectType": "string"
+              }
+            },
+            {
+              "attributeName": "delete_value",
+              "displayName": "delete value",
+              "description": "Value on delete of a record. In case string is defined it must be surrounded with single quotes such as \"'Y'\".",
+              "type": {
+                "objectType": "string"
+              }
+            }
+          ]
+        }
+      },
+      "required": true,
+      "isOverwriteable": true,
+      "isBasicAttribute": true
+    }
+  ]
+}

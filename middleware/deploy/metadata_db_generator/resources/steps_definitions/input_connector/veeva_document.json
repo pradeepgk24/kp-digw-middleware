@@ -1,0 +1,57 @@
+{
+  "title": "Source veeva parameters",
+  "componentCategory": "input_connector",
+  "componentType": "veeva_document",
+  "difwStepCategory": "process",
+  "documentationLink": "https://github.com/merck-gen/mf-difw-core/blob/{branch}/documentation/configuration/steps/common/processors/acq_from_veeva.md",
+  "difwStepType": "acq_from_veeva_documents",
+  "displayName": "Veeva document",
+  "componentProperties": {
+    "conditionType": "veeva_document",
+    "isTestable": true,
+    "loadTableListFromSource": "veeva_document"
+  },
+  "platforms": {
+    "glue": {
+      "supportedJobTypes": [
+        "python",
+        "spark"
+      ]
+    },
+    "databricks": {
+      "supportedJobTypes": [
+        "python_databricks",
+        "spark_databricks"
+      ]
+    }
+  },
+  "flowValidations": "#extendByFile:common/process_flow_validations_json_based_in_connectors.json",
+  "attributes": [
+    {
+      "attributeName": "query",
+      "displayName": "Query",
+      "description": "A VQL query. For incremental ingest you can use '{lower_bound}' and '{upper_bound}' placeholders. Do not use PAGESIZE and PAGEOFFSET keywords.",
+      "required": true,
+      "type": {
+        "objectType": "string"
+      },
+      "isBasicAttribute": true,
+      "isOverwriteable": true,
+      "value": ""
+    },
+    {
+      "attributeName": "fail_if_no_data",
+      "displayName": "Fail if no data",
+      "description": "If true, the step fails when the query doesn't match any data",
+      "required": false,
+      "type": {
+        "objectType": "boolean"
+      },
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": true
+    },
+    "#extendByFile:common/source_veeva_common_attributes.json",
+    "#extendByFile:common/source_connection_common_attributes.json"
+  ]
+}

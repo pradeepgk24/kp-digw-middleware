@@ -1,0 +1,133 @@
+{
+  "title": "Add change columns parameters",
+  "componentCategory": "transformer",
+  "componentType": "change_columns",
+  "difwStepCategory": "transformation",
+  "documentationLink": "https://github.com/merck-gen/mf-difw-core/blob/{branch}/documentation/configuration/steps/spark/transformers/change_columns.md",
+  "difwStepType": "change_columns",
+  "displayName": "Change columns",
+  "flowValidations": "#extendByFile:common/process_flow_validations_transformers.json",
+  "attributes": [
+    {
+      "attributeName": "rename",
+      "displayName": "Rename",
+      "description": "Dict of columns to be renamed. Key = current column name, Value = new column name",
+      "type": {
+        "objectType": "dictionary"
+      },
+      "required": false,
+      "isBasicAttribute": true,
+      "isOverwriteable": true,
+      "value": {}
+    },
+    {
+      "attributeName": "include",
+      "displayName": "Include",
+      "description": "List of columns to keep - can be also used to reorder the columns",
+      "type": {
+        "objectType": "list",
+        "elementsType": {
+          "objectType": "string"
+        }
+      },
+      "required": false,
+      "isBasicAttribute": true,
+      "isOverwriteable": true,
+      "value": []
+    },
+    {
+      "attributeName": "exclude",
+      "displayName": "Exclude",
+      "description": "List of columns to remove",
+      "type": {
+        "objectType": "list",
+        "elementsType": {
+          "objectType": "string"
+        }
+      },
+      "isOverwriteable": true,
+      "value": [],
+      "required": false,
+      "isBasicAttribute": true
+    },
+    {
+      "attributeName": "expression",
+      "displayName": "Expression",
+      "description": "Expression you can apply to each new column",
+      "type": {
+        "objectType": "dictionary"
+      },
+      "value": {},
+      "required": false,
+      "isBasicAttribute": true,
+      "isOverwriteable": true
+    },
+    {
+      "attributeName": "cast",
+      "displayName": "Data type cast",
+      "description": "Dict of columns to be cast to another type",
+      "type": {
+        "objectType": "dictionary"
+      },
+      "value": {},
+      "required": false,
+      "isBasicAttribute": true,
+      "isOverwriteable": true
+    },
+    {
+      "attributeName": "cast_by_original_type",
+      "displayName": "Cast by original type",
+      "description": "Cast column type based on a value in metadata field. Prerequisite is to have a dataframe with metadata which keeps the information about original data type.",
+      "type": {
+        "objectType": "object",
+        "attributes": [
+          {
+            "attributeName": "datatype_field",
+            "displayName": "Datatype field",
+            "required": false,
+            "description": "Name of the metadata key which holds the information for mapping.",
+            "type": {
+              "objectType": "string"
+            },
+            "value": "original_type"
+          },
+          {
+            "attributeName": "scale_field",
+            "displayName": "Scale field",
+            "required": false,
+            "description": "If desired Spark data type is decimal. Refer to metadata key, which has information about scale. Otherwise default or configured scale is applied.",
+            "type": {
+              "objectType": "string"
+            },
+            "value": ""
+          },
+          {
+            "attributeName": "precision_field",
+            "displayName": "Precision field",
+            "required": false,
+            "description": "If desired Spark data type is decimal. Refer to metadata key, which has information about precision. Otherwise default or configured precision is applied.",
+            "type": {
+              "objectType": "string"
+            },
+            "value": ""
+          },
+          {
+            "attributeName": "data_types_mapping",
+            "displayName": "Data types mapping",
+            "description": "Mapping of `original_data_type`: `spark_data_type`. Original data type value should match with the existing in the metadata key.",
+            "type": {
+              "objectType": "dictionary"
+            },
+            "value": {},
+            "required": false,
+            "isBasicAttribute": true,
+            "isOverwriteable": true
+          }
+        ]
+      },
+      "required": false,
+      "isBasicAttribute": true,
+      "isOverwriteable": true
+    }
+  ]
+}

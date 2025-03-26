@@ -1,0 +1,147 @@
+
+  "title": "Source FTP parameters",
+  "componentCategory": "input_connector",
+  "componentType": "ftp",
+  "documentationLink": "https://github.com/merck-gen/mf-difw-core/blob/{branch}/documentation/configuration/steps/common/processors/acq_from_ftp.md",
+  "difwStepCategory": "process",
+  "difwStepType": "acq_from_ftp",
+  "displayName": "FTP",
+  "flowValidations": "#extendByFile:common/process_flow_validations_file_based_in_connectors.json",
+  "platforms": {
+    "glue": {
+      "supportedJobTypes": [
+        "python",
+        "spark"
+      ]
+    },
+    "databricks": {
+      "supportedJobTypes": [
+        "python_databricks",
+        "spark_databricks"
+      ]
+    }
+  },
+  "componentProperties": {
+    "supportExternalAwsStorage": true
+  },
+  "attributes": [
+    {
+      "attributeName": "ftp_host",
+      "displayName": "FTP host",
+      "description": "Address of FTP server",
+      "type": {
+        "objectType": "string"
+      },
+      "required": true,
+      "isOverwriteable": true,
+      "isBasicAttribute": true,
+      "value": ""
+    },
+    {
+      "attributeName": "ftp_user",
+      "displayName": "FTP user",
+      "description": "User to connect to FTP server",
+      "type": {
+        "objectType": "string"
+      },
+      "required": false,
+      "isOverwriteable": true,
+      "isBasicAttribute": true,
+      "value": ""
+    },
+    {
+      "attributeName": "ftp_password",
+      "displayName": "FTP password",
+      "description": "Password to connect to FTP server",
+      "type": {
+        "objectType": "string"
+      },
+      "required": false,
+      "isOverwriteable": true,
+      "isBasicAttribute": true,
+      "value": ""
+    },
+    {
+      "attributeName": "ftp_path",
+      "displayName": "FTP path",
+      "description": "Path to directory on FTP server",
+      "type": {
+        "objectType": "string"
+      },
+      "required": false,
+      "isOverwriteable": true,
+      "isBasicAttribute": true,
+      "value": ""
+    },
+    {
+      "attributeName": "file_regex",
+      "displayName": "File regex",
+      "description": "Regex to match filenames to be processed",
+      "type": {
+        "objectType": "string"
+      },
+      "required": false,
+      "isOverwriteable": true,
+      "isBasicAttribute": false,
+      "value": ".*"
+    },
+    {
+      "attributeName": "limit",
+      "displayName": "Limit",
+      "description": "Limit number of files to be processed",
+      "type": {
+        "objectType": "number",
+        "scale": 0,
+        "precision": 10
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": null
+    },
+    {
+      "attributeName": "cdc",
+      "displayName": "ChangeDataCapture",
+      "description": "CDC feature to process only new files",
+      "type": {
+        "objectType": "object",
+        "attributes": [
+          {
+            "attributeName": "enabled",
+            "displayName": "Enabled",
+            "description": "Whether CDC is enabled. If set to true, then validation by absolute path will be enabled by default.",
+            "type": {
+              "objectType": "boolean"
+            },
+            "isOverwriteable": true,
+            "value": false
+          },
+          {
+            "attributeName": "validate_file_date_modify",
+            "displayName": "Validate file date modify",
+            "description": "Consider files as new by modified date",
+            "type": {
+              "objectType": "boolean"
+            },
+            "isOverwriteable": true,
+            "value": false
+          },
+          {
+            "attributeName": "validate_file_content",
+            "displayName": "Validate file content",
+            "description": "Consider files as new by file content",
+            "type": {
+              "objectType": "boolean"
+            },
+            "isOverwriteable": true,
+            "value": false
+          }
+        ]
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true
+    },
+    "#extendByFile:common/source_connection_common_attributes.json"
+  ]
+}

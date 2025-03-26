@@ -1,0 +1,190 @@
+\{
+  "title": "Update catalog latest materialized parameters",
+  "componentCategory": "processor",
+  "componentType": "update_catalog_latest_materialized",
+  "difwStepCategory": "process",
+  "difwStepType": "update_catalog_latest_materialized",
+  "displayName": "Update catalog materialized latest",
+  "documentationLink": "https://github.com/merck-gen/mf-difw-core/blob/{branch}/documentation/configuration/steps/spark/processors/update_catalog_latest_materialized.md",
+  "flowValidations": "#extendByFile:common/process_flow_validations_processors.json",
+  "platforms": {
+    "glue": {
+      "supportedJobTypes": [
+        "spark"
+      ]
+    },
+    "databricks": {
+      "supportedJobTypes": [
+        "spark_databricks"
+      ]
+    }
+  },
+  "attributes": [
+    {
+      "attributeName": "src_database_name",
+      "displayName": "Source database",
+      "description": "Source database name in Glue catalog",
+      "type": {
+        "objectType": "string"
+      },
+      "required": true,
+      "isBasicAttribute": true,
+      "isOverwriteable": true,
+      "value": "{{glue_databases.c_db.database_name}}"
+    },
+    {
+      "attributeName": "database_name",
+      "displayName": "Target database",
+      "description": "Target database name in Glue catalog",
+      "type": {
+        "objectType": "string"
+      },
+      "required": true,
+      "isBasicAttribute": true,
+      "isOverwriteable": true,
+      "value": "{{glue_databases.latest_db.database_name}}"
+    },
+    {
+      "attributeName": "writer_config",
+      "displayName": "Writer config",
+      "description": "Configuration of internal parquet writer used by this  processor (settings related to output file location are ignored)",
+      "type": {
+        "objectType": "dictionary"
+      },
+      "required": false,
+      "isOverwriteable": true,
+      "value": {},
+      "isBasicAttribute": false
+    },
+    {
+      "attributeName": "custom_table_properties",
+      "displayName": "Custom table properties",
+      "description": "User-defined key-value pairs to be set in TBLPROPERTIES. If the value is null, the property is unset",
+      "type": {
+        "objectType": "dictionary"
+      },
+      "required": false,
+      "isOverwriteable": true,
+      "value": {},
+      "isBasicAttribute": false
+    },
+    {
+      "attributeName": "update_glue_description",
+      "displayName": "Update glue description",
+      "description": "Updates glue table description parameter in glue catalog. Available only for glue catalog",
+      "type": {
+        "objectType": "boolean"
+      },
+      "required": true,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": false
+    },
+    {
+      "attributeName": "s3_bucket",
+      "displayName": "S3 bucket",
+      "description": "Source and target table s3 bucket",
+      "type": {
+        "objectType": "string",
+        "s3Browsing": {
+          "subType": "bucket",
+          "relatedS3BrowserAttrName": "s3_layer_path"
+        }
+      },
+      "required": true,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": "{{data_bucket}}"
+    },
+    {
+      "attributeName": "s3_layer_path",
+      "displayName": "Target s3 layer path",
+      "description": "Target table s3 path. The parameter affects only tables using ingest strategy incremental with update",
+      "type": {
+        "objectType": "string",
+        "s3Browsing": {
+          "subType": "key",
+          "relatedS3BrowserAttrName": "s3_bucket"
+        }
+      },
+      "required": true,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": "{{s3_paths.d_path}}"
+    },
+    {
+      "attributeName": "static_file_location",
+      "displayName": "Static file location",
+      "description": "If value is true, static partitions are eliminated from the target path",
+      "type": {
+        "objectType": "boolean"
+      },
+      "required": true,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": false
+    },
+    {
+      "attributeName": "incremental_execution_strategy",
+      "displayName": "Incremental execution strategy",
+      "description": "Setup of execution strategy for incremental tables with updates",
+      "type": {
+        "objectType": "object",
+        "attributes": [
+          {
+            "attributeName": "enable_union_strategy",
+            "displayName": "Type",
+            "description": "Enables or disables union strategy for incremental loads. See details and limitation of this approach",
+            "type": {
+              "objectType": "boolean"
+            },
+            "isOverwriteable": true,
+            "required": true,
+            "value": false
+          },
+          {
+            "attributeName": "enable_broadcast",
+            "displayName": "Level",
+            "description": "Enables or disables usage of the broadcast function in the union strategy",
+            "type": {
+              "objectType": "boolean"
+            },
+            "required": true,
+            "isOverwriteable": true,
+            "value": true
+          }
+        ]
+      },
+      "required": true,
+      "isBasicAttribute": false,
+      "isOverwriteable": true
+    },
+    {
+      "attributeName": "dynamic_partitions",
+      "displayName": "Dynamic partitions",
+      "description": "Overrides dynamic_partitions configured at Table config",
+      "type": {
+        "objectType": "list",
+        "elementsType": {
+          "objectType": "string"
+        }
+      },
+      "required": false,
+      "isOverwriteable": true,
+      "value": [],
+      "isBasicAttribute": false
+    },
+    {
+      "attributeName": "schema_change_detection",
+      "displayName": "Schema change detection",
+      "description": "Enables or disables schema change detection",
+      "type": {
+        "objectType": "boolean"
+      },
+      "required": true,
+      "isOverwriteable": true,
+      "isBasicAttribute": false,
+      "value": true
+    }
+  ]
+}

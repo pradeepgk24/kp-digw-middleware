@@ -1,0 +1,111 @@
+{
+  "title": "Anonymize data - columns list",
+  "componentCategory": "transformer",
+  "componentType": "anonymize_data_list",
+  "difwStepCategory": "transformation",
+  "documentationLink": "https://github.com/merck-gen/mf-difw-core/blob/{branch}/documentation/configuration/steps/spark/transformers/anonymize_data.md",
+  "difwStepType": "anonymize_data",
+  "displayName": "Anonymize data - columns list",
+  "flowValidations": "#extendByFile:common/process_flow_validations_transformers.json",
+  "attributes": [
+    {
+      "attributeName": "category",
+      "displayName": "Category",
+      "description": "The (de-)anonymization category",
+      "type": {
+        "objectType": "string"
+      },
+      "isOverwriteable": true,
+      "value": "",
+      "required": true,
+      "isBasicAttribute": true
+    },
+    {
+      "attributeName": "subtype",
+      "displayName": "Subtype",
+      "description": "The subtype of the selected anonymization category. Each category has its supported list of subtypes.",
+      "type": {
+        "objectType": "string"
+      },
+      "isOverwriteable": true,
+      "value": "",
+      "required": true,
+      "isBasicAttribute": true
+    },
+    {
+      "attributeName": "action",
+      "displayName": "Action",
+      "description": "The inherent operation that will be applied.",
+      "type": {
+        "objectType": "string"
+      },
+      "isOverwriteable": true,
+      "value": "",
+      "required": true,
+      "isBasicAttribute": true
+    },
+    {
+      "attributeName": "to_recover",
+      "displayName": "To recover",
+      "description": "Whether to proceed with de-anonymization instead, if the applied anonymization is reversible.",
+      "type": {
+        "objectType": "boolean"
+      },
+      "isOverwriteable": true,
+      "value": false,
+      "required": false,
+      "isBasicAttribute": true
+    },
+    {
+      "attributeName": "inverter",
+      "displayName": "Inverter",
+      "description": "The inverse action to recover original data, if the applied anonymization is reversible",
+      "type": {
+        "objectType": "boolean"
+      },
+      "isOverwriteable": true,
+      "value": "",
+      "required": false,
+      "isBasicAttribute": true
+    },
+    {
+      "attributeName": "columns",
+      "displayName": "Columns",
+      "description": "The columns to anonymize. Depending on the given category and subtype, it can be either a list of names or a dictionary where the key is the column name and the value is a column-specific detail needed for the transformation. Note that a column name can be * (wildcard column) which translates to \"all dataframe columns besides the specified ones if any. The wildcard column should be used responsibly (potential mismatch between the action and some of the implicit columns).",
+      "type": {
+        "objectType": "list",
+        "elementsType": {
+          "objectType": "string"
+        }
+      },
+      "isOverwriteable": true,
+      "value": [],
+      "required": true,
+      "isBasicAttribute": true
+    },
+    {
+      "attributeName": "aws_secret",
+      "displayName": "Aws secret",
+      "description": "Check documentation, mandatory and usable only for some of the types. The seed to retrieve from AWS Secrets Manager, based on your configured secret.",
+      "type": {
+        "objectType": "secret"
+      },
+      "isOverwriteable": false,
+      "required": false,
+      "isBasicAttribute": false,
+      "value": {}
+    },
+    {
+      "attributeName": "seed_key",
+      "displayName": "Seed key",
+      "description": "Only for category seed_based, need to provide seed key or aws secret, if both are provided, aws secret takes precedence. The hard-coded seed string",
+      "type": {
+        "objectType": "string"
+      },
+      "isOverwriteable": false,
+      "value": "",
+      "required": false,
+      "isBasicAttribute": false
+    }
+  ]
+}

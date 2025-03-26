@@ -1,0 +1,1158 @@
+openapi: "3.0.1"
+info:
+  title: "Ingestion-Framework"
+  version: "2021-12-07T11:38:42"
+
+servers:
+  - url: "https://dummy.com"
+    variables:
+      basePath:
+        default: "/${stage_name}"
+
+x-amazon-apigateway-endpoint-configuration:
+  vpcEndpointIds:
+    - "${PRIVATE_VPCE_IDS}"
+
+paths:
+  /${middleware_version}/secrets/{secretName}:
+    options:
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Methods: "'OPTIONS,GET,PUT,DELETE'"
+              method.response.header.Access-Control-Allow-Headers: "'*'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+        type: "mock"
+
+    get:
+      parameters:
+        - name: "subjects"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+        - name: "aws-region"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+        - name: "msd-api-connection"
+          in: "header"
+          required: false
+          schema:
+            type: "string"
+        - name: "metadata-connection"
+          in: "header"
+          required: false
+          schema:
+            type: "string"
+        - name: "AuthToken"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+        - name: "secretName"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "getValues"
+          in: "query"
+          required: false
+          schema:
+            type: "boolean"
+      responses:
+        "200":
+          description: "Successful response"
+        "400":
+          description: "Bad Request"
+        "401":
+          description: "Unauthorized"
+        "403":
+          description: "Forbidden"
+        "500":
+          description: "Internal Server Error"
+      x-amazon-apigateway-request-validator: "Validate query string parameters and headers"
+      x-amazon-apigateway-integration:
+        type: "aws_proxy"
+        httpMethod: "GET"
+        uri: "${LAMBDAPREFIX_SECRETS_API}"
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        passthroughBehavior: "when_no_match"
+        contentHandling: "CONVERT_TO_TEXT"
+
+    put:
+      parameters:
+        - name: "subjects"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+        - name: "aws-region"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+        - name: "AuthToken"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "Secret updated successfully"
+      x-amazon-apigateway-request-validator: "Validate query string parameters and headers"
+      x-amazon-apigateway-integration:
+        type: "aws_proxy"
+        httpMethod: "GET"
+        uri: "${LAMBDAPREFIX_SECRETS_API}"
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        passthroughBehavior: "when_no_match"
+        contentHandling: "CONVERT_TO_TEXT"
+
+    delete:
+      parameters:
+        - name: "subjects"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+        - name: "aws-region"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+        - name: "AuthToken"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+        - name: "deleteSecretManager"
+          in: "query"
+          required: false
+          schema:
+            type: "boolean"
+      responses:
+        "200":
+          description: "Secret deleted successfully"
+      x-amazon-apigateway-request-validator: "Validate query string parameters and headers"
+      x-amazon-apigateway-integration:
+        type: "aws_proxy"
+        httpMethod: "GET"
+        uri: "${LAMBDAPREFIX_SECRETS_API}"
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        passthroughBehavior: "when_no_match"
+        contentHandling: "CONVERT_TO_TEXT"
+
+  /${middleware_version}/secrets:
+    options:
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Methods: "'OPTIONS,GET,POST'"
+              method.response.header.Access-Control-Allow-Headers: "'*'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+        type: "mock"
+    get:
+      parameters:
+        - name: "secretName"
+          in: "query"
+          required: false
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "Successful response"
+    post:
+      responses:
+        "201":
+          description: "Created"
+
+  /${middleware_version}/secrets/{secretName}/exists:
+    get:
+      parameters:
+        - name: "subjects"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+        - name: "aws-region"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+        - name: "AuthToken"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "Secret existence check successful"
+
+  "/${middleware_version}/metadata/components/{difwCoreVersion}/{componentCategory}/{componentTypeName}":
+    options:
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Methods: "'OPTIONS,POST'"
+              method.response.header.Access-Control-Allow-Headers: "'*'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+        type: "mock"
+    get:
+      parameters:
+        - name: "subjects"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+        - name: "aws-region"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+        - name: "msd-api-connection"
+          in: "header"
+          required: false
+          schema:
+            type: "string"
+        - name: "metadata-connection"
+          in: "header"
+          required: false
+          schema:
+            type: "string"
+        - name: "AuthToken"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "Successful response"
+        "400":
+          description: "Bad Request"
+        "401":
+          description: "Unauthorized"
+        "403":
+          description: "Forbidden"
+        "500":
+          description: "Internal Server Error"
+      x-amazon-apigateway-request-validator: "Validate query string parameters and headers"
+      x-amazon-apigateway-integration:
+        type: "aws_proxy"
+        httpMethod: "POST"
+        uri: "${LAMBDAPREFIX_METADATA_API}"
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        passthroughBehavior: "when_no_match"
+        contentHandling: "CONVERT_TO_TEXT"
+
+  "/${middleware_version}/metadata/components/{difwCoreVersion}/{componentCategory}":
+    options:
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Methods: "'OPTIONS,POST'"
+              method.response.header.Access-Control-Allow-Headers: "'*'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+        type: "mock"
+    get:
+      parameters:
+        - name: "subjects"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+        - name: "aws-region"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+        - name: "AuthToken"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "Successful response"
+        "400":
+          description: "Bad Request"
+        "401":
+          description: "Unauthorized"
+        "403":
+          description: "Forbidden"
+        "500":
+          description: "Internal Server Error"
+      x-amazon-apigateway-request-validator: "Validate query string parameters and headers"
+      x-amazon-apigateway-integration:
+        type: "aws_proxy"
+        httpMethod: "POST"
+        uri: "${LAMBDAPREFIX_METADATA_API}"
+        responses:
+          default:
+            statusCode: "200"
+        passthroughBehavior: "when_no_match"
+        contentHandling: "CONVERT_TO_TEXT"
+
+  "/${middleware_version}/metadata/permissionActions":
+    options:
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Methods: "'OPTIONS,POST'"
+              method.response.header.Access-Control-Allow-Headers: "'*'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+        type: "mock"
+    get:
+      parameters:
+        - name: "subjects"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+        - name: "aws-region"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+        - name: "AuthToken"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "Successful response"
+        x-amazon-apigateway-request-validator: "Validate query string parameters and headers"
+        x-amazon-apigateway-integration:
+          type: "aws_proxy"
+          httpMethod: "PATCH"
+          uri: "${LAMBDAPREFIX_COMPONENT_TEMPLATE_API}"
+          responses:
+            default:
+              statusCode: "200"
+              responseParameters:
+                method.response.header.Access-Control-Allow-Origin: "'*'"
+          passthroughBehavior: "when_no_match"
+  "/${middleware_version}/metadata/frameworkVersions":
+    options:
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Methods: "'OPTIONS,POST'"
+              method.response.header.Access-Control-Allow-Headers: "'*'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+        type: "mock"
+    get:
+      parameters:
+        - name: "subjects"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+        - name: "aws-region"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+        - name: "AuthToken"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "Successful response"
+        x-amazon-apigateway-request-validator: "Validate query string parameters and headers"
+        x-amazon-apigateway-integration:
+          type: "aws_proxy"
+          httpMethod: "PATCH"
+          uri: "${LAMBDAPREFIX_COMPONENT_TEMPLATE_API}"
+          responses:
+            default:
+              statusCode: "200"
+              responseParameters:
+                method.response.header.Access-Control-Allow-Origin: "'*'"
+          passthroughBehavior: "when_no_match"
+  "/${middleware_version}/metadata/enumerators/{enumeratorCategory}":
+    options:
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Methods: "'OPTIONS,POST'"
+              method.response.header.Access-Control-Allow-Headers: "'*'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+        type: "mock"
+    get:
+      parameters:
+        - name: "subjects"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+        - name: "aws-region"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+        - name: "AuthToken"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+        - name: "enumeratorCategory"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "Successful response"
+        x-amazon-apigateway-request-validator: "Validate query string parameters and headers"
+        x-amazon-apigateway-integration:
+          type: "aws_proxy"
+          httpMethod: "PATCH"
+          uri: "${LAMBDAPREFIX_COMPONENT_TEMPLATE_API}"
+          responses:
+            default:
+              statusCode: "200"
+              responseParameters:
+                method.response.header.Access-Control-Allow-Origin: "'*'"
+          passthroughBehavior: "when_no_match"
+  "/${middleware_version}/components/{difwCoreVersion}/{componentCategory}/{componentType}/browse":
+    post:
+      parameters:
+        - name: "componentCategory"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "componentType"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "difwCoreVersion"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "getTableDetails"
+          in: "query"
+          required: false
+          schema:
+            type: "string"
+        - name: "subjects"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+        - name: "aws-region"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+        - name: "msd-api-connection"
+          in: "header"
+          required: false
+          schema:
+            type: "string"
+        - name: "metadata-connection"
+          in: "header"
+          required: false
+          schema:
+            type: "string"
+        - name: "AuthToken"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: "object"
+      responses:
+        "200":
+          description: "Browse successful"
+          content:
+            application/json:
+              schema:
+                type: "object"
+                properties:
+                  message:
+                    type: "string"
+        x-amazon-apigateway-request-validator: "Validate query string parameters and headers"
+        x-amazon-apigateway-integration:
+          type: "aws_proxy"
+          httpMethod: "PATCH"
+          uri: "${LAMBDAPREFIX_COMPONENT_TEMPLATE_API}"
+          responses:
+            default:
+              statusCode: "200"
+              responseParameters:
+                method.response.header.Access-Control-Allow-Origin: "'*'"
+          passthroughBehavior: "when_no_match"
+  "/${middleware_version}/components/{difwCoreVersion}/{componentCategory}/{componentType}/validate":
+    post:
+      parameters:
+        - name: "subjects"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+        - name: "aws-region"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+        - name: "msd-api-connection"
+          in: "header"
+          required: false
+          schema:
+            type: "string"
+        - name: "metadata-connection"
+          in: "header"
+          required: false
+          schema:
+            type: "string"
+        - name: "AuthToken"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: "object"
+      responses:
+        "200":
+          description: "Validation successful"
+          content:
+            application/json:
+              schema:
+                type: "object"
+                properties:
+                  message:
+                    type: "string"
+        x-amazon-apigateway-request-validator: "Validate query string parameters and headers"
+        x-amazon-apigateway-integration:
+          type: "aws_proxy"
+          httpMethod: "PATCH"
+          uri: "${LAMBDAPREFIX_COMPONENT_TEMPLATE_API}"
+          responses:
+            default:
+              statusCode: "200"
+              responseParameters:
+                method.response.header.Access-Control-Allow-Origin: "'*'"
+          passthroughBehavior: "when_no_match"
+          contentHandling: "CONVERT_TO_TEXT"
+  "/${middleware_version}/componentTemplates/exists":
+    get:
+      parameters:
+        - name: "componentTemplateName"
+          in: "query"
+          required: true
+          schema:
+            type: "string"
+        - name: "subjects"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+        - name: "aws-region"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+        - name: "msd-api-connection"
+          in: "header"
+          required: false
+          schema:
+            type: "string"
+        - name: "metadata-connection"
+          in: "header"
+          required: false
+          schema:
+            type: "string"
+        - name: "AuthToken"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "Check if component template exists"
+          content:
+            application/json:
+              schema:
+                type: "boolean"
+        x-amazon-apigateway-request-validator: "Validate query string parameters and headers"
+        x-amazon-apigateway-integration:
+          type: "aws_proxy"
+          httpMethod: "PATCH"
+          uri: "${LAMBDAPREFIX_COMPONENT_TEMPLATE_API}"
+          responses:
+            default:
+              statusCode: "200"
+              responseParameters:
+                method.response.header.Access-Control-Allow-Origin: "'*'"
+          passthroughBehavior: "when_no_match"
+          contentHandling: "CONVERT_TO_TEXT"
+  "/${middleware_version}/componentTemplates":
+    post:
+      parameters:
+        - name: "subjects"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+        - name: "aws-region"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+        - name: "msd-api-connection"
+          in: "header"
+          required: false
+          schema:
+            type: "string"
+        - name: "metadata-connection"
+          in: "header"
+          required: false
+          schema:
+            type: "string"
+        - name: "AuthToken"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: "object"
+      responses:
+        "201":
+          description: "Resource created successfully"
+          content:
+            application/json:
+              schema:
+                type: "object"
+        "400":
+          description: "Bad Request"
+        "401":
+          description: "Unauthorized"
+        "403":
+          description: "Forbidden"
+        "500":
+          description: "Internal Server Error"
+    get:
+      parameters:
+        - name: "componentCategory"
+          in: "query"
+          required: false
+          schema:
+            type: "string"
+        - name: "componentType"
+          in: "query"
+          required: false
+          schema:
+            type: "string"
+        - name: "limitedView"
+          in: "query"
+          required: false
+          schema:
+            type: "boolean"
+        - name: "templateName"
+          in: "query"
+          required: false
+          schema:
+            type: "string"
+        - name: "subjects"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+        - name: "aws-region"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+        - name: "msd-api-connection"
+          in: "header"
+          required: false
+          schema:
+            type: "string"
+        - name: "metadata-connection"
+          in: "header"
+          required: false
+          schema:
+            type: "string"
+        - name: "AuthToken"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "Successful response"
+          content:
+            application/json:
+              schema:
+                type: "array"
+                items:
+                  type: "object"
+        x-amazon-apigateway-request-validator: "Validate query string parameters and headers"
+        x-amazon-apigateway-integration:
+          type: "aws_proxy"
+          httpMethod: "PATCH"
+          uri: "${LAMBDAPREFIX_COMPONENT_TEMPLATE_API}"
+          responses:
+            default:
+              statusCode: "200"
+              responseParameters:
+                method.response.header.Access-Control-Allow-Origin: "'*'"
+          passthroughBehavior: "when_no_match"
+          contentHandling: "CONVERT_TO_TEXT"
+    "/${middleware_version}/componentTemplates/{templateId}":
+      delete:
+        summary: "Delete a component template"
+        parameters:
+          - name: "templateId"
+            in: "path"
+            required: true
+            schema:
+              type: "string"
+          - name: "subjects"
+            in: "header"
+            required: true
+            schema:
+              type: "string"
+          - name: "aws-region"
+            in: "header"
+            required: true
+            schema:
+              type: "string"
+          - name: "msd-api-connection"
+            in: "header"
+            required: false
+            schema:
+              type: "string"
+          - name: "metadata-connection"
+            in: "header"
+            required: false
+            schema:
+              type: "string"
+          - name: "AuthToken"
+            in: "header"
+            required: true
+            schema:
+              type: "string"
+        responses:
+          "200":
+            description: "Template deleted successfully"
+            content:
+              application/json:
+                schema:
+                  type: "object"
+                  properties:
+                    message:
+                      type: "string"
+      put:
+        summary: "Update a component template"
+        parameters:
+          - name: "templateId"
+            in: "path"
+            required: true
+            schema:
+              type: "string"
+          - name: "subjects"
+            in: "header"
+            required: true
+            schema:
+              type: "string"
+          - name: "aws-region"
+            in: "header"
+            required: true
+            schema:
+              type: "string"
+          - name: "msd-api-connection"
+            in: "header"
+            required: false
+            schema:
+              type: "string"
+          - name: "metadata-connection"
+            in: "header"
+            required: false
+            schema:
+              type: "string"
+          - name: "AuthToken"
+            in: "header"
+            required: true
+            schema:
+              type: "string"
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                type: "object"
+        responses:
+          "200":
+            description: "Template updated successfully"
+            content:
+              application/json:
+                schema:
+                  type: "object"
+                  properties:
+                    message:
+                      type: "string"
+      patch:
+        summary: "Partially update a component template"
+        parameters:
+          - name: "templateId"
+            in: "path"
+            required: true
+            schema:
+              type: "string"
+          - name: "subjects"
+            in: "header"
+            required: true
+            schema:
+              type: "string"
+          - name: "aws-region"
+            in: "header"
+            required: true
+            schema:
+              type: "string"
+          - name: "msd-api-connection"
+            in: "header"
+            required: false
+            schema:
+              type: "string"
+          - name: "metadata-connection"
+            in: "header"
+            required: false
+            schema:
+              type: "string"
+          - name: "AuthToken"
+            in: "header"
+            required: true
+            schema:
+              type: "string"
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                type: "object"
+        responses:
+          "200":
+            description: "Template partially updated successfully"
+            content:
+              application/json:
+                schema:
+                  type: "object"
+                  properties:
+                    message:
+                      type: "string"
+        x-amazon-apigateway-request-validator: "Validate query string parameters and headers"
+        x-amazon-apigateway-integration:
+          type: "aws_proxy"
+          httpMethod: "PATCH"
+          uri: "${LAMBDAPREFIX_COMPONENT_TEMPLATE_API}"
+          responses:
+            default:
+              statusCode: "200"
+              responseParameters:
+                method.response.header.Access-Control-Allow-Origin: "'*'"
+          passthroughBehavior: "when_no_match"
+          contentHandling: "CONVERT_TO_TEXT"
+  "/${middleware_version}/events/{eventId}":
+    options:
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Methods: "'OPTIONS,POST'"
+              method.response.header.Access-Control-Allow-Headers: "'*'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+        type: "mock"
+
+    get:
+      parameters:
+        - name: "eventId"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "getSubEvents"
+          in: "query"
+          required: false
+          schema:
+            type: "string"
+            enum: ["true", "false"]
+        - name: "subjects"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+        - name: "aws-region"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+        - name: "msd-api-connection"
+          in: "header"
+          required: false
+          schema:
+            type: "string"
+        - name: "metadata-connection"
+          in: "header"
+          required: false
+          schema:
+            type: "string"
+        - name: "AuthToken"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+
+      x-amazon-apigateway-request-validator: "ValidateQueryParamsAndHeaders"
+      x-amazon-apigateway-integration:
+        type: "aws_proxy"
+        httpMethod: "POST"
+        uri: "${LAMBDAPREFIX_EVENTS_API}"
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        passthroughBehavior: "when_no_match"
+        contentHandling: "CONVERT_TO_TEXT"
+
+components:
+  schemas:
+    Empty:
+      type: "object"
+      description: "An empty response schema."
+
+x-amazon-apigateway-gateway-responses:
+  DEFAULT_4XX:
+    responseParameters:
+      gatewayresponse.headers.Access-Control-Allow-Methods: "'*'"
+      gatewayresponse.headers.Access-Control-Allow-Origin: "'*'"
+      gatewayresponse.headers.Access-Control-Allow-Headers: "'*'"
+  DEFAULT_5XX:
+    responseParameters:
+      gatewayresponse.headers.Access-Control-Allow-Methods: "'*'"
+      gatewayresponse.headers.Access-Control-Allow-Origin: "'*'"
+      gatewayresponse.headers.Access-Control-Allow-Headers: "'*'"
+
+x-amazon-apigateway-request-validators:
+  ValidateQueryParamsAndHeaders:
+    validateRequestParameters: true
+    validateRequestBody: false

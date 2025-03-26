@@ -1,0 +1,101 @@
+{
+  "title": "Source data type JSON flatten parameters",
+  "componentCategory": "data_type",
+  "componentType": "json_flatten",
+  "documentationLink": "https://github.com/merck-gen/mf-difw-core/blob/{branch}/documentation/configuration/steps/spark/loaders/json_flatten.md",
+  "difwStepCategory": "input",
+  "difwStepType": "json_flatten",
+  "displayName": "JSON Flatten",
+  "componentProperties": {
+    "conditionType": "spark_sql"
+  },
+  "platforms": {
+    "glue": {
+      "supportedJobTypes": [
+        "spark"
+      ]
+    },
+    "databricks": {
+      "supportedJobTypes": [
+        "python_databricks"
+      ]
+    }
+  },
+  "flowValidations": "#extendByFile:common/process_flow_validations_json_data_type.json",
+  "attributes": [
+    {
+      "attributeName": "root_json_element_name",
+      "displayName": "Root json element name",
+      "description": "Name of root json element which represents one record",
+      "type": {
+        "objectType": "string"
+      },
+      "required": false,
+      "isOverwriteable": true,
+      "value": "",
+      "isBasicAttribute": true
+    },
+    {
+      "attributeName": "columns_definitions",
+      "displayName": "Column definitions",
+      "description": "Definition of columns mapping (map json element to column)",
+      "required": true,
+      "type": {
+        "objectType": "list",
+        "elementsType": {
+          "objectType": "object",
+          "attributes": [
+            {
+              "attributeName": "column_name",
+              "displayName": "Column name",
+              "description": "Name of column (used for creation of table header)",
+              "required": true,
+              "type": {
+                "objectType": "string"
+              },
+              "isOverwriteable": true,
+              "value": ""
+            },
+            {
+              "attributeName": "json_path",
+              "displayName": "Json path",
+              "description": "Path in json where column data are stored",
+              "type": {
+                "objectType": "string"
+              },
+              "isOverwriteable": true,
+              "value": ""
+            },
+            {
+              "attributeName": "schema",
+              "displayName": "Schema",
+              "required": false,
+              "description": "Customizable data type of the value, this allows to have more complex data types (e.g. arrays). If defined, both `type` and `nullable` parts are mandatory. Optional `metadata` field can be used to set column-level metadata",
+              "type": {
+                "objectType": "string"
+              },
+              "isOverwriteable": true,
+              "value": ""
+            }
+          ]
+        }
+      },
+      "isBasicAttribute": true,
+      "value": [],
+      "isOverwriteable": true
+    },
+    {
+      "attributeName": "add_meta_input_file_name_column",
+      "displayName": "Add meta column 'file_name'",
+      "description": "Flag indicates if meta input file name columns will be added or not",
+      "type": {
+        "objectType": "boolean"
+      },
+      "required": true,
+      "isBasicAttribute": false,
+      "value": false,
+      "isOverwriteable": true
+    },
+    "#extendByFile:common/source_data_types_common_attributes.json"
+  ]
+}

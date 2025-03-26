@@ -1,0 +1,93 @@
+[
+  {
+    "attributeName": "s3_bucket",
+    "displayName": "Source S3 bucket",
+    "description": "Source S3 bucket where data are stored",
+    "type": {
+      "objectType": "string",
+      "s3Browsing": {
+          "subType": "bucket",
+          "relatedS3BrowserAttrName": "s3_layer_path"
+      }
+    },
+    "isBasicAttribute": false,
+    "required": false,
+    "isOverwriteable": true,
+    "value": "{{data_bucket}}"
+  },
+  {
+    "attributeName": "s3_layer_path",
+    "displayName": "Source s3 path",
+    "description": "Source S3 path in S3 source bucket where data are stored",
+    "type": {
+      "objectType": "string",
+      "s3Browsing": {
+          "subType": "key",
+          "relatedS3BrowserAttrName": "s3_bucket"
+      }
+    },
+    "isBasicAttribute": false,
+    "required": false,
+    "isOverwriteable": true,
+    "value": "{{s3_paths.c_path}}"
+  },
+  {
+    "attributeName": "file_regex",
+    "displayName": "File regex",
+    "description": "File pattern - regular expression used for filtering input files",
+    "type": {
+      "objectType": "string"
+    },
+    "isOverwriteable": true,
+    "value": "",
+    "isBasicAttribute": true,
+    "required": true
+  },
+  {
+    "attributeName": "static_file_location",
+    "displayName": "Static file location",
+    "description": "If value is true, static partitions are eliminated from the target path",
+    "type": {
+      "objectType": "boolean"
+    },
+    "isBasicAttribute": false,
+    "isOverwriteable": true,
+    "required": false,
+    "value": false
+  },
+  {
+    "attributeName": "compression",
+    "displayName": "Compression",
+    "description": "Compresses files before upload to S3. All files will have a `.gz` suffix.",
+    "type": {
+      "objectType": "object",
+      "attributes": [
+        {
+          "attributeName": "type",
+          "displayName": "Type",
+          "value": "gzip",
+          "required": true,
+          "type": {
+            "objectType": "string",
+            "maxLength": "256"
+          }
+        },
+        {
+          "attributeName": "level",
+          "displayName": "Level",
+          "type": {
+            "objectType": "number",
+            "scale": 0,
+            "precision": 2
+          },
+          "required": true,
+          "value": 9
+        }
+      ]
+    },
+    "isBasicAttribute": false,
+    "isOverwriteable": true,
+    "required": false
+  },
+  "#extendByFile:../../common/common_assume_role_attribute.json"
+]

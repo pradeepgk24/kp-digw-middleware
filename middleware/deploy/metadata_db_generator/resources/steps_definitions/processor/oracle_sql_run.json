@@ -1,0 +1,99 @@
+{
+  "title": "Oracle sql run parameters",
+  "componentCategory": "processor",
+  "componentType": "oracle_sql_run",
+  "difwStepCategory": "process",
+  "documentationLink": "https://github.com/merck-gen/mf-difw-core/blob/{branch}/documentation/configuration/steps/python/processors/oracle_sql_run.md",
+  "difwStepType": "oracle_sql_run",
+  "displayName": "Oracle sql run",
+  "flowValidations": "#extendByFile:common/process_flow_validations_processors.json",
+  "platforms": {
+    "glue": {
+      "supportedJobTypes": [
+        "python"
+      ]
+    },
+    "databricks": {
+      "supportedJobTypes": [
+        "python_databricks",
+        "python_databricks_submit"
+      ]
+    }
+  },
+  "attributes": [
+    {
+      "attributeName": "query",
+      "displayName": "Query",
+      "description": "Oracle SQL query you want to run",
+      "type": {
+        "objectType": "string"
+      },
+      "required": true,
+      "isBasicAttribute": true,
+      "isOverwriteable": true,
+      "value": ""
+    },
+    {
+      "attributeName": "username",
+      "displayName": "Username",
+      "description": "Oracle connection username",
+      "type": {
+        "objectType": "string"
+      },
+      "required": true,
+      "isBasicAttribute": true,
+      "isOverwriteable": false,
+      "value": ""
+    },
+    {
+      "attributeName": "password",
+      "displayName": "Password",
+      "description": "Oracle connection password",
+      "type": {
+        "objectType": "secret"
+      },
+      "required": true,
+      "isBasicAttribute": true,
+      "isOverwriteable": false,
+      "value": {}
+    },
+    {
+      "attributeName": "host",
+      "displayName": "Host",
+      "description": "Host of source oracle database",
+      "type": {
+        "objectType": "string"
+      },
+      "required": true,
+      "isBasicAttribute": true,
+      "isOverwriteable": false,
+      "value": ""
+    },
+    {
+      "attributeName": "port",
+      "displayName": "Port",
+      "description": "Port of source oracle database",
+      "type": {
+        "objectType": "number",
+        "scale": 0,
+        "precision": 7
+      },
+      "required": true,
+      "isBasicAttribute": true,
+      "isOverwriteable": false,
+      "value": null
+    },
+    {
+      "attributeName": "db_name",
+      "displayName": "Database name",
+      "description": "DBName of source oracle database",
+      "type": {
+        "objectType": "string"
+      },
+      "required": true,
+      "isBasicAttribute": true,
+      "isOverwriteable": false,
+      "value": ""
+    }
+  ]
+}

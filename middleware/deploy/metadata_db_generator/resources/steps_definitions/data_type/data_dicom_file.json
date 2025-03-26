@@ -1,0 +1,42 @@
+{
+  "title": "Source data type dicom File parameters",
+  "componentCategory": "data_type",
+  "componentType": "dicom_file",
+  "documentationLink": "https://github.com/merck-gen/mf-difw-core/blob/{branch}/documentation/configuration/steps/spark/loaders/dicom_file.md",
+  "difwStepCategory": "input",
+  "difwStepType": "dicom_file",
+  "displayName": "DicomFile",
+  "flowValidations": "#extendByFile:common/process_flow_validations_data_type.json",
+  "componentProperties": {
+    "conditionType": "spark_sql"
+  },
+  "platforms": {
+    "glue": {
+      "supportedJobTypes": [
+        "spark"
+      ]
+    },
+    "databricks": {
+      "supportedJobTypes": [
+        "python_databricks"
+      ]
+    }
+  },
+  "attributes": [
+    {
+      "attributeName": "spark_read_binary_file_options",
+      "displayName": "Spark read Dicom File options",
+      "description": "Options of Spark dicomFile reader in key-value format. For complete list of the options see https://spark.apache.org/docs/latest/sql-data-sources-generic-options.html",
+      "type": {
+        "objectType": "dictionary"
+      },
+      "isOverwriteable": true,
+      "value": {},
+      "required": false,
+      "isBasicAttribute": true
+    },
+    "#extendByFile:common/source_data_types_common_attributes.json",
+    "#extendByFile:common/source_data_types_repartition_attributes.json",
+    "#extendByFile:common/common_blob_storage_connection_data_types.json"
+  ]
+}

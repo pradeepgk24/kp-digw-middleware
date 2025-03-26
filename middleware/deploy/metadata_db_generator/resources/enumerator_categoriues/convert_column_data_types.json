@@ -1,0 +1,42 @@
+[
+  {
+    "enumeratorValue": "tinyint",
+    "displayName": "ByteType"
+  },
+  {
+    "enumeratorValue": "smallint",
+    "displayName": "ShortType"
+  },
+  {
+    "enumeratorValue": "int",
+    "displayName": "IntegerType"
+  },
+  {
+    "enumeratorValue": "bigint",
+    "displayName": "LongType"
+  },
+  {
+    "enumeratorValue": "float",
+    "displayName": "FloatType"
+  },
+  {
+    "enumeratorValue": "double",
+    "displayName": "DoubleType"
+  },
+  {
+    "enumeratorValue": "decimal",
+    "displayName": "DecimalType"
+  },
+  {
+    "enumeratorValue": "string",
+    "displayName": "StringType"
+  },
+  {
+    "enumeratorValue": "binary",
+    "displayName": "BinaryType"
+  },
+  {
+    "enumeratorValue": "boolean",
+    "displayName": "BooleanType"
+  }
+]

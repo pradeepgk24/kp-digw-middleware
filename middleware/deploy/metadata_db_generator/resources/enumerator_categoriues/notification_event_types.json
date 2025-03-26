@@ -1,0 +1,22 @@
+[
+  {
+    "enumeratorValue": "schema_change",
+    "displayName": "schema_change"
+  },
+  {
+    "enumeratorValue": "column_comment_update_error",
+    "displayName": "column_comment_update_error"
+  },
+  {
+    "enumeratorValue": "bad_lines_detection",
+    "displayName": "bad_lines_detection"
+  },
+  {
+    "enumeratorValue": "send_no_data_notification",
+    "displayName": "send_no_data_notification"
+  },
+  {
+    "enumeratorValue": "data_quality_error",
+    "displayName": "data_quality_error"
+  }
+]

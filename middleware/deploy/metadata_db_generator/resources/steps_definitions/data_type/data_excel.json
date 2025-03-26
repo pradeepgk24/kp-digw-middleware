@@ -1,0 +1,115 @@
+{
+  "title": "Source data type excel parameters",
+  "componentCategory": "data_type",
+  "componentType": "excel",
+  "documentationLink": "https://github.com/merck-gen/mf-difw-core/blob/{branch}/documentation/configuration/steps/spark/loaders/excel.md",
+  "difwStepCategory": "input",
+  "difwStepType": "excel",
+  "displayName": "Excel",
+  "componentProperties": {
+    "conditionType": "spark_sql"
+  },
+  "platforms": {
+    "glue": {
+      "supportedJobTypes": [
+        "spark"
+      ]
+    },
+    "databricks": {
+      "supportedJobTypes": [
+        "python_databricks"
+      ]
+    }
+  },
+  "flowValidations": "#extendByFile:common/process_flow_validations_data_type.json",
+  "attributes": [
+    {
+      "attributeName": "sheet_name_regex",
+      "displayName": "Sheet name regex",
+      "description": "Regular expression to filter sheet names",
+      "type": {
+        "objectType": "string"
+      },
+      "required": true,
+      "isBasicAttribute": true,
+      "isOverwriteable": true,
+      "value": ".*"
+    },
+    {
+      "attributeName": "read_excel_options",
+      "displayName": "Read excel options",
+      "description": "Options for pandas.read_excel in key-value format. For complete list of Pandas read_excel options see https://pandas.pydata.org/docs/reference/api/pandas.read_excel.html#pandas.read_excel",
+      "type": {
+        "objectType": "dictionary"
+      },
+      "required": false,
+      "isOverwriteable": true,
+      "value": {},
+      "isBasicAttribute": false
+    },
+    {
+      "attributeName": "create_data_frame_options",
+      "displayName": "Create dataframe options",
+      "description": "Options for Spark createDataFrame in key-value format. For complete list of Spark createDataFrame options see https://spark.apache.org/docs/3.1.1/api/python/reference/api/pyspark.sql.SparkSession.createDataFrame.html#pyspark.sql.SparkSession.createDataFrame",
+      "type": {
+        "objectType": "dictionary"
+      },
+      "required": false,
+      "isOverwriteable": true,
+      "value": {},
+      "isBasicAttribute": false
+    },
+    {
+      "attributeName": "add_meta_input_file_name_column",
+      "displayName": "Add meta column 'file_name'",
+      "description": "Flag indicates if meta input file name columns will be added or not",
+      "type": {
+        "objectType": "boolean"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": false
+    },
+    {
+      "attributeName": "add_meta_input_sheet_name_column",
+      "displayName": "Add meta column 'sheet_name'",
+      "description": "Flag indicates if meta input sheet name columns will be added or not",
+      "type": {
+        "objectType": "boolean"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": false
+    },
+    {
+      "attributeName": "input_file_name",
+      "displayName": "Input file name",
+      "description": "Name of the Excel file to be ingested. If the path in B layer contains just one Excel file, it is not necessary to specify the name.If there are multiple Excel files in the same folder and the input_file_name is still not specified, all files must have the same structure to be loaded into a single table.",
+      "type": {
+        "objectType": "string"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": ""
+    },
+    {
+      "attributeName": "date_columns",
+      "displayName": "Date columns",
+      "description": "Only for pyxlsb (binary excel) engine. List of columns that contains dates, as the engine does not convert those implicitly (it leaves ints and floats in data), we convert it using this information.",
+      "type": {
+        "objectType": "list",
+        "elementsType": {
+          "objectType": "string"
+        }
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": []
+    },
+    "#extendByFile:common/source_data_types_common_attributes.json"
+  ]
+}

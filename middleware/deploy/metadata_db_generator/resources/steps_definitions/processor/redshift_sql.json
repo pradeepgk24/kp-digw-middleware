@@ -1,0 +1,126 @@
+{
+  "title": "Reqdshift SQL parameters",
+  "componentCategory": "processor",
+  "componentType": "redshift_sql",
+  "difwStepCategory": "process",
+  "difwStepType": "redshift_sql",
+  "displayName": "Redshift SQL",
+  "documentationLink": "https://github.com/merck-gen/mf-difw-core/blob/{branch}/documentation/configuration/steps/python/processors/redshift_sql.md",
+  "flowValidations": "#extendByFile:common/process_flow_validations_processors.json",
+  "platforms": {
+    "glue": {
+      "supportedJobTypes": [
+        "python"
+      ]
+    },
+    "databricks": {
+      "supportedJobTypes": [
+        "python_databricks",
+        "spark_databricks"
+      ]
+    }
+  },
+  "attributes": [
+    {
+      "attributeName": "connection",
+      "displayName": "Connection",
+      "description": "redshift connection details",
+      "type": {
+        "objectType": "object",
+        "attributes": [
+          {
+            "attributeName": "redshift_host",
+            "displayName": "Redshift host",
+            "description": "redshift host",
+            "type": {
+              "objectType": "string"
+            }
+          },
+          {
+            "attributeName": "redshift_port",
+            "displayName": "Redshift port",
+            "description": "redshift port",
+            "type": {
+              "objectType": "number"
+            },
+            "value": 5439
+          },
+          {
+            "attributeName": "redshift_user",
+            "displayName": "Redshift user",
+            "description": "redshift user",
+            "type": {
+              "objectType": "secret"
+            }
+          },
+          {
+            "attributeName": "redshift_password",
+            "displayName": "Redshift password",
+            "description": "redshift password",
+            "type": {
+              "objectType": "secret"
+            }
+          },
+          {
+            "attributeName": "redshift_database",
+            "displayName": "Redshift database",
+            "description": "redshift database",
+            "type": {
+              "objectType": "string"
+            }
+          }
+        ]
+      },
+      "required": true,
+      "isBasicAttribute": true,
+      "isOverwriteable": true,
+      "value": ""
+    },
+    {
+      "attributeName": "query",
+      "displayName": "Query",
+      "description": "Redshift SQL query or a filename ending with \".sql\" containing the query.  Populating one of the `Query` or `Named queries` is mandatory.",
+      "type": {
+        "objectType": "string"
+      },
+      "required": false,
+      "isBasicAttribute": true,
+      "isOverwriteable": true,
+      "value": ""
+    },
+    {
+      "attributeName": "named_queries",
+      "displayName": "Named queries",
+      "description": "Named queries are sorted by their names and run in that order. Populating one of the `Query` or `Named queries` is mandatory.",
+      "type": {
+        "objectType": "object",
+        "attributes": [
+          {
+            "attributeName": "query_name",
+            "displayName": "Query name",
+            "type": {
+              "objectType": "object",
+              "attributes": [],
+              "dynamicPattern": {
+                "attributes": [
+                  {
+                    "attributeName": "query",
+                    "displayName": "Query",
+                    "type": {
+                      "objectType": "string"
+                    },
+                    "isOverwriteable": true,
+                    "value": ""
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "required": false,
+      "isBasicAttribute": true,
+      "isOverwriteable": true
+    }
+  ]
+}
