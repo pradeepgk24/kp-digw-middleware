@@ -1,0 +1,48 @@
+{
+  "title": "Expand nested fields parameters",
+  "componentCategory": "transformer",
+  "componentType": "expand_nested_fields",
+  "difwStepCategory": "transformation",
+  "documentationLink": "https://github.com/merck-gen/mf-difw-core/blob/{branch}/documentation/configuration/steps/spark/transformers/expand_nested_fields.md",
+  "difwStepType": "expand_nested_fields",
+  "displayName": "Expand nested fields",
+  "flowValidations": "#extendByFile:common/process_flow_validations_transformers.json",
+  "attributes": [
+    {
+      "attributeName": "inner_column_delimiter",
+      "displayName": "Inner column delimiter",
+      "description": "Separator of expanded column name parts",
+      "type": {
+        "objectType": "string"
+      },
+      "required": true,
+      "isBasicAttribute": true,
+      "value": "_",
+      "isOverwriteable": true
+    },
+    {
+      "attributeName": "position_column_suffix",
+      "displayName": "Position column suffix",
+      "description": "Suffix for possible position column in case of list expansion. When Spark expands a nested list, it may also add a position column that contains a sequence of numbers starting with 0. The name of this column is constructed from the original name of the column + position_column_suffix. In case it is null then no position column is added at all",
+      "type": {
+        "objectType": "string"
+      },
+      "required": false,
+      "isBasicAttribute": true,
+      "isOverwriteable": true,
+      "value": ""
+    },
+    {
+      "attributeName": "row_expand_path",
+      "displayName": "Row expand path",
+      "description": "Path to the innermost nested list to expand rows from. E.g. customers/customer/orders/order/products/product/options/option. By default, all lists are expanded. However, this would fail if there were multiple lists at the same nesting level. See section Limitations below. When row_expand_path is used, all lists unused in the path are excluded",
+      "type": {
+        "objectType": "string"
+      },
+      "required": false,
+      "isBasicAttribute": true,
+      "isOverwriteable": true,
+      "value": ""
+    }
+  ]
+}

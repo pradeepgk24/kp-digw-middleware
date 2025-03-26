@@ -1,0 +1,51 @@
+[
+  {
+    "actionType": "writePermission",
+    "actionDefinition": {},
+    "description": "The permission to check if you can create or update permission or assign subject to permission"
+  },
+  {
+    "actionType": "deletePermission",
+    "actionDefinition": {},
+    "description": "The permission to check if you can delete permission"
+  },
+  {
+    "actionType": "readPermission",
+    "actionDefinition": {},
+    "description": "The permission to check if you can read permissions"
+  },
+  {
+    "actionType": "manageGlobalPermission",
+    "actionDefinition": {},
+    "description": "The permission check if you can manage global permissions"
+  },
+  {
+    "actionType": "accessIam",
+    "actionDefinition": {},
+    "description": "The permission check if you can see IAM settings"
+  },
+  {
+    "actionType": "accessProjectSettings",
+    "actionDefinition": {},
+    "description": "The permission check if you can see project settings in settings menu"
+  },
+  {
+    "actionType": "accessNotificationSettings",
+    "actionDefinition": {},
+    "description": "The permission check if user can see notification settings"
+  },
+  {
+    "actionType": "updateProjectSettings",
+    "actionDefinition": {
+      "settingsType": "string"
+    },
+    "description": "The permission check if you can update project settings"
+  },
+  {
+    "actionType": "readProjectSettings",
+    "actionDefinition": {
+      "settingsType": "string"
+    },
+    "description": "The permission check if you can update project settings"
+  }
+]

@@ -1,0 +1,252 @@
+{
+  "title": "Source S3 parameters",
+  "componentCategory": "input_connector",
+  "componentType": "s3",
+  "documentationLink": "https://github.com/merck-gen/mf-difw-core/blob/{branch}/documentation/configuration/steps/common/processors/acq_from_s3.md",
+  "difwStepCategory": "process",
+  "difwStepType": "acq_from_s3",
+  "componentProperties": {
+    "isTestable": true,
+    "supportExternalAwsStorage": true
+  },
+  "displayName": "AWS S3",
+  "flowValidations": "#extendByFile:common/process_flow_validations_file_based_in_connectors.json",
+  "platforms": {
+    "glue": {
+      "supportedJobTypes": [
+        "python",
+        "spark"
+      ]
+    },
+    "databricks": {
+      "supportedJobTypes": [
+        "python_databricks",
+        "spark_databricks"
+      ]
+    }
+  },
+  "attributes": [
+    {
+      "attributeName": "source_s3_bucket",
+      "displayName": "Source S3 bucket",
+      "description": "Source S3 bucket where data are stored",
+      "type": {
+        "objectType": "string",
+        "s3Browsing": {
+            "subType": "bucket",
+            "relatedS3BrowserAttrName": "source_path"
+        }
+      },
+      "isOverwriteable": false,
+      "required": true,
+      "isBasicAttribute": true,
+      "value": ""
+    },
+    {
+      "attributeName": "source_path",
+      "displayName": "Source path",
+      "description": "Source S3 path in S3 source bucket where data are stored. If selected also file name, please move this file name into Source file regex (and remove the trailing `/` in this parameter)",
+      "type": {
+        "objectType": "string",
+        "s3Browsing": {
+            "subType": "key",
+            "relatedS3BrowserAttrName": "source_s3_bucket"
+        }
+      },
+      "isRuntime": true,
+      "isOverwriteable": true,
+      "required": true,
+      "isBasicAttribute": true,
+      "value": ""
+    },
+    {
+      "attributeName": "file_regex",
+      "displayName": "Source file regex",
+      "description": "File regex pattern use for filtering of input files. This property is used together with `Source path` to form the following regular expression `Source path/\"Source file regex`. This expression is applied to the `key` property of the s3 object for matching.",
+      "type": {
+        "objectType": "string"
+      },
+      "required": true,
+      "isBasicAttribute": true,
+      "isOverwriteable": true,
+      "value": ".*"
+    },
+    {
+      "attributeName": "source_delete",
+      "displayName": "Source delete",
+      "description": "Flag indicates if files will be deleted from the source",
+      "type": {
+        "objectType": "boolean"
+      },
+      "required": true,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": false
+    },
+    {
+      "attributeName": "most_recent_only",
+      "displayName": "Get most recent only",
+      "description": "If true, then only the most recent file is ingested",
+      "type": {
+        "objectType": "boolean"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": false
+    },
+    {
+      "attributeName": "order_by",
+      "displayName": "Order by",
+      "description": "Process files in order. Possible values: 'modified_date', 'filename'.",
+      "type": {
+        "objectType": "string"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": ""
+    },
+    {
+      "attributeName": "ordering_regex",
+      "displayName": "Ordering regex",
+      "description": "Regex for use in ordering",
+      "type": {
+        "objectType": "string"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": ".*"
+    },
+    {
+      "attributeName": "ordering_direction",
+      "displayName": "Ordering direction",
+      "description": "Direction to process files in order (asc, desc)",
+      "type": {
+        "objectType": "string"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": "asc"
+    },
+    {
+      "attributeName": "limit",
+      "displayName": "Limit",
+      "description": "Limit number of files to be processed",
+      "type": {
+        "objectType": "number",
+        "scale": 0,
+        "precision": 10
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": null
+    },
+    {
+      "attributeName": "delay_after_copy",
+      "displayName": "Delay after copy",
+      "description": "Number of seconds to sleep after copying the files",
+      "type": {
+        "objectType": "number",
+        "scale": 0,
+        "precision": 10
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": 0
+    },
+    {
+      "attributeName": "cdc",
+      "displayName": "ChangeDataCapture",
+      "description": "CDC feature to process only new files",
+      "type": {
+        "objectType": "object",
+        "attributes": [
+          {
+            "attributeName": "enabled",
+            "displayName": "Enabled",
+            "description": "Whether CDC is enabled. If set to true, then validation by absolute path will be enabled by default.",
+            "type": {
+              "objectType": "boolean"
+            },
+            "isOverwriteable": true,
+            "value": false
+          },
+          {
+            "attributeName": "validate_file_date_modify",
+            "displayName": "Validate file date modify",
+            "description": "Consider files as new by modified date",
+            "type": {
+              "objectType": "boolean"
+            },
+            "isOverwriteable": true,
+            "value": false
+          },
+          {
+            "attributeName": "validate_file_content",
+            "displayName": "Validate file content",
+            "description": "Consider files as new by file content",
+            "type": {
+              "objectType": "boolean"
+            },
+            "isOverwriteable": true,
+            "value": false
+          }
+        ]
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true
+    },
+    {
+      "attributeName": "bounds",
+      "displayName": "Bounds",
+      "description": "Only files that were modified between those bounds will be ingested.",
+      "type": {
+        "objectType": "object",
+        "attributes": [
+          {
+            "attributeName": "lower",
+            "displayName": "Lower",
+            "description": "Datetime string following format '%Y-%m-%d %H:%M:%S' or a runtime placeholder, e.g. {{lower_bound}}",
+            "type": {
+              "objectType": "string",
+              "maxLength": "256"
+            },
+            "isOverwriteable": true,
+            "value": ""
+          },
+          {
+            "attributeName": "upper",
+            "displayName": "Upper",
+            "description": "Datetime string following format '%Y-%m-%d %H:%M:%S' or a runtime placeholder, e.g. {{upper_bound}}",
+            "type": {
+              "objectType": "string",
+              "maxLength": "256"
+            },
+            "isOverwriteable": true,
+            "value": ""
+          },
+          {
+            "attributeName": "timezone",
+            "displayName": "Timezone",
+            "description": "IANA time zone name for the bounds. If values from Airflow are used, these are by default in UTC (unless changed in Airflow config). (https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).",
+            "type": {
+              "objectType": "string"
+            },
+            "value": "UTC",
+            "isOverwriteable": true
+          }
+        ]
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true
+    },
+    "#extendByFile:common/source_connection_common_attributes.json"
+  ]
+}

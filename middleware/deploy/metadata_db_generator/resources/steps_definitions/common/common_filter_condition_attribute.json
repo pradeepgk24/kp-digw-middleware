@@ -1,0 +1,12 @@
+{
+  "attributeName": "filter_condition",
+  "displayName": "Filter condition",
+  "description": "Spark filter condition",
+  "type": {
+    "objectType": "string"
+  },
+  "required": false,
+  "isBasicAttribute": false,
+  "isOverwriteable": true,
+  "value": ""
+}

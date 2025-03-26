@@ -1,0 +1,345 @@
+{
+  "title": "Airflow DBT operator",
+  "componentCategory": "data_transformation_tool",
+  "componentType": "dbt",
+  "documentationLink": "https://github.com/merck-gen/mf-difw-core/blob/{branch}/documentation/configuration/README.md#dbt",
+  "difwStepCategory": "",
+  "difwStepType": "",
+  "difwJobCategory": "operator",
+  "difwTaskType": "airflow_component",
+  "displayName": "DBT",
+  "flowValidations": "#extendByFile:common/process_flow_validations_data_transformation_tools.json",
+  "componentProperties": {
+    "operatorClass": "difw_operators.dbt_operator.DbtOperator"
+  },
+  "platforms": {
+    "glue": {
+      "supportedJobTypes": []
+    },
+    "databricks": {
+      "supportedJobTypes": []
+    },
+    "airflow": {
+      "supportedJobTypes": []
+    }
+  },
+  "attributes": [
+    {
+      "attributeName": "trigger",
+      "displayName": "Trigger",
+      "description": "DBT job parameters",
+      "type": {
+        "objectType": "object",
+        "attributes": [
+          {
+            "attributeName": "connection_id",
+            "displayName": "Airflow connection id",
+            "description": "Airflow connection name. Connection details are provided by DBT Platform Team.",
+            "isBasicAttribute": true,
+            "type": {
+              "objectType": "string"
+            },
+            "isOverwriteable": false,
+            "value": "",
+            "required": true
+          },
+          {
+            "attributeName": "region",
+            "displayName": "Region",
+            "description": "Region name of EksPod.",
+            "isBasicAttribute": true,
+            "type": {
+              "objectType": "string"
+            },
+            "isOverwriteable": false,
+            "value": "us-east-1",
+            "required": true
+          },
+          {
+            "attributeName": "namespace",
+            "displayName": "Namespace",
+            "description": "The namespace in which to execute the pod. Namespace value is provided by DBT Platform Team.",
+            "isBasicAttribute": true,
+            "type": {
+              "objectType": "string"
+            },
+            "isOverwriteable": false,
+            "value": "",
+            "required": true
+          },
+          {
+            "attributeName": "service_account_name",
+            "displayName": "Service account name",
+            "description": "Service account name value is provided by DBT Platform Team.",
+            "isBasicAttribute": true,
+            "type": {
+              "objectType": "string"
+            },
+            "isOverwriteable": false,
+            "value": "",
+            "required": true
+          },
+          {
+            "attributeName": "cluster_name",
+            "displayName": "Cluster name",
+            "description": "The name of the Amazon EKS Cluster to execute the task on. Cluster name value is provided by DBT Platform Team.",
+            "isBasicAttribute": true,
+            "type": {
+              "objectType": "string"
+            },
+            "value": "",
+            "isOverwriteable": false,
+            "required": true
+          },
+          {
+            "attributeName": "project_path",
+            "displayName": "Project path",
+            "description": "Path to DBT project in git repository",
+            "isBasicAttribute": true,
+            "type": {
+              "objectType": "string"
+            },
+            "value": "",
+            "isOverwriteable": false,
+            "required": true
+          },
+          {
+            "attributeName": "init_environment_variables",
+            "displayName": "Init environment variables",
+            "description": "List of environment variables initialized in init container for the launched Pod.",
+            "isBasicAttribute": true,
+            "type": {
+              "objectType": "list",
+              "elementsType": {
+                "objectType": "object",
+                "attributes": [
+                  {
+                    "attributeName": "name",
+                    "displayName": "Variable name",
+                    "description": "Variable name",
+                    "type": {
+                      "objectType": "string"
+                    },
+                    "value": "",
+                    "required": true
+                  },
+                  {
+                    "attributeName": "value",
+                    "displayName": "Variable value",
+                    "description": "Variable value. Can be used if the value is not stored in secret.",
+                    "type": {
+                      "objectType": "string"
+                    },
+                    "value": "",
+                    "required": false
+                  },
+                  {
+                    "attributeName": "secret_name",
+                    "displayName": "Secret name",
+                    "description": "Defines secret name if a variable value is stored within AWS secret",
+                    "type": {
+                      "objectType": "string"
+                    },
+                    "value": "",
+                    "required": false
+                  },
+                  {
+                    "attributeName": "secret_key",
+                    "displayName": "Secret key",
+                    "description": "Defines secret key if a variable value is stored within AWS secret",
+                    "type": {
+                      "objectType": "string"
+                    },
+                    "value": "",
+                    "required": false
+                  }
+                ]
+              }
+            },
+            "value": [
+              {
+                "attributes": [
+                  {
+                    "attributeName": "name",
+                    "displayName": "Variable name",
+                    "description": "Variable name",
+                    "type": {
+                      "objectType": "string"
+                    },
+                    "value": "GIT_SYNC_PASSWORD",
+                    "required": true
+                  },
+                  {
+                    "attributeName": "secret_name",
+                    "displayName": "Secret name",
+                    "description": "Defines secret name if a variable value is stored within AWS secret",
+                    "type": {
+                      "objectType": "string"
+                    },
+                    "value": "<FILL GIT_SYNC_PASSWORD SECRET NAME HERE>",
+                    "required": false
+                  },
+                  {
+                    "attributeName": "secret_key",
+                    "displayName": "Secret key",
+                    "description": "Defines secret key if a variable value is stored within AWS secret",
+                    "type": {
+                      "objectType": "string"
+                    },
+                    "value": "<FILL GIT_SYNC_PASSWORD SECRET KEY HERE>",
+                    "required": false
+                  }
+                ]
+              },
+              {
+                "attributes": [
+                  {
+                    "attributeName": "name",
+                    "displayName": "Variable name",
+                    "description": "Variable name",
+                    "type": {
+                      "objectType": "string"
+                    },
+                    "value": "GIT_SYNC_USERNAME",
+                    "required": true
+                  },
+                  {
+                    "attributeName": "secret_name",
+                    "displayName": "Secret name",
+                    "description": "Defines secret name if a variable value is stored within AWS secret",
+                    "type": {
+                      "objectType": "string"
+                    },
+                    "value": "<FILL GIT_SYNC_USERNAME SECRET NAME HERE>",
+                    "required": false
+                  },
+                  {
+                    "attributeName": "secret_key",
+                    "displayName": "Secret key",
+                    "description": "Defines secret key if a variable value is stored within AWS secret",
+                    "type": {
+                      "objectType": "string"
+                    },
+                    "value": "<FILL GIT_SYNC_USERNAME SECRET KEY HERE>",
+                    "required": false
+                  }
+                ]
+              },
+              {
+                "attributes": [
+                  {
+                    "attributeName": "name",
+                    "displayName": "Variable name",
+                    "description": "Variable name",
+                    "type": {
+                      "objectType": "string"
+                    },
+                    "value": "GIT_SYNC_BRANCH",
+                    "required": true
+                  },
+                  {
+                    "attributeName": "value",
+                    "displayName": "Variable value",
+                    "description": "Variable value. Can be used if the value is not stored in secret.",
+                    "type": {
+                      "objectType": "string"
+                    },
+                    "value": "develop",
+                    "required": false
+                  }
+                ]
+              },
+              {
+                "attributes": [
+                  {
+                    "attributeName": "name",
+                    "displayName": "Variable name",
+                    "description": "Variable name",
+                    "type": {
+                      "objectType": "string"
+                    },
+                    "value": "GIT_SYNC_REPO",
+                    "required": true
+                  },
+                  {
+                    "attributeName": "value",
+                    "displayName": "Variable value",
+                    "description": "Variable value. Can be used if the value is not stored in secret.",
+                    "type": {
+                      "objectType": "string"
+                    },
+                    "value": "<FILL GIT_SYNC_REPO REPO URL HERE>",
+                    "required": false
+                  }
+                ]
+              }
+            ],
+            "isOverwriteable": false,
+            "required": true
+          },
+          {
+            "attributeName": "environment_variables",
+            "displayName": "Environment variables",
+            "description": "List of environment variables initialized in the container. Values can be rendered in DBT profiles.yml",
+            "isBasicAttribute": true,
+            "type": {
+              "objectType": "list",
+              "elementsType": {
+                "objectType": "object",
+                "attributes": [
+                  {
+                    "attributeName": "name",
+                    "displayName": "Variable name",
+                    "description": "Variable name",
+                    "type": {
+                      "objectType": "string"
+                    },
+                    "value": "",
+                    "required": true
+                  },
+                  {
+                    "attributeName": "value",
+                    "displayName": "Variable value",
+                    "description": "Variable value. Can be used if the value is not stored in secret.",
+                    "type": {
+                      "objectType": "string"
+                    },
+                    "value": "",
+                    "required": false
+                  },
+                  {
+                    "attributeName": "secret_name",
+                    "displayName": "Secret name",
+                    "description": "Defines secret name if a variable value is stored within AWS secret",
+                    "type": {
+                      "objectType": "string"
+                    },
+                    "value": "",
+                    "required": false
+                  },
+                  {
+                    "attributeName": "secret_key",
+                    "displayName": "Secret key",
+                    "description": "Defines secret key if a variable value is stored within AWS secret",
+                    "type": {
+                      "objectType": "string"
+                    },
+                    "value": "",
+                    "required": false
+                  }
+                ]
+              }
+            },
+            "value": null,
+            "isOverwriteable": false,
+            "required": true
+          }
+        ]
+      },
+      "required": true,
+      "isOverwriteable": true,
+      "isBasicAttribute": true,
+      "value": []
+    }
+  ]
+}

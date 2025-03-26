@@ -1,0 +1,113 @@
+[
+  {
+    "attributeName": "connection",
+    "displayName": "Blob storage connection details",
+    "description": "Connection details",
+    "type": {
+      "objectType": "object",
+      "attributes": [
+        {
+          "attributeName": "account_name",
+          "displayName": "Account name",
+          "description": "The name of storage account",
+          "required": true,
+          "type": {
+            "objectType": "string"
+          },
+          "isOverwriteable": true
+        },
+        {
+          "attributeName": "account_key",
+          "displayName": "Account Key",
+          "description": "Authorization using account key shared account key",
+          "required": false,
+          "type": {
+            "objectType": "secret"
+          },
+          "isOverwriteable": true
+        },
+        {
+          "attributeName": "sas_token",
+          "displayName": "Shared access signature token",
+          "description": "Authorization using sas token Shared access signature",
+          "required": false,
+          "type": {
+            "objectType": "secret"
+          },
+          "isOverwriteable": true
+        },
+        {
+          "attributeName": "verify",
+          "displayName": "Verify",
+          "description": "SSL verification enabled",
+          "required": false,
+          "type": {
+            "objectType": "boolean"
+          },
+          "value": true,
+          "isOverwriteable": false
+        },
+        {
+          "attributeName": "timeout",
+          "displayName": "Timeout",
+          "required": false,
+          "description": "Timeout for a http request response",
+          "type": {
+            "objectType": "number"
+          },
+          "value": 600,
+          "isOverwriteable": true
+        },
+        {
+          "attributeName": "proxies",
+          "displayName": "Proxies",
+          "required": false,
+          "description": "Proxy for http request can override the value from global configuration",
+          "type": {
+            "objectType": "dictionary"
+          },
+          "isOverwriteable": true,
+          "value": {}
+        },
+        {
+          "attributeName": "retries",
+          "displayName": "Retries",
+          "description": "Number of retries to retry an api call if the previous one was unsuccessful. Same for all API calls in the pipeline.",
+          "type": {
+            "objectType": "number"
+          },
+          "required": false,
+          "isBasicAttribute": false,
+          "isOverwriteable": true,
+          "value": 0
+        },
+        {
+          "attributeName": "initial_retry_delay",
+          "displayName": "Initial retry delay",
+          "description": "Amount of time for the initial delay between API calls retries. Every iteration the delay will grow by double the amount.",
+          "type": {
+            "objectType": "number"
+          },
+          "required": false,
+          "isBasicAttribute": false,
+          "isOverwriteable": true,
+          "value": 1
+        }
+      ]
+    },
+    "required": true,
+    "isBasicAttribute": true,
+    "isOverwriteable": true
+  },
+  {
+    "attributeName": "container_name",
+    "displayName": "Container name",
+    "description": "Name of the storage container",
+    "type": {
+      "objectType": "string"
+    },
+    "required": true,
+    "isBasicAttribute": true,
+    "isOverwriteable": true
+  }
+]

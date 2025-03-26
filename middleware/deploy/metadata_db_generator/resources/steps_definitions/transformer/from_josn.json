@@ -1,0 +1,60 @@
+{
+  "title": "From json parameters",
+  "componentCategory": "transformer",
+  "componentType": "from_json_transformer",
+  "difwStepCategory": "transformation",
+  "documentationLink": "https://github.com/merck-gen/mf-difw-core/blob/{branch}/documentation/configuration/steps/spark/transformers/from_json_transformer.md",
+  "difwStepType": "from_json_transformer",
+  "displayName": "From Json",
+  "flowValidations": "#extendByFile:common/process_flow_validations_transformers.json",
+  "attributes": [
+    {
+      "attributeName": "json_column_name",
+      "displayName": "JSON column name",
+      "description": "Defines name of the column containing json data",
+      "type": {
+        "objectType": "string"
+      },
+      "isBasicAttribute": true,
+      "required": true,
+      "value": "_",
+      "isOverwriteable": true
+    },
+    {
+      "attributeName": "json_schema",
+      "displayName": "JSON schema",
+      "description": "Defines schema of the json",
+      "type": {
+        "objectType": "string"
+      },
+      "required": true,
+      "isOverwriteable": true,
+      "value": "",
+      "isBasicAttribute": true
+    },
+    {
+      "attributeName": "output_column_name",
+      "displayName": "Output column name",
+      "description": "Defines a new name of the transformed column",
+      "type": {
+        "objectType": "string"
+      },
+      "required": false,
+      "isOverwriteable": true,
+      "value": "",
+      "isBasicAttribute": false
+    },
+    {
+      "attributeName": "comment",
+      "displayName": "Comment",
+      "description": "Defines column comment",
+      "type": {
+        "objectType": "string"
+      },
+      "required": false,
+      "isOverwriteable": true,
+      "value": "",
+      "isBasicAttribute": false
+    }
+  ]
+}

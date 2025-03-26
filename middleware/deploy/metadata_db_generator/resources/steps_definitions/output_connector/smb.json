@@ -1,0 +1,177 @@
+{
+  "title": "Export to SMB parameters",
+  "componentCategory": "output_connector",
+  "componentType": "samba",
+  "difwStepCategory": "process",
+  "difwStepType": "exp_to_smb",
+  "documentationLink": "https://github.com/merck-gen/mf-difw-core/blob/{branch}/documentation/configuration/steps/common/processors/exp_to_smb.md",
+  "flowValidations": "#extendByFile:common/process_flow_validations_exports_out_connectors.json",
+  "displayName": "Samba",
+  "attributes": [
+    {
+      "attributeName": "smb_host",
+      "displayName": "SMB host",
+      "description": "The NetBIOS machine name of the remote server",
+      "type": {
+        "objectType": "string"
+      },
+      "required": true,
+      "isOverwriteable": false,
+      "value": "",
+      "isBasicAttribute": true
+    },
+    {
+      "attributeName": "smb_share",
+      "displayName": "SMB share",
+      "description": "The name of the share on the server",
+      "type": {
+        "objectType": "string"
+      },
+      "required": true,
+      "isOverwriteable": false,
+      "value": "",
+      "isBasicAttribute": true
+    },
+    {
+      "attributeName": "target_path",
+      "displayName": "Target path",
+      "description": "Path relative to the share",
+      "type": {
+        "objectType": "string"
+      },
+      "required": true,
+      "isOverwriteable": true,
+      "value": "",
+      "isBasicAttribute": true
+    },
+    {
+      "attributeName": "smb_user",
+      "displayName": "SMB user",
+      "description": "Username",
+      "type": {
+        "objectType": "string"
+      },
+      "required": true,
+      "isOverwriteable": false,
+      "isBasicAttribute": true,
+      "value": ""
+    },
+    {
+      "attributeName": "smb_password",
+      "displayName": "SMB password",
+      "description": "Password",
+      "type": {
+        "objectType": "secret"
+      },
+      "required": true,
+      "isOverwriteable": false,
+      "isBasicAttribute": true,
+      "value": {}
+    },
+    {
+      "attributeName": "smb_domain",
+      "displayName": "SMB domain",
+      "description": "The network domain",
+      "type": {
+        "objectType": "string"
+      },
+      "required": false,
+      "isOverwriteable": false,
+      "isBasicAttribute": false,
+      "value": "merck.com"
+    },
+    {
+      "attributeName": "smb_port",
+      "displayName": "SMB port",
+      "description": "SMB port",
+      "type": {
+        "objectType": "number",
+        "scale": 0,
+        "precision": 6
+      },
+      "required": true,
+      "isOverwriteable": false,
+      "isBasicAttribute": false,
+      "value": 139
+    },
+    {
+      "attributeName": "smb_is_direct_tcp",
+      "displayName": "Is direct TCP",
+      "description": "False = NetBIOS over TCP/IP (default), True = Direct SMB over TCP/IP",
+      "type": {
+        "objectType": "boolean"
+      },
+      "required": false,
+      "isOverwriteable": false,
+      "isBasicAttribute": false,
+      "value": false
+    },
+    {
+      "attributeName": "smb_use_ntlm_v2",
+      "displayName": "Use ntlm v2",
+      "description": "NTLMv2 authentication is used. If False, NTLMv1 is used",
+      "type": {
+        "objectType": "boolean"
+      },
+      "required": false,
+      "isOverwriteable": false,
+      "isBasicAttribute": false,
+      "value": true
+    },
+    {
+      "attributeName": "smb_sign_options",
+      "displayName": "Sign options",
+      "description": "Sign SMB messages. 0 = never, 1 = if supported, 2 = if required",
+      "type": {
+        "objectType": "options",
+        "values": [
+          {
+              "value": "0",
+              "displayValue": "Never"
+          },
+          {
+              "value": "1",
+              "displayValue": "Supported"
+          },
+          {
+              "value": "2",
+              "displayValue": "If required"
+          }
+        ]
+      },
+      "required": false,
+      "isOverwriteable": false,
+      "isBasicAttribute": false,
+      "value": "0"
+    },
+    {
+      "attributeName": "smb_sock_family",
+      "displayName": "Socket family type: 2 = IP address family",
+      "description": "SMB port",
+      "type": {
+        "objectType": "number",
+        "scale": 0,
+        "precision": 2
+      },
+      "required": false,
+      "isOverwriteable": false,
+      "isBasicAttribute": false,
+      "value": 2
+    },
+    {
+      "attributeName": "smb_timeout",
+      "displayName": "Connection timeout",
+      "description": "Connection timeout",
+      "type": {
+        "objectType": "number",
+        "scale": 0,
+        "precision": 6
+      },
+      "required": false,
+      "isOverwriteable": false,
+      "isBasicAttribute": false,
+      "value": 60
+    },
+    "#extendByFile:common/export_processor_common_attributes.json"
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "attributeName": "blob_storage",
+  "displayName": "Blob storage options",
+  "description": "Options for the Azure Blob storage source",
+  "type": {
+    "objectType": "object",
+    "isInUse": false,
+    "attributes": [
+      {
+        "attributeName": "account_name",
+        "displayName": "Account name",
+        "description": "Name of the storage account",
+        "type": {
+          "objectType": "string"
+        },
+        "isOverwriteable": true,
+        "required": true
+      },
+      {
+        "attributeName": "container_name",
+        "displayName": "Container name",
+        "description": "Name of the storage container.",
+        "type": {
+          "objectType": "string"
+        },
+        "required": true,
+        "isOverwriteable": true
+      },
+      {
+        "attributeName": "account_key",
+        "displayName": "Account key",
+        "description": "Shared account key which provides the access to a Blob storage. Not needed if sas_token is defined.",
+        "type": {
+          "objectType": "secret"
+        },
+        "required": false,
+        "isOverwriteable": true
+      },
+      {
+        "attributeName": "sas_token",
+        "displayName": "SAS Token",
+        "description": "Shared access signature token which provides the access to a Blob storage. Not needed if account_key is defined.",
+        "type": {
+          "objectType": "secret"
+        },
+        "required": false,
+        "isOverwriteable": true
+      },
+      {
+        "attributeName": "source_path",
+        "displayName": "Source path",
+        "description": "Storage path is the path to the blob or the blob prefix",
+        "type": {
+          "objectType": "string"
+        },
+        "required": false,
+        "isOverwriteable": true
+      },
+      {
+        "attributeName": "verify",
+        "displayName": "Verify",
+        "description": "Enables or disables SSL verification. Applied only if file_regex is defined and blobs are filtered.",
+        "type": {
+          "objectType": "boolean"
+        },
+        "required": false,
+        "isOverwriteable": true,
+        "value": false
+      }
+    ]
+  }
+}

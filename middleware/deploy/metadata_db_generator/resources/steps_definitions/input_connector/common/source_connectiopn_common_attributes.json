@@ -1,0 +1,91 @@
+[
+  {
+    "attributeName": "s3_bucket",
+    "displayName": "Target S3 bucket",
+    "description": "Target S3 bucket where data will be stored",
+    "type": {
+      "objectType": "string",
+      "s3Browsing": {
+          "subType": "bucket",
+          "relatedS3BrowserAttrName": "s3_layer_path"
+      }
+    },
+    "isBasicAttribute": false,
+    "isOverwriteable": true,
+    "required": false,
+    "value": ""
+  },
+  {
+    "attributeName": "s3_layer_path",
+    "displayName": "Target s3 path",
+    "description": "Target S3 path in S3 source bucket where data will be stored",
+    "type": {
+      "objectType": "string",
+      "s3Browsing": {
+          "subType": "key",
+          "relatedS3BrowserAttrName": "s3_bucket"
+      }
+    },
+    "isBasicAttribute": false,
+    "isOverwriteable": true,
+    "required": false,
+    "value": ""
+  },
+  {
+    "attributeName": "static_file_location",
+    "displayName": "Static file location",
+    "description": "If value is true, static partitions are eliminated from the target path",
+    "type": {
+      "objectType": "boolean"
+    },
+    "isBasicAttribute": false,
+    "isOverwriteable": true,
+    "required": false,
+    "value": false
+  },
+  {
+    "attributeName": "compression",
+    "displayName": "Compression",
+    "description": "Compresses files before upload to S3. All files will have a `.gz` suffix.",
+    "type": {
+      "objectType": "object",
+      "attributes": [
+        {
+          "attributeName": "type",
+          "displayName": "Compression type",
+          "description": "Compresses files before upload to S3. All files will have a `.gz` suffix.",
+          "type": {
+            "objectType": "options",
+            "values": [
+              {
+                "value": "",
+                "displayValue": "No compression"
+              },
+              {
+                "value": "gzip",
+                "displayValue": "gzip"
+              }
+            ]
+          },
+          "value": "",
+          "isOverwriteable": true,
+          "required": false
+        },
+        {
+          "attributeName": "level",
+          "displayName": "Level",
+          "type": {
+            "objectType": "number",
+            "scale": 0,
+            "precision": 2
+          },
+          "value": null,
+          "required": false
+        }
+      ]
+    },
+    "isBasicAttribute": false,
+    "isOverwriteable": true,
+    "required": false
+  }
+]

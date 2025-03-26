@@ -1,0 +1,117 @@
+{
+  "title": "Source delta parameters",
+  "componentCategory": "input_connector",
+  "componentType": "delta",
+  "documentationLink": "https://github.com/merck-gen/mf-difw-core/blob/{branch}/documentation/configuration/steps/spark/loaders/delta.md",
+  "difwStepCategory": "input",
+  "difwStepType": "delta",
+  "displayName": "Delta",
+  "flowValidations": "#extendByFile:common/process_flow_validations_loaders_in_connectors.json",
+  "componentProperties": {
+    "conditionType": "delta",
+    "sparkConfig": {
+      "spark.sql.extensions": "io.delta.sql.DeltaSparkSessionExtension",
+      "spark.sql.catalog.spark_catalog": "org.apache.spark.sql.delta.catalog.DeltaCatalog"
+    }
+  },
+  "platforms": {
+    "glue": {
+      "supportedJobTypes": [
+        "spark"
+      ]
+    },
+    "databricks": {
+      "supportedJobTypes": [
+        "spark_databricks"
+      ]
+    }
+  },
+  "additionalJarDependencies": [
+    {
+      "groupId": "io.delta",
+      "artifactId": "delta-core_2.12",
+      "version": "2.2.0"
+    },
+    {
+      "groupId": "io.delta",
+      "artifactId": "delta-storage",
+      "version": "2.2.0"
+    }
+  ],
+  "attributes": [
+    {
+      "attributeName": "mode",
+      "displayName": "Mode",
+      "description": "Path reconstructs the `delta.path` from s3_bucket, s3_layer_path and table_name. Catalog reads data from the glue catalog (important note: spark cannot read data from manifest tables). And query loads whatever is in the query.",
+      "type": {
+        "objectType": "options",
+        "values": [
+          {
+            "value": "path",
+            "displayValue": "Path"
+          },
+          {
+            "value": "catalog",
+            "displayValue": "Catalog"
+          },
+          {
+            "value": "query",
+            "displayValue": "Query"
+          }
+        ]
+      },
+      "required": true,
+      "isBasicAttribute": true,
+      "isOverwriteable": true,
+      "value": "catalog"
+    },
+    {
+      "attributeName": "database_name",
+      "displayName": "Database name",
+      "description": "Glue database name",
+      "type": {
+        "objectType": "string"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": "{{glue_databases.latest_db.database_name}}"
+    },
+    {
+      "attributeName": "table_name",
+      "displayName": "Table name",
+      "description": "Override of the table name from table section",
+      "type": {
+        "objectType": "string"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": "{{table_name}}"
+    },
+    {
+      "attributeName": "query",
+      "displayName": "Query",
+      "description": "Delta spark sql query to be passed into the loader. If a sql query is defined, loader will use it like so `SELECT * FROM (query)`, filters and incremental condition are still applied",
+      "type": {
+        "objectType": "string"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": ""
+    },
+    {
+      "attributeName": "catalog_name",
+      "displayName": "Catalog name",
+      "required": false,
+      "isBasicAttribute": false,
+      "description": "Defines name of a catalog. This property can be used only with databricks platform.",
+      "type": {
+        "objectType": "string"
+      }
+    },
+    "#extendByFile:../common/common_filter_condition_attribute.json",
+    "#extendByFile:../data_type/common/source_blob_storage_attributes.json"
+  ]
+}

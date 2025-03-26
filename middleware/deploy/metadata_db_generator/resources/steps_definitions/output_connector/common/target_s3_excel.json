@@ -1,0 +1,143 @@
+{
+  "title": "Excel to S3 parameters",
+  "componentCategory": "target",
+  "componentType": "excel",
+  "displayName": "Excel to S3",
+  "attributes": [
+    {
+      "attributeName": "write_excel_options",
+      "displayName": "To excel method options",
+      "description": "Other options for pandas to_excel method.<br/>For complete list of options see https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.to_excel.html",
+      "type": {
+        "objectType": "dictionary"
+      },
+      "isOverwriteable": true,
+      "value": {},
+      "required": false,
+      "isBasicAttribute": false
+    },
+    {
+      "attributeName": "s3_bucket",
+      "displayName": "Target S3 bucket",
+      "description": "Target S3 bucket where data will be stored",
+      "type": {
+        "objectType": "string",
+        "s3Browsing": {
+          "subType": "bucket",
+          "relatedS3BrowserAttrName": "s3_layer_path"
+        }
+      },
+      "required": true,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": ""
+    },
+    {
+      "attributeName": "s3_layer_path",
+      "displayName": "Target s3 path",
+      "description": "Target S3 path in S3 target bucket where data will be stored",
+      "type": {
+        "objectType": "string",
+        "s3Browsing": {
+          "subType": "key",
+          "relatedS3BrowserAttrName": "s3_bucket"
+        }
+      },
+      "required": true,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": ""
+    },
+    {
+      "attributeName": "static_file_location",
+      "displayName": "Static file location",
+      "description": "Set this value to true (to eliminate static partitions from the target path)",
+      "type": {
+        "objectType": "boolean"
+      },
+      "required": true,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": false
+    },
+    {
+      "attributeName": "dynamic_partitions",
+      "displayName": "Dynamic partitions",
+      "description": "Overrides dynamic_partitions configured at Table config",
+      "type": {
+        "objectType": "list",
+        "elementsType": {
+          "objectType": "string"
+        }
+      },
+      "isOverwriteable": true,
+      "value": [],
+      "required": false,
+      "isBasicAttribute": false
+    },
+    {
+      "attributeName": "date_format",
+      "displayName": "Date format",
+      "description": "Format string for dates written into Excel files (e.g. ‘YYYY-MM-DD’).",
+      "type": {
+        "objectType": "string"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": ""
+    },
+    {
+      "attributeName": "datetime_format",
+      "displayName": "Datetime format",
+      "description": "Format string for datetime objects written into Excel files. (e.g. ‘YYYY-MM-DD HH:MM:SS’).",
+      "type": {
+        "objectType": "string"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": ""
+    },
+    {
+      "attributeName": "json_string_options",
+      "displayName": "JSON string options",
+      "description": "Options to control converting to JSON string. Accepts the same options as the JSON datasource.",
+      "type": {
+        "objectType": "dictionary"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": {}
+    },
+    {
+      "attributeName": "delay_after_write",
+      "displayName": "Delay after write",
+      "description": "Seconds to sleep after write. Obsolete parameter",
+      "type": {
+        "objectType": "number",
+        "scale": 0,
+        "precision": 10
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": 0
+    },
+    {
+      "attributeName": "file_name",
+      "displayName": "File name",
+      "description": "Name of the output xlsx-file",
+      "type": {
+        "objectType": "string"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": "output"
+    }
+  ]
+}
+
+

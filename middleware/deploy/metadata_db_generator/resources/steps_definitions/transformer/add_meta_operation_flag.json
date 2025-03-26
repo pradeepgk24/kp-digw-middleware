@@ -1,0 +1,12 @@
+{
+  "title": "Add add_meta__operation_flag parameters",
+  "componentCategory": "transformer",
+  "componentType": "add_meta__operation_flag",
+  "difwStepCategory": "transformation",
+  "documentationLink": "https://github.com/merck-gen/mf-difw-core/blob/{branch}/documentation/configuration/steps/spark/transformers/add_meta__operation_flag.md",
+  "difwStepType": "add_meta__operation_flag",
+  "displayName": "Add column add_meta__operation_flag",
+  "flowValidations": "#extendByFile:common/process_flow_validations_transformers.json",
+  "attributes": [
+  ]
+}

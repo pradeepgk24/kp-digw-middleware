@@ -1,0 +1,100 @@
+{
+  "title": "Source data type text parameters",
+  "componentCategory": "data_type",
+  "componentType": "text",
+  "documentationLink": "https://github.com/merck-gen/mf-difw-core/blob/{branch}/documentation/configuration/steps/spark/loaders/text.md",
+  "difwStepCategory": "input",
+  "difwStepType": "text",
+  "displayName": "Text",
+  "componentProperties": {
+    "conditionType": "spark_sql"
+  },
+  "platforms": {
+    "glue": {
+      "supportedJobTypes": [
+        "spark"
+      ]
+    },
+    "databricks": {
+      "supportedJobTypes": [
+        "python_databricks"
+      ]
+    }
+  },
+  "flowValidations": "#extendByFile:common/process_flow_validations_data_type.json",
+  "attributes": [
+    {
+      "attributeName": "spark_read_text_options",
+      "displayName": "Spark read text options",
+      "description": "Options of Spark text reader in key-value format. For complete list of Spark text reader options see https://spark.apache.org/docs/3.1.1/api/python/_modules/pyspark/sql/readwriter.html#DataFrameReader.text as documentation is missing for this class. Documentation was added for spark 3.3, approach with caution https://spark.apache.org/docs/3.3.0/api/python/reference/pyspark.sql/api/pyspark.sql.DataFrameReader.text.html#pyspark.sql.DataFrameReader.text",
+      "type": {
+        "objectType": "dictionary"
+      },
+      "required": false,
+      "isOverwriteable": true,
+      "value": {},
+      "isBasicAttribute": true
+    },
+    {
+      "attributeName": "add_meta_input_file_name_column",
+      "displayName": "Add meta input file name column",
+      "description": "Flag indicates if meta input file name columns will be added or not",
+      "type": {
+        "objectType": "boolean"
+      },
+      "required": false,
+      "isOverwriteable": true,
+      "value": false,
+      "isBasicAttribute": true
+    },
+    {
+      "attributeName": "parse_fixed_width",
+      "displayName": "Parse fixed width",
+      "type": {
+        "objectType": "object",
+        "attributes": [
+          {
+            "attributeName": "column_name",
+            "displayName": "Column name",
+            "type": {
+              "objectType": "object",
+              "attributes": [],
+              "dynamicPattern": {
+                "attributes": [
+                  {
+                    "attributeName": "start",
+                    "displayName": "Start",
+                    "type": {
+                      "objectType": "number",
+                      "scale": 0,
+                      "precision": 6
+                    },
+                    "isOverwriteable": true,
+                    "value": ""
+                  },
+                  {
+                    "attributeName": "length",
+                    "displayName": "Length",
+                    "type": {
+                      "objectType": "number",
+                      "scale": 0,
+                      "precision": 6
+                    },
+                    "isOverwriteable": true,
+                    "value": ""
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "required": false,
+      "isBasicAttribute": true,
+      "isOverwriteable": true
+    },
+    "#extendByFile:common/source_data_types_common_attributes.json",
+    "#extendByFile:common/source_data_types_repartition_attributes.json",
+    "#extendByFile:common/common_blob_storage_connection_data_types.json"
+  ]
+}

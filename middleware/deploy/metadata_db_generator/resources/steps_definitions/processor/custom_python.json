@@ -1,0 +1,121 @@
+{
+  "title": "Custom python processor",
+  "componentCategory": "processor",
+  "componentType": "custom_python_processor",
+  "difwStepCategory": "process",
+  "documentationLink": "https://github.com/merck-gen/mf-difw-core/blob/{branch}/documentation/configuration/steps/python/processors/custom_python_processor.md",
+  "difwStepType": "custom_python_processor",
+  "displayName": "Custom Python processor",
+  "flowValidations": "#extendByFile:common/process_flow_validations_processors.json",
+  "platforms": {
+    "glue": {
+      "supportedJobTypes": [
+        "python"
+      ]
+    },
+    "databricks": {
+      "supportedJobTypes": [
+        "python_databricks",
+        "spark_databricks"
+      ]
+    }
+  },
+  "attributes": [
+    {
+      "attributeName": "custom_python_code",
+      "displayName": "Custom python code",
+      "description": "Write your custom python processor here",
+      "type": {
+        "objectType": "file",
+        "bucketType": "resource_bucket",
+        "s3Location": "files-from-ui/{{unique-hash-id}}/custom_code/custom_python_processor",
+        "fileName": "custom_python_processor.py",
+        "fileType": "python",
+        "fromLocal": false,
+        "fromText": true
+      },
+      "isBasicAttribute": true,
+      "isOverwriteable": false,
+      "value": "Iw0KIyBQVVQgWU9VUiBDVVNUT00gTElCUkFSSUVTIElNUE9SVFMgSEVSRQ0KIw0KDQoNCiMgdGhpcyBpcyB0aGUgb25seSBtYW5kYXRvcnkgZnVuY3Rpb24geW91IGhhdmUgdG8gaGF2ZSBpbiB5b3VyIGN1c3RvbSBjb2RlDQojIHRoZSBmdWxsIGludGVyZmFjZSBpczoNCiMgZGVmIG1haW4oam9iX2NvbmZpZ3VyYXRpb24sIHRhYmxlX2NvbmZpZ3VyYXRpb24sDQojICAgICAgICAgIGN1c3RvbV9wYXJhbWV0ZXJzLCBjb21wb25lbnRfaW5zdGFuY2UsIGxvZ2dlcik6DQojIGFsbCBwYXJhbWV0ZXJzIGFyZSBwYXNzZWQgYXMgbmFtZWQgYXJndW1lbnRzLCBzbyBpZiB5b3VyIGN1c3RvbSBjb21wb25lbnQgZG9lcyBub3QgbmVlZCBhbGwNCiMgdGhlIGFyZ3VtZW50cywganVzdCByZW1vdmUgdGhlbSBhbmQgdXNlICoqa3dhcmdzIGF0IHRoZSBlbmQNCmRlZiBtYWluKGpvYl9jb25maWd1cmF0aW9uLCB0YWJsZV9jb25maWd1cmF0aW9uLCBjdXN0b21fcGFyYW1ldGVycywgY29tcG9uZW50X2luc3RhbmNlLCBsb2dnZXIsICoqa3dhcmdzKToNCiAgICBsb2dnZXIuaW5mbygnU3RhcnQgY3VzdG9tIHB5dGhvbiBwcm9jZXNzb3InKQ0KICAgIGxvZ2dlci5pbmZvKHJlcHIoam9iX2NvbmZpZ3VyYXRpb24pKQ0KICAgIGxvZ2dlci5pbmZvKHJlcHIodGFibGVfY29uZmlndXJhdGlvbikpDQogICAgbG9nZ2VyLmluZm8ocmVwcihjdXN0b21fcGFyYW1ldGVycykpDQogICAgbG9nZ2VyLmluZm8oJ0luZ2VzdCBzdHJhdGVneSBmb3IgdGhpcyBsb2FkIGlzOicgKyByZXByKGNvbXBvbmVudF9pbnN0YW5jZS5ydW5fbWV0YS5pbmdlc3Rfc3RyYXRlZ3kpKQ0KICAgICMgPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0NCiAgICAjIFBBU1MgWU9VUiBDVVNUT00gQ09ERSBIRVJFDQogICAgIyA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PQ0KDQoNCg=="
+    },
+    {
+      "attributeName": "custom_parameters",
+      "displayName": "Custom parameters",
+      "description": "User specific options for custom code",
+      "isBasicAttribute": true,
+      "type": {
+        "objectType": "object",
+        "dynamicInputStructure": true,
+        "attributes": []
+      }
+    },
+    {
+      "attributeName": "additional_python_packages",
+      "displayName": "Additional python packages",
+      "description": "These packages will be deployed with the dataset the same way as core DIFW dependencies",
+      "type": {
+        "objectType": "list",
+        "elementsType": {
+          "objectType": "object",
+          "attributes": [
+            {
+              "type": {
+                "objectType": "string"
+              },
+              "attributeName": "library_name",
+              "displayName": "Library name",
+              "value": "",
+              "isOverwriteable": false
+            },
+            {
+              "type": {
+                "objectType": "string"
+              },
+              "attributeName": "library_version",
+              "displayName": "Library version",
+              "value": "",
+              "isOverwriteable": false
+            }
+          ]
+        }
+      },
+      "isBasicAttribute": false,
+      "isOverwriteable": false,
+      "value": []
+    },
+    {
+      "attributeName": "runtime_python_packages",
+      "displayName": "Runtime python packages",
+      "description": "These packages will be downloaded from index and installed during every job run",
+      "type": {
+        "objectType": "list",
+        "elementsType": {
+          "objectType": "object",
+          "attributes": [
+            {
+              "type": {
+                "objectType": "string"
+              },
+              "attributeName": "library_name",
+              "displayName": "Library name",
+              "value": "",
+              "isOverwriteable": false
+            },
+            {
+              "type": {
+                "objectType": "string"
+              },
+              "attributeName": "library_version",
+              "displayName": "Library version",
+              "value": "",
+              "isOverwriteable": false
+            }
+          ]
+        }
+      },
+      "isBasicAttribute": false,
+      "isOverwriteable": false,
+      "value": []
+    }
+  ]
+}

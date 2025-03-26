@@ -1,0 +1,161 @@
+{
+  "title": "Spark sql data quality check parameters",
+  "componentCategory": "processor",
+  "componentType": "spark_sql_data_quality_check",
+  "difwStepCategory": "process",
+  "difwStepType": "spark_sql_data_quality_check",
+  "displayName": "Spark sql data test",
+  "flowValidations": "#extendByFile:common/process_flow_validations_processors.json",
+  "documentationLink": "https://github.com/merck-gen/mf-difw-core/blob/{branch}/documentation/configuration/steps/spark/processors/spark_sql_data_quality_check.md",
+  "platforms": {
+    "glue": {
+      "supportedJobTypes": [
+        "spark"
+      ]
+    },
+    "databricks": {
+      "supportedJobTypes": [
+        "spark_databricks"
+      ]
+    }
+  },
+  "attributes": [
+    {
+      "attributeName": "query",
+      "displayName": "Query",
+      "description": "Spark SQL query. Populating one of the `Query` or `Named queries` is mandatory.",
+      "type": {
+        "objectType": "string"
+      },
+      "required": false,
+      "isBasicAttribute": true,
+      "isOverwriteable": true,
+      "value": ""
+    },
+    {
+      "attributeName": "database",
+      "displayName": "Database name",
+      "description": "Name of the database to be used (if not included in the query)",
+      "type": {
+        "objectType": "string"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": ""
+    },
+    {
+      "attributeName": "log_limit",
+      "displayName": "Log limit",
+      "description": "If the test fails, this variable controls how many rows are displayed from the dataframe",
+      "type": {
+        "objectType": "number",
+        "scale": 0,
+        "precision": 5
+      },
+      "required": true,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": 100
+    },
+    {
+      "attributeName": "named_queries",
+      "displayName": "Named queries",
+      "description": "Named queries are sorted by their names and run in that order. Populating one of the `Query` or `Named queries` is mandatory.",
+      "type": {
+        "objectType": "object",
+        "attributes": [
+          {
+            "attributeName": "query_name",
+            "displayName": "Query name",
+            "type": {
+              "objectType": "object",
+              "attributes": [],
+              "dynamicPattern": {
+                "attributes": [
+                  {
+                    "attributeName": "query",
+                    "displayName": "Query",
+                    "type": {
+                      "objectType": "string"
+                    },
+                    "isOverwriteable": true,
+                    "value": ""
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "required": false,
+      "isBasicAttribute": true,
+      "isOverwriteable": true
+    },
+    {
+      "attributeName": "dataframe_view",
+      "displayName": "Dataframe view",
+      "description": "Section for the temporary dataframe view, if not set then the view is not created",
+      "required": false,
+      "type": {
+        "objectType": "object",
+        "attributes": [
+          {
+            "attributeName": "view_name",
+            "displayName": "View name",
+            "description": "Name of the temporary dataframe view",
+            "required": true,
+            "type": {
+              "objectType": "string"
+            },
+            "isOverwriteable": true,
+            "value": ""
+          },
+          {
+            "attributeName": "s3_bucket",
+            "displayName": "S3 bucket",
+            "description": "Table s3 bucket",
+            "required": false,
+            "type": {
+              "objectType": "string",
+              "s3Browsing": {
+                "subType": "bucket",
+                "relatedS3BrowserAttrName": "s3_layer_path"
+              }
+            },
+            "isOverwriteable": true,
+            "value": "{{data_bucket}}"
+          },
+          {
+            "attributeName": "s3_layer_path",
+            "displayName": "S3 path",
+            "description": "Table s3 path",
+            "required": false,
+            "type": {
+              "objectType": "string",
+              "s3Browsing": {
+                "subType": "key",
+                "relatedS3BrowserAttrName": "s3_bucket"
+              }
+            },
+            "isOverwriteable": true,
+            "value": "{{s3_paths.c_path}}"
+          },
+          {
+            "attributeName": "static_file_location",
+            "displayName": "Static file location",
+            "description": "Use false, if a table is supposed to be partitioned using static_partitions parameter",
+            "required": false,
+            "type": {
+              "objectType": "boolean"
+            },
+            "isOverwriteable": true,
+            "value": false
+          }
+        ]
+      },
+      "isOverwriteable": true,
+      "isBasicAttribute": true
+    }
+  ]
+}

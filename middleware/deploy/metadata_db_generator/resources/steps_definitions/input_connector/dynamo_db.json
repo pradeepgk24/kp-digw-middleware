@@ -1,0 +1,104 @@
+{
+  "title": "Source dynamo DB parameters",
+  "displayName": "Dynamo DB",
+  "componentCategory": "input_connector",
+  "componentType": "dynamo_db",
+  "documentationLink": "https://github.com/merck-gen/mf-difw-core/blob/{branch}/documentation/configuration/steps/common/processors/acq_from_dynamo_db.md",
+  "difwStepCategory": "process",
+  "difwStepType": "acq_from_dynamo_db",
+  "componentProperties": {
+    "conditionType": "parti_ql"
+  },
+  "flowValidations": "#extendByFile:common/process_flow_validations_json_based_in_connectors.json",
+  "platforms": {
+    "glue": {
+      "supportedJobTypes": [
+        "spark"
+      ]
+    },
+    "databricks": {
+      "supportedJobTypes": [
+        "spark_databricks"
+      ]
+    }
+  },
+  "attributes": [
+    {
+      "attributeName": "load_table_options",
+      "displayName": "Load table options",
+      "description": "Options boto3 load methods. The loader use 2 boto3 methods. _Scan_ https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/dynamodb.html#DynamoDB.Table.scan in case of full load and https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/dynamodb.html#DynamoDB.Client.execute_statement in case of incremental load or the load with filter condition )",
+      "type": {
+        "objectType": "dictionary"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": {}
+    },
+    {
+      "attributeName": "filter_condition",
+      "displayName": "Filter condition",
+      "description": "A SQL expression defining a filter condition used in the WHERE clause. This condition is apply for each load no matter if it is full or incremental load",
+      "type": {
+        "objectType": "string"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": ""
+    },
+    {
+      "attributeName": "region_name",
+      "displayName": "Region name",
+      "description": "Region in which to access the DynamoDB",
+      "type": {
+        "objectType": "string"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": "us-east-1"
+    },
+    {
+      "attributeName": "assumed_role",
+      "displayName": "Assumed role",
+      "description": "Sets an IAM role to assume. This allows for access to a DynamoDB in a different account than the Spark cluster. Defaults to the standard role configuration",
+      "type": {
+        "objectType": "string"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": ""
+    },
+    {
+      "attributeName": "assumed_role_session_duration",
+      "displayName": "Assumed role session duration",
+      "description": "How long the boto3 session will be active (in seconds), if assume role option is chosen. It can be set to max of assumed role session duration setup in AWS account",
+      "type": {
+        "objectType": "number",
+        "scale": 0,
+        "precision": 5
+      },
+      "required": true,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": 3600
+    },
+    {
+      "attributeName": "chunk_size",
+      "displayName": "Chunk size",
+      "description": "Chunks size. One chunk = count of records (size of local dict) you are loading from boto3 to local dict and later transfer to DynamoDB",
+      "type": {
+        "objectType": "number",
+        "scale": 0,
+        "precision": 10
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": 50000
+    },
+    "#extendByFile:common/source_connection_common_attributes.json"
+  ]
+}

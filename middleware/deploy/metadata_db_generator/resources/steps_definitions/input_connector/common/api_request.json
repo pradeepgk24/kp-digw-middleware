@@ -1,0 +1,105 @@
+{
+  "objectType": "object",
+  "attributes": [
+    {
+      "attributeName": "url",
+      "displayName": "URL",
+      "description": "Source server URL for get request",
+      "type": {
+        "objectType": "string"
+      },
+      "required": false,
+      "isBasicAttribute": true,
+      "isOverwriteable": true,
+      "value": ""
+    },
+    {
+      "attributeName": "method",
+      "displayName": "Method",
+      "description": "Type of the HTTP request",
+      "isOverwriteable": true,
+      "value": "",
+      "required": false,
+      "type": {
+        "objectType": "string"
+      }
+    },
+    {
+      "attributeName": "params",
+      "displayName": "Parameters",
+      "required": false,
+      "isOverwriteable": true,
+      "value": {},
+      "description": "Passes parameters key/value pairs in the url after a question mark. http://bin.org/get?key=val , https://requests.readthedocs.io/en/latest/user/quickstart/?highlight=passing-parameters-in-urls#passing-parameters-in-urls.",
+      "type": {
+        "objectType": "dictionary"
+      }
+    },
+    {
+      "attributeName": "headers",
+      "displayName": "Headers",
+      "required": false,
+      "isOverwriteable": true,
+      "value": {},
+      "description": "Defines a http header to a request, https://requests.readthedocs.io/en/latest/user/quickstart/?highlight=custom-headers#custom-headers.",
+      "type": {
+        "objectType": "dictionary"
+      }
+    },
+    {
+      "attributeName": "proxies",
+      "displayName": "Proxies",
+      "required": false,
+      "value": {},
+      "description": "Defines a proxies, https://requests.readthedocs.io/en/latest/user/advanced/?highlight=proxies#proxies.",
+      "type": {
+        "objectType": "dictionary"
+      },
+      "isOverwriteable": true
+    },
+    {
+      "attributeName": "data",
+      "displayName": "Data",
+      "required": false,
+      "isOverwriteable": true,
+      "value": {},
+      "description": "Body of the request, which is used in case of POST request. Data in the payload are sent with \"Content-Type\": \"application/x-www-form-urlencoded header\".",
+      "type": {
+        "objectType": "dictionary"
+      }
+    },
+    {
+      "attributeName": "json",
+      "displayName": "Json",
+      "required": false,
+      "isOverwriteable": true,
+      "value": {},
+      "description": "Body of the request, which is used in case of POST request. Data from the dictionary are converted to JSON string and are sent with \"Content-Type\": \"application/json\" header.",
+      "type": {
+        "objectType": "dictionary"
+      }
+    },
+    {
+      "attributeName": "timeout",
+      "displayName": "Timeout",
+      "required": false,
+      "isOverwriteable": true,
+      "value": null,
+      "description": "Defines a request timeout",
+      "type": {
+        "objectType": "number"
+      }
+    },
+    {
+      "attributeName": "verify",
+      "displayName": "Verify",
+      "required": false,
+      "isOverwriteable": true,
+      "description": "SSL verification",
+      "type": {
+        "objectType": "boolean"
+      },
+      "value": false
+    }
+  ]
+}

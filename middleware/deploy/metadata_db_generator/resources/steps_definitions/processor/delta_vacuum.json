@@ -1,0 +1,116 @@
+{
+  "title": "Delta vacuum parameters",
+  "componentCategory": "processor",
+  "componentType": "delta_vacuum",
+  "difwStepCategory": "process",
+  "difwStepType": "delta_vacuum",
+  "displayName": "Delta vacuum",
+  "documentationLink": "https://github.com/merck-gen/mf-difw-core/blob/{branch}/documentation/configuration/steps/spark/processors/delta_vacuum.md",
+  "flowValidations": "#extendByFile:common/process_flow_validations_processors.json",
+  "platforms": {
+    "glue": {
+      "supportedJobTypes": [
+        "spark"
+      ]
+    },
+    "databricks": {
+      "supportedJobTypes": [
+        "spark_databricks"
+      ]
+    }
+  },
+  "attributes": [
+    {
+      "attributeName": "retention_threshold",
+      "displayName": "Retention threshold",
+      "description": "How old data should be preserved, in hours. If this parameter is not provided, then the command is ran without it, that means the `delta.deletedFileRetentionDuration` from table properties is used.",
+      "type": {
+        "objectType": "number",
+        "scale": 0,
+        "precision": 6
+      },
+      "required": false,
+      "isOverwriteable": true,
+      "value": null,
+      "isBasicAttribute": true
+    },
+    {
+      "attributeName": "s3_bucket",
+      "displayName": "S3 bucket",
+      "description": "Table s3 bucket",
+      "type": {
+        "objectType": "string",
+        "s3Browsing": {
+          "subType": "bucket",
+          "relatedS3BrowserAttrName": "s3_layer_path"
+        }
+      },
+      "required": true,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": "{{data_bucket}}"
+    },
+    {
+      "attributeName": "s3_layer_path",
+      "displayName": "S3 path",
+      "description": "Table s3 path",
+      "type": {
+        "objectType": "string",
+        "s3Browsing": {
+          "subType": "key",
+          "relatedS3BrowserAttrName": "s3_bucket"
+        }
+      },
+      "required": true,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": "{{s3_paths.d_path}}"
+    },
+    {
+      "attributeName": "mode",
+      "displayName": "Mode",
+      "description": "Mode 'path' reconstructs the delta.path from s3_bucket, s3_layer_path and table_name. Mode 'catalog' reads data from the catalog based on provided database_name and eventually catalog_name.",
+      "isBasicAttribute": true,
+      "type": {
+        "objectType": "options",
+        "values": [
+          {
+            "value": "path",
+            "displayValue": "path"
+          },
+          {
+            "value": "catalog",
+            "displayValue": "catalog"
+          }
+        ]
+      },
+      "isOverwriteable": true,
+      "value": "path",
+      "required": false
+    },
+    {
+      "attributeName": "database_name",
+      "displayName": "Database name",
+      "description": "Database name is mandatory if mode catalog is selected.",
+      "isBasicAttribute": true,
+      "type": {
+        "objectType": "string"
+      },
+      "isOverwriteable": true,
+      "value": "",
+      "required": false
+    },
+    {
+      "attributeName": "catalog_name",
+      "displayName": "Catalog name",
+      "description": "Parameter needed only if catalog mode is selected and multiple catalogs are available in your spark session (typically with databricks jobs).",
+      "isBasicAttribute": true,
+      "type": {
+        "objectType": "string"
+      },
+      "isOverwriteable": true,
+      "value": "",
+      "required": false
+    }
+  ]
+}

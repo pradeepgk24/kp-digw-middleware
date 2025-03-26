@@ -1,0 +1,82 @@
+{
+  "title": "Spark sql parameters",
+  "componentCategory": "processor",
+  "componentType": "spark_sql",
+  "difwStepCategory": "process",
+  "difwStepType": "spark_sql",
+  "displayName": "Spark sql",
+  "documentationLink": "https://github.com/merck-gen/mf-difw-core/blob/{branch}/documentation/configuration/steps/spark/processors/spark_sql.md",
+  "flowValidations": "#extendByFile:common/process_flow_validations_processors.json",
+  "platforms": {
+    "glue": {
+      "supportedJobTypes": [
+        "spark"
+      ]
+    },
+    "databricks": {
+      "supportedJobTypes": [
+        "spark_databricks"
+      ]
+    }
+  },
+  "attributes": [
+    {
+      "attributeName": "query",
+      "displayName": "Query",
+      "description": "Spark SQL query. Populating one of the `Query` or `Named queries` is mandatory.",
+      "type": {
+        "objectType": "string"
+      },
+      "required": false,
+      "isBasicAttribute": true,
+      "isOverwriteable": true,
+      "value": ""
+    },
+    {
+      "attributeName": "database",
+      "displayName": "Database name",
+      "description": "Name of the database to be used (if not included in the query)",
+      "type": {
+        "objectType": "string"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": ""
+    },
+    {
+      "attributeName": "named_queries",
+      "displayName": "Named queries",
+      "description": "Named queries are sorted by their names and run in that order. Populating one of the `Query` or `Named queries` is mandatory.",
+      "type": {
+        "objectType": "object",
+        "attributes": [
+          {
+            "attributeName": "query_name",
+            "displayName": "Query name",
+            "type": {
+              "objectType": "object",
+              "attributes": [],
+              "dynamicPattern": {
+                "attributes": [
+                  {
+                    "attributeName": "query",
+                    "displayName": "Query",
+                    "type": {
+                      "objectType": "string"
+                    },
+                    "isOverwriteable": true,
+                    "value": ""
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "required": false,
+      "isBasicAttribute": true,
+      "isOverwriteable": true
+    }
+  ]
+}

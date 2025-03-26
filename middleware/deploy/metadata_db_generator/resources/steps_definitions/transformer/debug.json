@@ -1,0 +1,142 @@
+{
+  "title": "Debugging parameters",
+  "componentCategory": "transformer",
+  "componentType": "debug",
+  "difwStepCategory": "transformation",
+  "documentationLink": "https://github.com/merck-gen/mf-difw-core/blob/{branch}/documentation/configuration/steps/spark/transformers/debug.md",
+  "difwStepType": "debug",
+  "displayName": "Debug",
+  "flowValidations": "#extendByFile:common/process_flow_validations_transformers.json",
+  "attributes": [
+    {
+      "attributeName": "show_data",
+      "displayName": "Show data",
+      "type": {
+        "objectType": "object",
+        "attributes": [
+          {
+            "attributeName": "select",
+            "displayName": "Select",
+            "isOverwriteable": true,
+            "description": "List of columns to be selected. If none is selected and this section is present, the whole dataframe is shown. Be mindful, showing sensitive data in logs can be an issue!",
+            "value": [],
+            "type": {
+              "objectType": "list",
+              "elementsType": {
+                "objectType": "string"
+              }
+            }
+          },
+          {
+            "attributeName": "drop",
+            "displayName": "Drop",
+            "description": "List of columns to be dropped. Use this if the dataframe contains sensitive data.",
+            "isOverwriteable": true,
+            "value": [],
+            "type": {
+              "objectType": "list",
+              "elementsType": {
+                "objectType": "string"
+              }
+            }
+          },
+          {
+            "attributeName": "truncate_rows",
+            "displayName": "Truncate rows",
+            "isOverwriteable": true,
+            "description": "If rows are too long, Spark will truncate them. If this is set to False, it might be difficult to read the dataframe. Leave as default, if the exact content of the data is not important for debugging. Integer can be provided to truncate to exactly 'number' characters.",
+            "value": "",
+            "type": {
+              "objectType": "boolean"
+            }
+          },
+          {
+            "attributeName": "row_limit",
+            "displayName": "Row limit",
+            "isOverwriteable": true,
+            "description": "The amount of data rows to show.",
+            "value": 100,
+            "type": {
+              "objectType": "number"
+            }
+          },
+          {
+            "attributeName": "vertical",
+            "displayName": "Vertical",
+            "isOverwriteable": true,
+            "description": "Show each record (row) transposed",
+            "value": "",
+            "type": {
+              "objectType": "boolean"
+            }
+          }
+        ]
+       },
+      "required": false,
+      "isBasicAttribute": true
+    },
+    {
+      "attributeName": "show_counts",
+      "displayName": "Show count",
+      "isOverwriteable": true,
+      "description": "Call count on dataframe, shows a row count.",
+      "value": "",
+      "type": {
+        "objectType": "boolean"
+      }
+    },
+    {
+      "attributeName": "show_execution_plan",
+      "displayName": "Show execution plan",
+      "required": false,
+      "isOverwriteable": true,
+      "description": "\tShows the execution plan for the dataframe",
+      "type": {
+        "objectType": "options",
+        "values": [
+          {
+            "value": "extended",
+            "displayValue": "Extended"
+          },
+          {
+            "value": "codegen",
+            "displayValue": "Codegen"
+          },
+          {
+            "value": "simple",
+            "displayValue": "Simple"
+          },
+          {
+            "value": "cost",
+            "displayValue": "Cost"
+          },
+          {
+            "value": "formatted",
+            "displayValue": "Formatted"
+          }
+        ]
+      },
+      "value": "extended"
+    },
+    {
+      "attributeName": "show_size_estimate",
+      "displayName": "Show size estimate",
+      "isOverwriteable": true,
+      "description": "Uses somewhat unreliable developer API to estimate the sizes of Java objects",
+      "value": "",
+      "type": {
+        "objectType": "boolean"
+      }
+    },
+    {
+      "attributeName": "crash_pipeline",
+      "displayName": "Crash pipeline",
+      "isOverwriteable": true,
+      "description": "If True, an Exception is raised and crashes the pipeline - this might be helpful if further processing is taking too much time. Don't forget that retries in Airflow will apply.",
+      "value": "",
+      "type": {
+        "objectType": "boolean"
+      }
+    }
+  ]
+}

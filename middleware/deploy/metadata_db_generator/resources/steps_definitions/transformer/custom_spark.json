@@ -1,0 +1,120 @@
+{
+  "title": "Custom spark transformer",
+  "componentCategory": "transformer",
+  "componentType": "custom_spark_transformer",
+  "difwStepCategory": "transformation",
+  "documentationLink": "https://github.com/merck-gen/mf-difw-core/blob/{branch}/documentation/configuration/steps/spark/transformers/custom_spark_transformer.md",
+  "difwStepType": "custom_spark_transformer",
+  "displayName": "Custom spark transformer",
+  "flowValidations": "#extendByFile:common/process_flow_validations_transformers.json",
+  "platforms": {
+    "glue": {
+      "supportedJobTypes": [
+        "spark"
+      ]
+    },
+    "databricks": {
+      "supportedJobTypes": [
+        "spark_databricks"
+      ]
+    }
+  },
+  "attributes": [
+    {
+      "attributeName": "custom_spark_code",
+      "displayName": "Custom spark code",
+      "description": "Write your custom python spark transformer here",
+      "type": {
+        "objectType": "file",
+        "bucketType": "resource_bucket",
+        "s3Location": "files-from-ui/{{unique-hash-id}}/custom_code/custom_spark_transformer",
+        "fileName": "custom_spark_transformer.py",
+        "fileType": "python",
+        "fromLocal": false,
+        "fromText": true
+      },
+      "value": "IyB5b3UgY2FuIGltcG9ydCBzdGFuZGFyZCBsaWJyYXJpZXMgYXZhaWxhYmxlIGluIERJRlcgcGFja2FnZQojID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09CiMgUFVUIFlPVVIgU1RBTkRBUkQgRlcgTElCUkFSSUVTIElNUE9SVFMgSEVSRQojID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09CmZyb20gcHlzcGFyay5zcWwgaW1wb3J0IERhdGFGcmFtZQoKIyBjdXN0b20gcGFja2FnZXMgdGhhdCBhcmUgaW5zdGFsbGVkIGF0IHJ1bnRpbWUgY2FuIGJlIGltcG9ydGVkIGRpcmVjdGx5CiMgPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0KIyBQVVQgWU9VUiBDVVNUT00gTElCUkFSSUVTIElNUE9SVFMgSEVSRQojID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09CgoKIyB0aGlzIGlzIHRoZSBvbmx5IG1hbmRhdG9yeSBmdW5jdGlvbiB5b3UgaGF2ZSB0byBoYXZlIGluIHlvdXIgY3VzdG9tIGNvZGUKIyB0aGUgZnVsbCBpbnRlcmZhY2UgaXM6CiMgZGVmIG1haW4oam9iX2NvbmZpZ3VyYXRpb24sIHRhYmxlX2NvbmZpZ3VyYXRpb24sCiMgICAgICAgICAgY3VzdG9tX3BhcmFtZXRlcnMsIGNvbXBvbmVudF9pbnN0YW5jZSwgbG9nZ2VyLCBkYXRhZnJhbWUpOgojIGFsbCBwYXJhbWV0ZXJzIGFyZSBwYXNzZWQgYXMgbmFtZWQgYXJndW1lbnRzLCBzbyBpZiB5b3VyIGN1c3RvbSBjb21wb25lbnQgZG9lcyBub3QgbmVlZCBhbGwKIyB0aGUgYXJndW1lbnRzLCBqdXN0IHJlbW92ZSB0aGVtIGFuZCB1c2UgKiprd2FyZ3MgYXQgdGhlIGVuZApkZWYgbWFpbihqb2JfY29uZmlndXJhdGlvbiwgdGFibGVfY29uZmlndXJhdGlvbiwgY3VzdG9tX3BhcmFtZXRlcnMsIGNvbXBvbmVudF9pbnN0YW5jZSwgbG9nZ2VyLCBkYXRhZnJhbWUsICoqa3dhcmdzKToKICAgIGxvZ2dlci5pbmZvKCdTdGFydCBjdXN0b20gc3BhcmsgdHJhbnNmb3JtZXInKQogICAgYXNzZXJ0IGlzaW5zdGFuY2UoZGF0YWZyYW1lLCBEYXRhRnJhbWUpCiAgICBsb2dnZXIuaW5mbyhyZXByKGpvYl9jb25maWd1cmF0aW9uKSkKICAgIGxvZ2dlci5pbmZvKHJlcHIodGFibGVfY29uZmlndXJhdGlvbikpCiAgICBsb2dnZXIuaW5mbyhyZXByKGN1c3RvbV9wYXJhbWV0ZXJzKSkKICAgICMgPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0KICAgICMgUEFTUyBZT1VSIENVU1RPTSBDT0RFIEhFUkUKICAgICMgPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0KICAgICMgaGF2ZSB0byByZXR1cm4gU3BhcmsgZGF0YWZyYW1lCiAgICByZXR1cm4gTm9uZQo=",
+      "isBasicAttribute": true,
+      "isOverwriteable": false
+    },
+    {
+      "attributeName": "custom_parameters",
+      "displayName": "Custom parameters",
+      "description": "User specific options for custom code",
+      "isBasicAttribute": true,
+      "type": {
+        "objectType": "object",
+        "dynamicInputStructure": true,
+        "attributes": []
+      }
+    },
+    {
+      "attributeName": "additional_spark_packages",
+      "displayName": "Additional spark packages",
+      "description": "List of python dependencies for spark. Attach python libraries to a cluster (CANNOT be a c-based/compiled library)",
+      "type": {
+        "objectType": "list",
+        "elementsType": {
+          "objectType": "object",
+          "attributes": [
+            {
+              "type": {
+                "objectType": "string"
+              },
+              "attributeName": "library_name",
+              "displayName": "Library name",
+              "value": "",
+              "isOverwriteable": false
+            },
+            {
+              "type": {
+                "objectType": "string"
+              },
+              "attributeName": "library_version",
+              "displayName": "Library version",
+              "value": "",
+              "isOverwriteable": false
+            }
+          ]
+        }
+      },
+      "isBasicAttribute": false,
+      "isOverwriteable": false,
+      "value": []
+    },
+    {
+      "attributeName": "runtime_python_packages",
+      "displayName": "Runtime python packages",
+      "description": "Install python packages at runtime (can be a c-based/compiled library). it will be available only is spark driver. Not in executors",
+      "type": {
+        "objectType": "list",
+        "elementsType": {
+          "objectType": "object",
+          "attributes": [
+            {
+              "type": {
+                "objectType": "string"
+              },
+              "attributeName": "library_name",
+              "displayName": "Library name",
+              "value": "",
+              "isOverwriteable": false
+            },
+            {
+              "type": {
+                "objectType": "string"
+              },
+              "attributeName": "library_version",
+              "displayName": "Library version",
+              "value": "",
+              "isOverwriteable": false
+            }
+          ]
+        }
+      },
+      "isBasicAttribute": false,
+      "isOverwriteable": false,
+      "value": []
+    }
+  ]
+}

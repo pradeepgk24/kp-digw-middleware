@@ -1,0 +1,30 @@
+[
+  {
+    "actionType": "readNotification",
+    "actionDefinition": {
+      "notificationType": "<notificationType>"
+    },
+    "description": "The permission check if you can read/see/use notifications. Reading mean that you are also able to use notification within the pipelines"
+  },
+  {
+    "actionType": "deleteNotification",
+    "actionDefinition": {
+      "notificationType": "<notificationType>"
+    },
+    "description": "The permission check if you can delete notification"
+  },
+  {
+    "actionType": "updateNotification",
+    "actionDefinition": {
+      "notificationType": "<notificationType>"
+    },
+    "description": "The permission check if you can update notification"
+  },
+  {
+    "actionType": "createNotification",
+    "actionDefinition": {
+      "notificationType": "<notificationType>"
+    },
+    "description": "The permission check if you can create notification"
+  }
+]

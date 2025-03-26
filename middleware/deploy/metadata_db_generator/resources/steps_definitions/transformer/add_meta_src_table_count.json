@@ -1,0 +1,12 @@
+{
+  "title": "Add meta__src_table_count parameters",
+  "componentCategory": "transformer",
+  "componentType": "add_meta__src_table_count",
+  "difwStepCategory": "transformation",
+  "documentationLink": "https://github.com/merck-gen/mf-difw-core/blob/{branch}/documentation/configuration/steps/spark/transformers/add_meta__src_table_count.md",
+  "difwStepType": "add_meta__src_table_count",
+  "displayName": "Add column meta__src_table_count",
+  "flowValidations": "#extendByFile:common/process_flow_validations_transformers.json",
+  "attributes": [
+  ]
+}

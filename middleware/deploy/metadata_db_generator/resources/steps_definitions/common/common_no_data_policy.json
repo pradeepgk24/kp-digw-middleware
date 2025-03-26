@@ -1,0 +1,42 @@
+{
+  "attributeName": "no_data_policy",
+  "displayName": "No Data Policy Options",
+  "description": "Options for how to proceed when data source has no data",
+  "required": false,
+  "type": {
+    "objectType": "object",
+    "attributes": [
+      {
+        "attributeName": "send_no_data_notification",
+        "displayName": "Send No Data Notification",
+        "description": "Send No Data Notification - Sends email notification if data source has no data.",
+        "required": false,
+        "value": false,
+        "type": {
+          "objectType": "boolean"
+        }
+      },
+      {
+        "attributeName": "raise_error",
+        "displayName": "Raise Error",
+        "description": "If True, task will fail in Airflow with no retries.",
+        "type": {
+          "objectType": "boolean"
+        },
+        "required": false,
+        "value": false
+      },
+      {
+        "attributeName": "skip_load",
+        "displayName": "Skip Load",
+        "description": "If True, task will be skipped in Airflow.",
+         "type": {
+          "objectType": "boolean"
+        },
+        "required": false,
+        "value": false
+      }
+    ]
+  },
+  "isOverwriteable": true
+}

@@ -1,0 +1,56 @@
+{
+  "title": "Source data type JSON parameters",
+  "componentCategory": "data_type",
+  "componentType": "json",
+  "documentationLink": "https://github.com/merck-gen/mf-difw-core/blob/{branch}/documentation/configuration/steps/spark/loaders/json.md",
+  "difwStepCategory": "input",
+  "difwStepType": "json",
+  "displayName": "JSON",
+  "componentProperties": {
+    "conditionType": "spark_sql"
+  },
+  "platforms": {
+    "glue": {
+      "supportedJobTypes": [
+        "spark"
+      ]
+    },
+    "databricks": {
+      "supportedJobTypes": [
+        "python_databricks"
+      ]
+    }
+  },
+  "flowValidations": "#extendByFile:common/process_flow_validations_json_data_type.json",
+  "attributes": [
+    {
+      "attributeName": "spark_read_json_options",
+      "displayName": "Spark read JSON options",
+      "description": "Options of Spark JSON reader in key-value format. For complete list of Spark JSON reader options see https://spark.apache.org/docs/3.1.1/api/python//reference/api/pyspark.sql.DataFrameReader.json.html",
+      "type": {
+        "objectType": "dictionary"
+      },
+      "required": false,
+      "isOverwriteable": true,
+      "value": {},
+      "isBasicAttribute": true
+    },
+    {
+      "attributeName": "add_meta_input_file_name_column",
+      "displayName": "Add meta column 'file_name'",
+      "description": "Flag indicates if meta input file name columns will be added or not",
+      "type": {
+        "objectType": "boolean"
+      },
+      "required": true,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": false
+    },
+    "#extendByFile:common/source_data_types_bad_lines_detection_attributes.json",
+    "#extendByFile:common/source_data_types_common_attributes.json",
+    "#extendByFile:common/source_data_types_repartition_attributes.json",
+    "#extendByFile:common/common_blob_storage_connection_data_types.json"
+  ]
+}
+

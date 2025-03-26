@@ -1,0 +1,149 @@
+{
+  "title": "Target JDBC parameters",
+  "componentCategory": "output_connector",
+  "componentType": "jdbc",
+  "difwStepCategory": "output",
+  "difwStepType": "jdbc",
+  "displayName": "JDBC",
+  "documentationLink": "https://github.com/merck-gen/mf-difw-core/blob/{branch}/documentation/configuration/steps/spark/writers/jdbc.md",
+  "flowValidations": "#extendByFile:common/process_flow_validations_writers_out_connectors.json",
+  "platforms": {
+    "glue": {
+      "supportedJobTypes": [
+        "spark"
+      ]
+    },
+    "databricks": {
+      "supportedJobTypes": [
+        "python_databricks"
+      ]
+    }
+  },
+  "attributes": [
+    {
+      "attributeName": "mode",
+      "required": false,
+      "displayName": "Mode",
+      "description": "Write mode: append, overwrite, error (alias errorifexists) or ignore",
+      "type": {
+        "objectType": "options",
+        "values": [
+          {
+            "value": "append",
+            "displayValue": "Append"
+          },
+          {
+            "value": "overwrite",
+            "displayValue": "Overwrite"
+          },
+          {
+            "value": "error",
+            "displayValue": "Error"
+          },
+          {
+            "value": "ignore",
+            "displayValue": "Ignore"
+          }
+        ]
+      },
+      "value": "overwrite",
+      "isBasicAttribute": false,
+      "isOverwriteable": true
+    },
+    {
+      "attributeName": "jdbc_user",
+      "displayName": "JDBC user",
+      "description": "JDBC username",
+      "required": false,
+      "type": {
+        "objectType": "string"
+      },
+      "isOverwriteable": false,
+      "isBasicAttribute": true,
+      "value": ""
+    },
+    {
+      "attributeName": "jdbc_password",
+      "displayName": "JDBC password",
+      "description": "JDBC password",
+      "required": false,
+      "type": {
+        "objectType": "secret"
+      },
+      "isOverwriteable": false,
+      "isBasicAttribute": true,
+      "value": {}
+    },
+    {
+      "attributeName": "jdbc_url",
+      "displayName": "JDBC url",
+      "description": "Template on a connection string. Template is: '{dialect}{jdbc_host}:{jdbc_port}/{jdbc_database}', manually replace the following values: {jdbc_host}, {jdbc_port}, {jdbc_database} and {dialect}, current supported {dialect} options are 'jdbc:oracle:thin:@', 'jdbc:postgresql://', 'jdbc:mysql://', 'jdbc:redshift://', redshift does not support extraction of columns information. Databricks jobs do support having ':' between port and database - '{jdbc_port}:{jdbc_database}', this is not supported for Glue jobs.",
+      "type": {
+        "objectType": "string"
+      },
+      "isOverwriteable": false,
+      "required": true,
+      "isBasicAttribute": true,
+      "value": ""
+    },
+    {
+      "attributeName": "jdbc_driver",
+      "displayName": "JDBC driver",
+      "description": "A driver class name to use. For instance: oracle.jdbc.OracleDriver. Not needed for drivers based on JDBC 4.0 and above (auto load feature). This software also supports various other JDBC drivers including but not limited to: PostgreSQL (org.postgresql.Driver), Amazon Redshift (com.amazon.redshift.jdbc42.Driver), Presto (io.prestosql.jdbc.PrestoDriver), Microsoft SQL Server (com.microsoft.sqlserver.jdbc.SQLServerDriver), MySQL (com.mysql.cj.jdbc.Driver), OSIsoft (com.osisoft.jdbc.Driver), and SAP HANA (com.sap.db.jdbc.Driver).",
+      "type": {
+        "objectType": "string"
+      },
+      "isOverwriteable": false,
+      "isBasicAttribute": true,
+      "value": ""
+    },
+    {
+      "attributeName": "jdbc_custom_format",
+      "displayName": "JDBC custom format",
+      "description": "A custom format can be configured in order to properly handle various data types",
+      "type": {
+        "objectType": "string"
+      },
+      "isOverwriteable": false,
+      "isBasicAttribute": false,
+      "value": ""
+    },
+    {
+      "attributeName": "spark_writer_jdbc_options",
+      "displayName": "Spark writer jdbc options",
+      "description": "Spark jdbc write options. For complete list of options see https://spark.apache.org/docs/3.1.1/api/python/reference/api/pyspark.sql.DataFrameWriter.jdbc.html",
+      "type": {
+        "objectType": "dictionary"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": {}
+    },
+    {
+      "attributeName": "column_names_to_upper_case",
+      "displayName": "Convert column names to upper case",
+      "description": "Convert name of columns to upper case. It is mutually exclusive with option column_names_to_lower_case)",
+      "type": {
+        "objectType": "boolean"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": false
+    },
+    {
+      "attributeName": "column_names_to_lower_case",
+      "displayName": "Convert column names to lower case",
+      "description": "Convert name of columns to lower case. It is mutually exclusive with option column_names_to_upper_case)",
+      "type": {
+        "objectType": "boolean"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": false
+    },
+    "#extendByFile:../common/common_additional_jars_dependencies.json"
+  ]
+}

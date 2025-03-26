@@ -1,0 +1,27 @@
+{
+  "title": "Remove empty columns",
+  "componentCategory": "transformer",
+  "componentType": "remove_empty_columns",
+  "difwStepCategory": "transformation",
+  "documentationLink": "https://github.com/merck-gen/mf-difw-core/blob/{branch}/documentation/configuration/steps/spark/transformers/remove_empty_columns.md",
+  "difwStepType": "remove_empty_columns",
+  "displayName": "Remove empty columns",
+  "flowValidations": "#extendByFile:common/process_flow_validations_transformers.json",
+  "attributes": [
+    {
+      "attributeName": "ignored_columns",
+      "displayName": "Ignored columns names",
+      "description": "Optional. If filled in, values in those columns are not considered.",
+      "required": false,
+      "type": {
+        "objectType": "list",
+        "elementsType": {
+          "objectType": "string"
+        }
+      },
+      "isBasicAttribute": true,
+      "isOverwriteable": true,
+      "value": []
+    }
+  ]
+}

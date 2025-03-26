@@ -1,0 +1,566 @@
+{
+  "title": "Delta writer parameters",
+  "componentCategory": "output_connector",
+  "componentType": "delta",
+  "difwStepCategory": "output",
+  "difwStepType": "delta_writer",
+  "displayName": "Delta",
+  "documentationLink": "https://github.com/merck-gen/mf-difw-core/blob/{branch}/documentation/configuration/steps/spark/writers/delta_writer.md",
+  "flowValidations": "#extendByFile:common/process_flow_validations_writers_out_connectors.json",
+  "additionalJarDependencies": [
+    {
+      "groupId": "io.delta",
+      "artifactId": "delta-core_2.12",
+      "version": "2.2.0"
+    },
+    {
+      "groupId": "io.delta",
+      "artifactId": "delta-storage",
+      "version": "2.2.0"
+    }
+  ],
+  "componentProperties": {
+    "sparkConfig": {
+      "spark.sql.extensions": "io.delta.sql.DeltaSparkSessionExtension",
+      "spark.sql.catalog.spark_catalog": "org.apache.spark.sql.delta.catalog.DeltaCatalog"
+    }
+  },
+  "attributes": [
+    {
+      "attributeName": "mode",
+      "displayName": "Mode",
+      "description": "Whether to perform latest snapshot or compute history",
+      "type": {
+        "objectType": "options",
+        "values": [
+          {
+            "value": "latest",
+            "displayValue": "Latest"
+          },
+          {
+            "value": "history",
+            "displayValue": "History"
+          },
+          {
+            "value": "snapshot_history",
+            "displayValue": "Snapshot history"
+          },
+          {
+            "value": "hard_delete",
+            "displayValue": "Hard delete"
+          }
+        ]
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": "latest"
+    },
+    {
+      "attributeName": "s3_bucket",
+      "displayName": "Target S3 bucket",
+      "description": "Source S3 bucket where data will be stored",
+      "type": {
+        "objectType": "string",
+        "s3Browsing": {
+          "subType": "bucket",
+          "relatedS3BrowserAttrName": "s3_layer_path"
+        }
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "value": "{{data_bucket}}",
+      "isOverwriteable": true
+    },
+    {
+      "attributeName": "s3_layer_path",
+      "displayName": "Target s3 path",
+      "description": "Source S3 path in S3 source bucket where data will be stored",
+      "type": {
+        "objectType": "string",
+        "s3Browsing": {
+          "subType": "key",
+          "relatedS3BrowserAttrName": "s3_bucket"
+        }
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": "{{s3_paths.b_path}}"
+    },
+    {
+      "attributeName": "num_partitions",
+      "displayName": "Number of partitions",
+      "description": "Tells Spark to repartition data to the given number. Set this value to 1 if you want to produce a single output file",
+      "type": {
+        "objectType": "number",
+        "scale": 0,
+        "precision": 10
+      },
+      "required": false,
+      "isOverwriteable": true,
+      "value": null,
+      "isBasicAttribute": false
+    },
+    {
+      "attributeName": "dynamic_partitions",
+      "displayName": "Dynamic partitions",
+      "description": "Overrides dynamic_partitions configured at Table config",
+      "type": {
+        "objectType": "list",
+        "elementsType": {
+          "objectType": "string"
+        }
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": []
+    },
+    {
+      "attributeName": "delay_after_write",
+      "displayName": "Delay after write",
+      "description": "Seconds to sleep after write. Obsolete parameter",
+      "type": {
+        "objectType": "number",
+        "scale": 0,
+        "precision": 10
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "value": 0,
+      "isOverwriteable": true
+    },
+    {
+      "attributeName": "enable_partitions",
+      "displayName": "Enable dynamic partitioning",
+      "description": "Enable dynamic partitioning",
+      "type": {
+        "objectType": "boolean"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "value": false,
+      "isOverwriteable": true
+    },
+    {
+      "attributeName": "schema_evolution",
+      "displayName": "Schema evolution",
+      "description": "Works only in mode `latest` and `snapshot_history`, allows automatic schema evolution",
+      "type": {
+        "objectType": "boolean"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "value": true,
+      "isOverwriteable": true
+    },
+    {
+      "attributeName": "create_catalog_table",
+      "displayName": "Create catalog table",
+      "description": "Whether to create delta table in the glue catalog",
+      "type": {
+        "objectType": "boolean"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "value": false,
+      "isOverwriteable": true
+    },
+    {
+      "attributeName": "create_manifest_files",
+      "displayName": "Create manifest files",
+      "description": "Create manifest files without creating an entry in the catalog. Also usable in case of Unity catalog, which does not support manifest table.",
+      "type": {
+        "objectType": "boolean"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "value": false,
+      "isOverwriteable": true
+    },
+    {
+      "attributeName": "create_manifest_table",
+      "displayName": "Create manifest table",
+      "description": "Create manifest files and manifest table in the glue catalog for readers that don't support reading Delta Lake directly.",
+      "type": {
+        "objectType": "boolean"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "value": false,
+      "isOverwriteable": true
+    },
+    {
+      "attributeName": "manifest_table_name_format",
+      "displayName": "Manifest table name format",
+      "description": "Custom name of the manifest table, can be formatted using the `{table_name}` substring",
+      "type": {
+        "objectType": "string"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": "{{table_name}}_manifest"
+    },
+    {
+      "attributeName": "custom_table_properties",
+      "displayName": "Custom table properties",
+      "description": "User-defined key-value pairs to be set in `TBLPROPERTIES`. If value is null, the property is unset",
+      "type": {
+        "objectType": "dictionary"
+      },
+      "required": false,
+      "isOverwriteable": true,
+      "value": {},
+      "isBasicAttribute": false
+    },
+    {
+      "attributeName": "values_for_invalidation",
+      "displayName": "Values for invalidation",
+      "description": "These values are used to ensure idempotency for history, snapshot_history and append modes. In case of a job restart, you do not want to have duplicated data, so we need a way how to recognize a particular ingest data. The default value corresponds to the `static_partitions` that is usually present in the configuration (unless removed by the user). Framework encloses strings in quotes, other measures are the users' responsibility to make this convertible to valid SQL. What we do: (`key1` = 'value1') AND (`key2` = 'value2')",
+      "type": {
+        "objectType": "dictionary"
+      },
+      "required": false,
+      "isOverwriteable": true,
+      "value": {},
+      "isBasicAttribute": false
+    },
+    {
+      "attributeName": "target_table",
+      "displayName": "Target table",
+      "description": "Target table name",
+      "type": {
+        "objectType": "string"
+      },
+      "required": false,
+      "isOverwriteable": true,
+      "value": "",
+      "isBasicAttribute": false
+    },
+    {
+      "attributeName": "table_comment",
+      "displayName": "Table comment",
+      "description": "Overrides the same configuration from the table section",
+      "type": {
+        "objectType": "string"
+      },
+      "required": false,
+      "isOverwriteable": true,
+      "value": "",
+      "isBasicAttribute": false
+    },
+    {
+      "attributeName": "database_name",
+      "displayName": "Database name",
+      "description": "Target database name",
+      "type": {
+        "objectType": "string"
+      },
+      "required": false,
+      "isOverwriteable": true,
+      "value": "",
+      "isBasicAttribute": false
+    },
+    {
+      "attributeName": "recompute_history_hashes",
+      "displayName": "Recompute history hashes",
+      "description": "If set on True, the hashes in the existing history table are recomputed. This option can be useful if you decide to change which columns are used for hashing, or if there is a change in the hash computation in our code",
+      "type": {
+        "objectType": "boolean"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "value": false,
+      "isOverwriteable": true
+    },
+    {
+      "attributeName": "append_overwrite",
+      "displayName": "Append overwrite",
+      "description": "For latest mode and incremental without update (append) ingest strategy only: if `values_for_invalidation` are already computed (data for that ingest are already present), this configuration gives the option to overwrite the existing data atomically.",
+      "type": {
+        "objectType": "boolean"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "value": false,
+      "isOverwriteable": true
+    },
+    {
+      "attributeName": "update_glue_description",
+      "displayName": "Update glue description",
+      "description": "Updates glue table description parameter in glue catalog. Available only for glue catalog",
+      "type": {
+        "objectType": "boolean"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "value": false,
+      "isOverwriteable": true
+    },
+    {
+      "attributeName": "catalog_tables",
+      "displayName": "Catalog Tables",
+      "description": "Section to define catalog tables. This section replaces usage of following parameters `create_catalog_table`,`create_manifest_table`,`manifest_table_name_format` and `database_name`",
+      "type": {
+        "objectType": "object",
+        "attributes": [
+          {
+            "attributeName": "catalog_table",
+            "displayName": "Catalog table",
+            "type": {
+              "objectType": "object",
+              "attributes": [],
+              "dynamicPattern": {
+                "attributes": [
+                  {
+                    "attributeName": "catalog_name",
+                    "displayName": "Catalog name",
+                    "description": "Catalog name in which the table is going to be created",
+                    "type": {
+                      "objectType": "string"
+                    },
+                    "isOverwriteable": true,
+                    "value": ""
+                  },
+                  {
+                    "attributeName": "database_name",
+                    "displayName": "Database name",
+                    "description": "Name of the schema within the catalog",
+                    "type": {
+                      "objectType": "string"
+                    },
+                    "isOverwriteable": true,
+                    "value": ""
+                  },
+                  {
+                    "attributeName": "table_type",
+                    "displayName": "Table type",
+                    "description": "Type of the table created in a catalog. Be aware that in case you choose managed table, you cannot define any other table in the catalog",
+                    "type": {
+                      "objectType": "options",
+                      "values": [
+                        {
+                          "value": "external",
+                          "displayValue": "external"
+                        },
+                        {
+                          "value": "managed",
+                          "displayValue": "managed"
+                        },
+                        {
+                          "value": "manifest",
+                          "displayValue": "manifest"
+                        }
+                      ]
+                    },
+                    "isOverwriteable": true,
+                    "value": "external"
+                  },
+                  {
+                    "attributeName": "table_name",
+                    "displayName": "Table name",
+                    "description": "Defines a specific name for a catalog table. Overwrites table's name and `catalog_table_name` parameter",
+                    "type": {
+                      "objectType": "string"
+                    },
+                    "isOverwriteable": true,
+                    "value": ""
+                  },
+                  {
+                    "attributeName": "table_permissions",
+                    "displayName": "Table permissions",
+                    "description": "Defines permissions on table level. The list consists of two parameters `name` and `privileges`",
+                    "type": {
+                      "objectType": "list",
+                      "elementsType": {
+                        "objectType": "object",
+                        "attributes": [
+                          {
+                            "attributeName": "name",
+                            "displayName": "User or group name",
+                            "description": "Name of the user or group, that will get the privileges.",
+                            "type": {
+                              "objectType": "string"
+                            },
+                            "required": false,
+                            "isOverwriteable": true,
+                            "value": ""
+                          },
+                          {
+                            "attributeName": "privileges",
+                            "displayName": "Privileges",
+                            "description": "List of privileges to be granted on the table level. Allowed values are 'SELECT', 'MODIFY', 'ALL PRIVILEGES'",
+                            "type": {
+                              "objectType": "options",
+                              "values": [
+                                {
+                                  "value": "",
+                                  "displayValue": "Select privileges"
+                                },
+                                {
+                                  "value": "SELECT",
+                                  "displayValue": "SELECT"
+                                },
+                                {
+                                  "value": "MODIFY",
+                                  "displayValue": "MODIFY"
+                                },
+                                {
+                                  "value": "ALL PRIVILEGES",
+                                  "displayValue": "ALL PRIVILEGES"
+                                }
+                              ]
+                            },
+                            "isOverwriteable": true,
+                            "value": "",
+                            "required": false
+                          }
+                        ]
+                      }
+                    },
+                    "isOverwriteable": true,
+                    "required": false,
+                    "value": []
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "value": false,
+      "isOverwriteable": true
+    },
+    {
+      "attributeName": "customization",
+      "displayName": "Customization",
+      "description": "Custom modification of historization process",
+      "type": {
+        "objectType": "object",
+        "attributes": "#extendByFile:../common/common_history_customization.json"
+      },
+      "required": false,
+      "value": {},
+      "isBasicAttribute": false
+    },
+    {
+      "attributeName": "refresh_catalog_metadata",
+      "displayName": "Refresh catalog metadata",
+      "description": "Enables or disables workaround which refreshes table metadata in a catalog (Glue,Unity) by executing `ALTER TABLE UNSET TBLPROPERTIES` command",
+      "type": {
+        "objectType": "boolean"
+      },
+      "required": false,
+      "value": true,
+      "isBasicAttribute": false
+    },
+    {
+      "attributeName": "enable_column_drop",
+      "displayName": "Enable column drop",
+      "description": "Works only in mode `hard_delete`. Parameter to enable option to drop column from target table if the column is missing in the source data. Read the details in the documentation section schema evolution in hard delete mode",
+      "type": {
+        "objectType": "boolean"
+      },
+      "required": false,
+      "value": false,
+      "isBasicAttribute": false
+    },
+    {
+      "attributeName": "hard_delete_options",
+      "displayName": "Hard delete options",
+      "description": "Section for options used in hard_delete` mode",
+      "type": {
+        "objectType": "object",
+        "isInUse": false,
+        "attributes": [
+          {
+            "attributeName": "delete_record_condition",
+            "displayName": "Delete record condition",
+            "required": false,
+            "isBasicAttribute": false,
+            "description": "Parameter defines a condition which filters already deleted record in the delta table, so the process can ignore once deleted records",
+            "type": {
+              "objectType": "string"
+            },
+            "value": ""
+          },
+          {
+            "attributeName": "loader_config",
+            "displayName": "Loader config",
+            "required": false,
+            "isBasicAttribute": false,
+            "description": "Subsection to define location of source data (deleted records data).",
+            "type": {
+              "objectType": "object",
+              "attributes": [
+                {
+                  "attributeName": "s3_bucket",
+                  "displayName": "S3 bucket",
+                  "description": "Defines source s3 bucket of deleted data",
+                  "type": {
+                    "objectType": "string",
+                    "s3Browsing": {
+                      "subType": "bucket",
+                      "relatedS3BrowserAttrName": "s3_layer_path"
+                    }
+                  },
+                  "required": false,
+                  "isBasicAttribute": false,
+                  "isOverwriteable": true,
+                  "value": "{{data_bucket}}"
+                },
+                {
+                  "attributeName": "s3_layer_path",
+                  "displayName": "S3 layer path",
+                  "description": "Defines s3 layer path of deleted data",
+                  "type": {
+                    "objectType": "string",
+                    "s3Browsing": {
+                      "subType": "key",
+                      "relatedS3BrowserAttrName": "s3_bucket"
+                    }
+                  },
+                  "required": false,
+                  "isBasicAttribute": false,
+                  "isOverwriteable": true
+                },
+                {
+                  "attributeName": "static_file_location",
+                  "displayName": "Static file location",
+                  "description": "If value is true, static partitions are eliminated from the target path",
+                  "type": {
+                    "objectType": "boolean"
+                  },
+                  "required": false,
+                  "isBasicAttribute": false,
+                  "isOverwriteable": true,
+                  "value": false
+                },
+                {
+                  "attributeName": "input_table_name",
+                  "displayName": "Input table name",
+                  "description": "Defines a source table name, which affects the s3 path. Default is {source_table}_{delete_mode}",
+                  "type": {
+                    "objectType": "string"
+                  },
+                  "required": true,
+                  "isBasicAttribute": false,
+                  "isOverwriteable": true
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "required": false,
+      "isOverwriteable": true,
+      "value": {}
+    }
+  ]
+}
+
+

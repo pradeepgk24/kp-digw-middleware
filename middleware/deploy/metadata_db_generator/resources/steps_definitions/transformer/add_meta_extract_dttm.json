@@ -1,0 +1,94 @@
+{
+  "title": "Add meta__extract_dttm parameters",
+  "componentCategory": "transformer",
+  "componentType": "add_meta__extract_dttm",
+  "difwStepCategory": "transformation",
+  "documentationLink": "https://github.com/merck-gen/mf-difw-core/blob/{branch}/documentation/configuration/steps/spark/transformers/add_meta__extract_dttm.md",
+  "difwStepType": "add_meta__extract_dttm",
+  "displayName": "Add column meta__extract_dttm",
+  "flowValidations": "#extendByFile:common/process_flow_validations_transformers.json",
+  "attributes": [
+    {
+      "attributeName": "date_trunc_format",
+      "displayName": "Date truncate format",
+      "description": "Format used for date truncate. See function documentation https://spark.apache.org/docs/latest/api/python/reference/api/pyspark.sql.functions.date_trunc.html",
+      "type": {
+        "objectType": "options",
+        "values": [
+          {
+            "value": "year",
+            "displayValue": "Year"
+          },
+          {
+            "value": "yyyy",
+            "displayValue": "YYYY"
+          },
+          {
+            "value": "yy",
+            "displayValue": "YY"
+          },
+          {
+            "value": "month",
+            "displayValue": "Month"
+          },
+          {
+            "value": "mm",
+            "displayValue": "MM"
+          },
+          {
+            "value": "day",
+            "displayValue": "Day"
+          },
+          {
+            "value": "dd",
+            "displayValue": "DD"
+          },
+          {
+            "value": "hour",
+            "displayValue": "Hour"
+          },
+          {
+            "value": "minute",
+            "displayValue": "Minute"
+          },
+          {
+            "value": "second",
+            "displayValue": "Second"
+          },
+          {
+            "value": "microsecond",
+            "displayValue": "Microsecond"
+          },
+          {
+            "value": "millisecond",
+            "displayValue": "Millisecond"
+          },
+          {
+            "value": "week",
+            "displayValue": "Week"
+          },
+          {
+            "value": "quarter",
+            "displayValue": "Quarter"
+          }
+        ]
+      },
+      "required": true,
+      "isBasicAttribute": true,
+      "isOverwriteable": true,
+      "value": "year"
+    },
+    {
+      "attributeName": "column_name",
+      "displayName": "Column name",
+      "description": "Defines name of the column",
+      "type": {
+        "objectType": "string"
+      },
+      "required": true,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": "meta__extract_dttm"
+    }
+  ]
+}

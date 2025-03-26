@@ -1,0 +1,94 @@
+{
+  "title": "Unpivot data parameters",
+  "displayName": "Unpivot data",
+  "componentCategory": "transformer",
+  "componentType": "unpivot_data",
+  "documentationLink": "https://github.com/merck-gen/mf-difw-core/blob/{branch}/documentation/configuration/steps/spark/transformers/unpivot_data.md",
+  "difwStepCategory": "transformation",
+  "difwStepType": "unpivot_data",
+  "flowValidations": "#extendByFile:common/process_flow_validations_transformers.json",
+  "attributes": [
+    {
+      "attributeName": "static_column_indexes",
+      "displayName": "Static column indexes",
+      "description": "List of columns indexes which are static, not transformed columns",
+      "type": {
+        "objectType": "list",
+        "elementsType": {
+          "objectType": "string"
+        }
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": []
+    },
+    {
+      "attributeName": "static_column_names",
+      "displayName": "Static column names",
+      "description": "List of columns names which are static, not transformed columns",
+      "type": {
+        "objectType": "list",
+        "elementsType": {
+          "objectType": "string"
+        }
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": []
+    },
+    {
+      "attributeName": "key_column_name",
+      "displayName": "Key column name",
+      "description": "Name of column which represent column key (original column name)",
+      "type": {
+        "objectType": "string"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": ""
+    },
+    {
+      "attributeName": "value_column_name",
+      "displayName": "Value column name",
+      "description": "Name of column which represent value of column",
+      "type": {
+        "objectType": "string"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": ""
+    },
+    {
+      "attributeName": "convert_static_columns_to_dtype",
+      "displayName": "Convert static columns to DataType",
+      "description": "Choose one of the value from the list or put custom from: https://spark.apache.org/docs/latest/sql-ref-datatypes.html",
+      "isBasicAttribute": false,
+      "type": {
+        "objectType": "options",
+        "valuesEnumCategory": "convert_column_data_types",
+        "values": []
+      },
+      "isOverwriteable": true,
+      "value": "",
+      "required": false
+    },
+    {
+      "attributeName": "convert_dynamic_columns_to_dtype",
+      "displayName": "Convert dynamic columns to DataType",
+      "description": "Choose one of the value from the list or put custom from: https://spark.apache.org/docs/latest/sql-ref-datatypes.html",
+      "isBasicAttribute": false,
+      "type": {
+        "objectType": "options",
+        "valuesEnumCategory": "convert_column_data_types",
+        "values": []
+      },
+      "isOverwriteable": true,
+      "value": "",
+      "required": false
+    }
+  ]
+}

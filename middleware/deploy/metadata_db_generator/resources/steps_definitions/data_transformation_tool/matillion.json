@@ -1,0 +1,130 @@
+{
+  "title": "Airflow Matillion operator",
+  "componentCategory": "data_transformation_tool",
+  "componentType": "matillion",
+  "documentationLink": "https://github.com/merck-gen/mf-difw-core/blob/{branch}/documentation/configuration/README.md#matillion",
+  "difwStepCategory": "",
+  "difwStepType": "",
+  "difwJobCategory": "operator",
+  "difwTaskType": "airflow_component",
+  "displayName": "Matillion",
+  "flowValidations": "#extendByFile:common/process_flow_validations_data_transformation_tools.json",
+  "componentProperties": {
+    "operatorClass": "difw_operators.matillion_operator.MatillionOperator"
+  },
+  "platforms": {
+    "glue": {
+      "supportedJobTypes": []
+    },
+    "databricks": {
+      "supportedJobTypes": []
+    },
+    "airflow": {
+      "supportedJobTypes": []
+    }
+  },
+  "attributes": [
+    {
+      "attributeName": "trigger",
+      "displayName": "Trigger",
+      "description": "Matillion job parameters",
+      "type": {
+        "objectType": "object",
+        "attributes": [
+          {
+            "attributeName": "job_name",
+            "displayName": "Name of Matillion job",
+            "description": "Job Name in Matillion",
+            "isBasicAttribute": true,
+            "type": {
+              "objectType": "string"
+            },
+            "isOverwriteable": false,
+            "value": "",
+            "required": true
+          },
+          {
+            "attributeName": "connection_id",
+            "displayName": "Airflow connection id",
+            "description": "HTTP connection ID defined in Airflow connections. For more options, see description below.",
+            "isBasicAttribute": true,
+            "type": {
+              "objectType": "string"
+            },
+            "isOverwriteable": false,
+            "value": "",
+            "required": true
+          },
+          {
+            "attributeName": "group_name",
+            "displayName": "Project Group name in Matillion",
+            "description": "Project Group name in Matillion",
+            "isBasicAttribute": true,
+            "type": {
+              "objectType": "string"
+            },
+            "isOverwriteable": false,
+            "value": "",
+            "required": true
+          },
+          {
+            "attributeName": "project_name",
+            "displayName": "Project Name in Matillion",
+            "description": "Project Name in Matillion",
+            "isBasicAttribute": true,
+            "type": {
+              "objectType": "string"
+            },
+            "isOverwriteable": false,
+            "value": "",
+            "required": true
+          },
+          {
+            "attributeName": "version_name",
+            "displayName": "Version Name in Matillion",
+            "description": "Version Name in Matillion",
+            "isBasicAttribute": true,
+            "type": {
+              "objectType": "string"
+            },
+            "isOverwriteable": false,
+            "value": "",
+            "required": true
+          },
+          {
+            "attributeName": "api_call_interva",
+            "displayName": "API call interval (seconds)",
+            "description": "Intervals in which to check the Job status in Matillion",
+            "isBasicAttribute": false,
+            "type": {
+              "objectType": "number",
+              "scale": 0,
+              "precision": 10
+            },
+            "value": 60,
+            "isOverwriteable": false,
+            "required": false
+          },
+          {
+            "attributeName": "poke_timeout",
+            "displayName": "Poke timeout (seconds)",
+            "description": "When to timeout status checking of Matillion Job. This will result in task failure in DAG, even though Job might still be running in Matillion.",
+            "isBasicAttribute": false,
+            "type": {
+              "objectType": "number",
+              "scale": 0,
+              "precision": 10
+            },
+            "value": null,
+            "isOverwriteable": false,
+            "required": false
+          }
+        ]
+      },
+      "required": true,
+      "isOverwriteable": true,
+      "isBasicAttribute": true,
+      "value": []
+    }
+  ]
+}

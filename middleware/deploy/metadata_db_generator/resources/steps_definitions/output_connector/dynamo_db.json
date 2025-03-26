@@ -1,0 +1,204 @@
+{
+  "title": "Dynamo db parameters",
+  "componentCategory": "output_connector",
+  "componentType": "dynamo_db",
+  "difwStepCategory": "output",
+  "difwStepType": "dynamo_db",
+  "displayName": "Dynamo DB",
+  "documentationLink": "https://github.com/merck-gen/mf-difw-core/blob/{branch}/documentation/configuration/steps/spark/writers/dynamo_db.md",
+  "flowValidations": "#extendByFile:common/process_flow_validations_writers_out_connectors.json",
+  "additionalJarDependencies": [
+    {
+      "groupId": "com.audienceproject",
+      "artifactId": "spark-dynamodb_2.12",
+      "version": "1.1.1"
+    }
+  ],
+  "attributes": [
+    {
+      "attributeName": "create_table_options",
+      "displayName": "Create table options",
+      "description": "These options will be used for creation of new DynamoDB table in case that target table does not exist",
+      "type": {
+        "objectType": "object",
+        "attributes": [
+          {
+            "attributeName": "billing_mode",
+            "displayName": "Billing mode",
+            "description": "Controls how you are charged for read and write throughput and how you manage capacity",
+            "type": {
+              "objectType": "options",
+              "values": [
+                {
+                  "value": "PROVISIONED",
+                  "displayValue": "provisioned"
+                },
+                {
+                  "value": "PAY_PER_REQUEST",
+                  "displayValue": "pay per request"
+                }
+              ]
+            },
+            "required": true,
+            "value": "PAY_PER_REQUEST",
+            "isOverwriteable": true
+          },
+          {
+            "attributeName": "attribute_definitions",
+            "displayName": "Attribute definitions",
+            "description": "An array of attributes that describe the key schema for the table and indexes",
+            "required": false,
+            "value": [],
+            "type": {
+              "objectType": "list",
+              "elementsType": {
+                "objectType": "object",
+                "attributes": [
+                  {
+                    "attributeName": "AttributeName",
+                    "displayName": "Attribute name",
+                    "description": "Name of attribute",
+                    "required": true,
+                    "type": {
+                      "objectType": "string"
+                    },
+                    "isOverwriteable": true,
+                    "value": ""
+                  },
+                  {
+                    "attributeName": "AttributeType",
+                    "displayName": "Attribute type",
+                    "description": "Type of attributes. Possible values: <br/>- S - the attribute is of type String<br/>- N - the attribute is of type Number<br/>- B - the attribute is of type Binary",
+                    "type": {
+                      "objectType": "options",
+                      "values": [
+                        {
+                          "value": "S",
+                          "displayValue": "String"
+                        },
+                        {
+                          "value": "N",
+                          "displayValue": "Number"
+                        },
+                        {
+                          "value": "B",
+                          "displayValue": "Binary"
+                        }
+                      ]
+                    },
+                    "isOverwriteable": true,
+                    "value": "S"
+                  }
+                ]
+              }
+            },
+            "isOverwriteable": true
+          },
+          {
+            "attributeName": "key_schema",
+            "displayName": "Key schema",
+            "description": "Specifies the attributes that make up the primary key for a table or an index.",
+            "required": true,
+            "value": [],
+            "type": {
+              "objectType": "list",
+              "elementsType": {
+                "objectType": "object",
+                "attributes": [
+                  {
+                    "attributeName": "AttributeName",
+                    "displayName": "Attribute name",
+                    "description": "Name of attribute",
+                    "type": {
+                      "objectType": "string"
+                    },
+                    "isOverwriteable": true,
+                    "value": ""
+                  },
+                  {
+                    "attributeName": "KeyType",
+                    "displayName": "Key type",
+                    "description": "The role that the key attribute will assume. Possible values: <br/>- HASH - partition key<br/>- RANGE - sort key",
+                    "type": {
+                      "objectType": "options",
+                      "values": [
+                        {
+                          "value": "HASH",
+                          "displayValue": "Partition key"
+                        },
+                        {
+                          "value": "RANGE",
+                          "displayValue": "Sort key"
+                        }
+                      ]
+                    },
+                    "isOverwriteable": true,
+                    "value": "HASH"
+                  }
+                ]
+              }
+            },
+            "isOverwriteable": true
+          },
+          {
+            "attributeName": "tags",
+            "displayName": "Tags",
+            "description": "List of table tags",
+            "required": false,
+            "type": {
+              "objectType": "list",
+              "elementsType": {
+                "objectType": "object",
+                "attributes": [
+                  {
+                    "attributeName": "Key",
+                    "displayName": "Key",
+                    "description": "Tag key",
+                    "type": {
+                      "objectType": "string"
+                    }
+                  },
+                  {
+                    "attributeName": "Value",
+                    "displayName": "Value",
+                    "description": "Tag value",
+                    "type": {
+                      "objectType": "string"
+                    }
+                  }
+                ]
+              }
+            },
+            "isOverwriteable": true,
+            "value": []
+          }
+        ]
+      },
+      "isBasicAttribute": true
+    },
+    {
+      "attributeName": "spark_write_dynamo_db_options",
+      "displayName": "Spark write dynamo db options",
+      "description": "Custom writer format specific options",
+      "type": {
+        "objectType": "dictionary"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": {}
+    },
+    {
+      "attributeName": "target_table",
+      "displayName": "Target table",
+      "description": "Name of table in dynamo db where the data will be saved. If that's not specified, then the name of the table",
+      "type": {
+        "objectType": "string"
+      },
+      "required": false,
+      "isBasicAttribute": false,
+      "isOverwriteable": true,
+      "value": ""
+    }
+  ]
+}

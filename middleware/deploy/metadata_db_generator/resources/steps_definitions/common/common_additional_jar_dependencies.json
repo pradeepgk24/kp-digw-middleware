@@ -1,0 +1,41 @@
+{
+  "attributeName": "additional_jar_dependencies",
+  "displayName": "Additional Jar Dependencies",
+  "description": "Jar Dependencies for the Pipeline Execution.",
+  "type": {
+    "objectType": "list",
+    "elementsType": {
+      "objectType": "object",
+      "attributes": [
+        {
+          "attributeName": "group_id",
+          "displayName": "Group ID",
+          "description": "Maven Group ID",
+          "type": {
+            "objectType": "string"
+          },
+          "value": ""
+        },
+        {
+          "attributeName": "artifact_id",
+          "displayName": "Artifact ID",
+          "description": "Maven Artifact ID",
+          "type": {
+            "objectType": "string"
+          },
+          "value": ""
+        },
+        {
+          "attributeName": "version",
+          "displayName": "Version",
+          "description": "Maven version",
+          "type": {
+            "objectType": "string"
+          },
+          "value": ""
+        }
+      ]
+    }
+  },
+  "value": []
+}

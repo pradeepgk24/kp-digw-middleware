@@ -1,0 +1,148 @@
+[
+    {
+      "attributeName": "meta__start_date",
+      "displayName": "meta__start_date",
+      "description": "Customization of meta__start_date column",
+      "required": false,
+      "type": {
+        "objectType": "object",
+        "attributes": [
+          {
+            "attributeName": "name",
+            "displayName": "Name",
+            "required": false,
+            "description": "Custom name for meta__start_date column",
+            "type": {
+              "objectType": "string"
+            },
+            "value": "meta__start_date"
+          },
+          {
+            "attributeName": "type",
+            "displayName": "Type",
+            "required": false,
+            "description": "Custom type for meta__start_date column",
+            "type": {
+              "objectType": "string"
+            },
+            "value": "timestamp"
+          }
+        ]
+      },
+      "value": {}
+    },
+    {
+      "attributeName": "meta__end_date",
+      "displayName": "meta__end_date",
+      "description": "Customization of meta__end_date column",
+      "required": false,
+      "type": {
+        "objectType": "object",
+        "attributes": [
+          {
+            "attributeName": "name",
+            "displayName": "Name",
+            "required": false,
+            "description": "Custom name for meta__end_date column",
+            "type": {
+              "objectType": "string"
+            },
+            "value": "meta__start_date"
+          },
+          {
+            "attributeName": "type",
+            "displayName": "Type",
+            "required": false,
+            "description": "Custom type for meta__end_date column",
+            "type": {
+              "objectType": "string"
+            },
+            "value": "timestamp"
+          },
+          {
+            "attributeName": "value",
+            "displayName": "Value",
+            "required": false,
+            "description": "Custom value for meta__end_date column",
+            "type": {
+              "objectType": "string"
+            },
+            "value": null
+          }
+        ]
+      },
+      "value": {}
+    },
+    {
+      "attributeName": "columns",
+      "displayName": "Columns",
+      "required": false,
+      "description": "Custom columns",
+      "type": {
+        "objectType": "object",
+        "attributes": [
+          {
+            "attributeName": "name",
+            "displayName": "Name",
+            "required": false,
+            "description": "Name for custom column",
+            "type": {
+              "objectType": "string"
+            },
+            "value": ""
+          },
+          {
+            "attributeName": "type",
+            "displayName": "Type",
+            "required": false,
+            "description": "Type for custom column",
+            "type": {
+              "objectType": "string"
+            },
+            "value": ""
+          },
+          {
+            "attributeName": "insert_value",
+            "displayName": "Insert value",
+            "required": false,
+            "description": "Value added to a record on insert",
+            "type": {
+              "objectType": "string"
+            },
+            "value": ""
+          },
+          {
+            "attributeName": "update_value",
+            "displayName": "Update value",
+            "required": false,
+            "description": "Value added to a record on update or delete if is not defined delete_value",
+            "type": {
+              "objectType": "string"
+            },
+            "value": ""
+          },
+          {
+            "attributeName": "delete_value",
+            "displayName": "Delete value",
+            "required": false,
+            "description": "Value added to a record on delete",
+            "type": {
+              "objectType": "string"
+            },
+            "value": ""
+          }
+        ]
+      },
+      "value": {}
+    },
+    {
+      "attributeName": "spark_hash_function",
+      "displayName": "Spark hash function",
+      "required": false,
+      "description": "Spark hash function",
+      "type": {
+        "objectType": "string"
+      },
+      "value": ""
+    }
+  ]

@@ -1,0 +1,35 @@
+{
+  "title": "Add column metadata",
+  "componentCategory": "transformer",
+  "componentType": "add_column_metadata",
+  "difwStepCategory": "transformation",
+  "difwStepType": "add_column_metadata",
+  "displayName": "Add column metadata",
+  "documentationLink": "https://github.com/merck-gen/mf-difw-core/blob/{branch}/documentation/configuration/steps/spark/transformers/add_column_metadata.md",
+  "flowValidations": "#extendByFile:common/process_flow_validations_transformers.json",
+  "attributes": [
+    {
+      "attributeName": "columns",
+      "displayName": "Columns - read tooltip please",
+      "description": "Choose type dictionary, replace the custom_column_name with your column name, then add Value, there the key: value is the same as in documentation, metadata: type",
+      "type": {
+        "objectType": "object",
+        "dynamicInputStructure": true,
+        "attributes": [
+          {
+            "attributeName": "custom_column_name",
+            "displayName": "custom_column_name",
+            "type": {
+              "objectType": "dictionary"
+            },
+            "isOverwriteable": true,
+            "value": {}
+          }
+        ]
+      },
+      "required": false,
+      "isBasicAttribute": true,
+      "isOverwriteable": true
+    }
+  ]
+}

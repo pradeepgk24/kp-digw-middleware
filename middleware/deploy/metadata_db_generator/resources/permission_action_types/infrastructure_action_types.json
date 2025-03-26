@@ -1,0 +1,20 @@
+[
+  {
+    "actionType": "removeS3Objects",
+    "actionDefinition": {},
+    "description": "The permission check if you can remove s3 object"
+  },
+  {
+    "actionType": "writeS3Objects",
+    "actionDefinition": {
+      "s3Bucket": "<s3Bucket>",
+      "s3ObjectKey": "<s3ObjectKey>"
+    },
+    "description": "The permission check if you can write/manipulate with s3 objects - generate pre-signed URL for s3"
+  },
+  {
+    "actionType": "createEvent",
+    "actionDefinition": {},
+    "description": "The permission check if you can create Event"
+  }
+]
